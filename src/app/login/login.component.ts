@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { OAuthService } from 'angular2-oauth2/oauth-service';
+import { AuthentificationService } from '../authentification.service';
+import { OauthResponse } from '../model/OauthResponse';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-login',
@@ -7,14 +9,23 @@ import { OAuthService } from 'angular2-oauth2/oauth-service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    constructor(private oauthService: OAuthService) {
+    constructor(private auth: AuthentificationService, private http: HttpClient) {
     }
 
-    login(): void {
-        this.oauthService.initImplicitFlow();
+    public login() {
+        this.auth.login().subscribe((data: OauthResponse) => {
+            localStorage.setItem('access_token', data.access_token);
+        });
     }
 
-    logOff(): void {
-        this.oauthService.logOut();
+    public test() {
+        this.http.get('http://localhost:8000/api/demos').subscribe(
+            data => {
+                console.log(data);
+            },
+            err => {
+                alert('sry');
+            },
+        );
     }
 }
