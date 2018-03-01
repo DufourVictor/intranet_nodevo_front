@@ -2,14 +2,14 @@
     <div
         class="form-group"
         [ngClass]="{
-            'has-danger': username.invalid,
-            'has-success': username.valid
+            'has-error': username.invalid && (username.touched || username.dirty),
+            'has-success': username.valid && (username.touched || username.dirty)
         }"
     >
-        <label>Username</label>
+        <label class="form-label">Username</label>
         <input
             type="text"
-            class="form-control"
+            class="form-input"
             formControlName="username"
         >
         <span class="form-input-hint">The username is invalid.</span>
@@ -18,18 +18,25 @@
     <div
         class="form-group"
         [ngClass]="{
-            'has-danger': true,
-            'has-success': password.valid
+            'has-error': password.invalid && (password.touched || password.dirty),
+            'has-success': password.valid && (password.touched || password.dirty)
         }"
     >
-        <label>Password</label>
+        <label class="form-label">Password</label>
         <input
             type="password"
-            class="form-control"
+            class="form-input"
             formControlName="password"
         >
         <span class="form-input-hint">The password is invalid.</span>
     </div>
 
-    <button type="submit">Login</button>
+    <div class="form-group">
+        <label class="form-checkbox">
+            <input type="checkbox" formControlName="remember">
+            <i class="form-icon"></i> Remember me
+        </label>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
 </form>
