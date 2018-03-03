@@ -9,7 +9,7 @@ export class AuthentificationService {
     }
 
     login (username: string, password: string): Observable<Object> {
-        return this.http.post('/login_check', {username, password})
+        return this.http.post('/login_check', {username, password});
     }
 
     public getAccessToken() {
@@ -23,7 +23,7 @@ export class AuthentificationService {
       if (remember) {
         localStorage.setItem('access_token', token);
       } else {
-        sessionStorage.setItem('access_token', token)
+        sessionStorage.setItem('access_token', token);
       }
     }
 }

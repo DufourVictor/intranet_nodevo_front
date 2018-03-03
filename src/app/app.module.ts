@@ -8,12 +8,17 @@ import { TokenInterceptor } from './token.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UsersComponent } from './users/users.component';
+import { MenuComponent } from './menu/menu.component';
+import {RetrieveUsersService} from './retrieveUsers.service';
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
-        DashboardComponent
+        DashboardComponent,
+        UsersComponent,
+        MenuComponent
     ],
     imports: [
         BrowserModule,
@@ -25,6 +30,7 @@ import { AppRoutingModule } from './app-routing.module';
     providers: [
         HttpClient,
         AuthentificationService,
+        RetrieveUsersService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
