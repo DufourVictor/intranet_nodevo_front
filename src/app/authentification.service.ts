@@ -13,6 +13,17 @@ export class AuthentificationService {
     }
 
     public getAccessToken() {
+        if (sessionStorage.getItem('access_token')) {
+            return sessionStorage.getItem('access_token');
+        }
         return localStorage.getItem('access_token');
+    }
+
+    public setAccessToken(token, remember) {
+      if (remember) {
+        localStorage.setItem('access_token', token);
+      } else {
+        sessionStorage.setItem('access_token', token)
+      }
     }
 }

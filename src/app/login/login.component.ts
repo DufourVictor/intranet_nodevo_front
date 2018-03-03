@@ -6,12 +6,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+    loginForm: FormGroup;
     username: FormControl;
     password: FormControl;
-    loginForm: FormGroup
+    remember: FormControl;
 
     constructor(private auth: AuthentificationService, private http: HttpClient) {
     }
@@ -19,10 +20,12 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         this.username = new FormControl('', Validators.required);
         this.password = new FormControl('', Validators.required);
+        this.remember = new FormControl();
 
         this.loginForm = new FormGroup({
             'username': this.username,
             'password': this.password,
+            'remember': this.remember,
         });
     }
 
@@ -30,7 +33,7 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.valid) {
             this.auth.login(this.username.value, this.password.value).subscribe(
                 (data: {token}) => {
-                    localStorage.setItem('access_token', data.token);
+                    this.auth.setAccessToken(data.token, this.remember.value);
                 },
                 (error) => {
                     // TODO : Display error msg for user
@@ -41,6 +44,19 @@ export class LoginComponent implements OnInit {
                     alert('logged!');
                 }
             );
+        } else {
+          this.validateAllFormFields(this.loginForm);
         }
     }
+
+  validateAllFormFields(formGroup: FormGroup) {
+      Object.keys(formGroup.controls).forEach(field => {
+          const control = formGroup.get(field);
+          if (control instanceof FormControl) {
+              control.markAsTouched({ onlySelf: true });
+          } else if (control instanceof FormGroup) {
+              this.validateAllFormFields(control);
+          }
+      });
+  }
 }
