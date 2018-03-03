@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthentificationService } from '../authentification.service';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
     password: FormControl;
     remember: FormControl;
 
-    constructor(private auth: AuthentificationService, private http: HttpClient) {
+    constructor(private auth: AuthentificationService, private http: HttpClient, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -40,8 +41,7 @@ export class LoginComponent implements OnInit {
                     console.error(error);
                 },
                 () => {
-                    // TODO : redirect the user on the dashboard
-                    alert('logged!');
+                    this.router.navigate(['dashboard']);
                 }
             );
         } else {
