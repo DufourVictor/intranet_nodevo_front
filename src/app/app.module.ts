@@ -11,26 +11,33 @@ import { AppRoutingModule } from './app-routing.module';
 import { UsersComponent } from './users/users.component';
 import { MenuComponent } from './menu/menu.component';
 import {RetrieveUsersService} from './retrieveUsers.service';
+import { NoneRecordingTimesComponent } from './none-recording-times/none-recording-times.component';
+import { RetrieveUsersNoneRecordingTimesService } from './retrieveUsersNoneRecordingTimes.service';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(localeFr, 'fr');
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
         DashboardComponent,
         UsersComponent,
-        MenuComponent
+        MenuComponent,
+        NoneRecordingTimesComponent,
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        AppRoutingModule
+        AppRoutingModule,
     ],
     providers: [
         HttpClient,
         AuthentificationService,
         RetrieveUsersService,
+        RetrieveUsersNoneRecordingTimesService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

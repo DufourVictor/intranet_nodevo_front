@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {RetrieveUsersService} from '../retrieveUsers.service';
-import {Users} from '../model/users';
+import { Component, OnInit } from '@angular/core';
+import { RetrieveUsersService } from '../retrieveUsers.service';
+import { User } from '../model/user';
 
 @Component({
     selector: 'app-users',
@@ -8,16 +8,23 @@ import {Users} from '../model/users';
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    users: Users[];
+    users: User[];
 
     constructor(private retrieveUsersService: RetrieveUsersService) {
-        this.retrieveUsersService.onGetUsers.subscribe((users: Users[]) => {
-            this.users = users;
-        });
     }
 
     ngOnInit() {
-        this.retrieveUsersService.getUsers();
+        this.retrieveUsersService.getUsers()
+            .subscribe(data => this.users = data);
     }
 
+    addUser() {
+        alert('added');
+    }
+
+    confirmDelete() {
+        if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
+            //  @TODO Delete
+        }
+    }
 }
