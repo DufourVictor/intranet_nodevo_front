@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RetrieveUsersService } from '../retrieveUsers.service';
-import { User } from '../model/user';
+import { User } from '../../backend/model/user';
+import { UsersService } from '../../backend/services';
 
 @Component({
     selector: 'app-users',
@@ -8,18 +8,21 @@ import { User } from '../model/user';
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    users: User[];
+    users: Array<User> = [];
 
-    constructor(private retrieveUsersService: RetrieveUsersService) {
+    constructor(
+        private usersService: UsersService
+    ) {
     }
 
     ngOnInit() {
-        this.retrieveUsersService.getUsers()
-            .subscribe(data => this.users = data);
+        this.usersService.getAll().subscribe(users => {
+            this.users = users;
+        });
     }
 
     addUser() {
-        alert('added');
+        // TODO : Create
     }
 
     confirmDelete() {

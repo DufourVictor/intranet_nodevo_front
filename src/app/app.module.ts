@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthentificationService } from './authentification.service';
@@ -10,13 +12,18 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UsersComponent } from './users/users.component';
 import { MenuComponent } from './menu/menu.component';
-import {RetrieveUsersService} from './retrieveUsers.service';
 import { NoneRecordingTimesComponent } from './none-recording-times/none-recording-times.component';
 import { RetrieveUsersNoneRecordingTimesService } from './retrieveUsersNoneRecordingTimes.service';
-import localeFr from '@angular/common/locales/fr';
-import { registerLocaleData } from '@angular/common';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { NoTimeRecordingsService, ProfilesService, UsersService } from '../backend/services';
+import { RestangularModule } from 'ngx-restangular';
+import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
 
 registerLocaleData(localeFr, 'fr');
+export function createRestangularConfigFactory(RestangularProvider) {
+    return RestangularConfigFactory(RestangularProvider, { baseUrl: 'https://localhost:8443' });
+}
 @NgModule({
     declarations: [
         AppComponent,
@@ -25,6 +32,8 @@ registerLocaleData(localeFr, 'fr');
         UsersComponent,
         MenuComponent,
         NoneRecordingTimesComponent,
+        UserDetailsComponent,
+        UserFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -32,12 +41,15 @@ registerLocaleData(localeFr, 'fr');
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
+        RestangularModule.forRoot([], createRestangularConfigFactory)
     ],
     providers: [
         HttpClient,
         AuthentificationService,
-        RetrieveUsersService,
         RetrieveUsersNoneRecordingTimesService,
+        NoTimeRecordingsService,
+        ProfilesService,
+        UsersService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

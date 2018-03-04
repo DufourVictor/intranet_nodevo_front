@@ -1,0 +1,31 @@
+<form (ngSubmit)="save()" #userForm="ngForm">
+    <div>
+        <input type="text" class="form-control" disabled [value]="user.trigram">
+    </div>
+
+    <div>
+        <input type="email" class="form-control" name="email" required [(ngModel)]="user.email">
+    </div>
+
+    <div>
+        <input type="text" class="form-control" name="lastName" required [(ngModel)]="user.lastName">
+        <input type="text" class="form-control" name="firstName" required [(ngModel)]="user.firstName">
+    </div>
+
+    <div>
+        <select
+            name="profile"
+            id="profile"
+            class="form-control"
+            [(ngModel)]="user.profile.id"
+            #userProfile="ngModel"
+        >
+            <option
+                *ngFor="let profile of profiles"
+                [ngValue]="profile.id"
+            >{{profile.label}}</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
