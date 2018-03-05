@@ -15,6 +15,7 @@ import { NoneRecordingTimesComponent } from './none-recording-times/none-recordi
 import { RetrieveUsersNoneRecordingTimesService } from './retrieveUsersNoneRecordingTimes.service';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import { NoTimeRecordingFormComponent } from './no-time-recording-form/no-time-recording-form.component';
 
 registerLocaleData(localeFr, 'fr');
 @NgModule({
@@ -25,6 +26,7 @@ registerLocaleData(localeFr, 'fr');
         UsersComponent,
         MenuComponent,
         NoneRecordingTimesComponent,
+        NoTimeRecordingFormComponent,
     ],
     imports: [
         BrowserModule,

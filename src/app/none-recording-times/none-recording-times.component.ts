@@ -17,10 +17,23 @@ export class NoneRecordingTimesComponent implements OnInit {
         this.retrieveUsersNoneRecordingTimesService.getNoneRecordingTimes().subscribe(data => this.noneRecordingTimes = data);
     }
 
-    confirmDelete() {
-        if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
-            //  @TODO Delete
-        }
+    add(reason, fromDate, toDate, user) {
+        reason = reason.trim();
+        this.retrieveUsersNoneRecordingTimesService.add({
+            reason,
+            fromDate,
+            toDate,
+            user
+        } as NoneRecordingTime).subscribe((noneRecordingTime) => {
+            this.noneRecordingTimes.push(noneRecordingTime);
+        });
     }
 
+    confirmDelete(obj) {
+        if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
+            this.retrieveUsersNoneRecordingTimesService.delete(obj).subscribe(() => {
+                this.noneRecordingTimes.splice(this.noneRecordingTimes.indexOf(obj), 1);
+            });
+        }
+    }
 }
