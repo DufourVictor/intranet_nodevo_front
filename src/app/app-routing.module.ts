@@ -5,12 +5,15 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import {NoTimeRecordingFormComponent} from './no-time-recording-form/no-time-recording-form.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'users', component: UsersComponent },
-    { path: 'user/:id', component: UserDetailsComponent }
+    { path: 'user/:id', component: UserDetailsComponent },
+    { path: 'no-time-recordingForm', component: NoTimeRecordingFormComponent }
+
 ];
 
 @NgModule({

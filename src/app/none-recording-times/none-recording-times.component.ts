@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NoneRecordingTime} from '../model/noneRecordingTime';
-import {RetrieveUsersNoneRecordingTimesService} from '../retrieveUsersNoneRecordingTimes.service';
+import { NoTimeRecordingsService } from '../../backend/services';
+import { NoTimeRecording } from '../../backend/model';
 
 @Component({
     selector: 'app-none-recording-times',
@@ -8,19 +8,32 @@ import {RetrieveUsersNoneRecordingTimesService} from '../retrieveUsersNoneRecord
     styleUrls: ['./none-recording-times.component.scss']
 })
 export class NoneRecordingTimesComponent implements OnInit {
-    noneRecordingTimes: NoneRecordingTime[];
+    noneRecordingTimes: NoTimeRecording[] = [];
 
-    constructor(private retrieveUsersNoneRecordingTimesService: RetrieveUsersNoneRecordingTimesService) {
+    constructor(
+        private noTimeRecordingsService: NoTimeRecordingsService
+    ) {
     }
 
     ngOnInit() {
-        this.retrieveUsersNoneRecordingTimesService.getNoneRecordingTimes().subscribe(data => this.noneRecordingTimes = data);
+        this.noTimeRecordingsService.getAll().subscribe(data => this.noneRecordingTimes = data);
     }
 
-    confirmDelete() {
+    add(reason, fromDate, toDate, user) {
+        reason = reason.trim();
+        const time = new NoTimeRecording();
+        this.noTimeRecordingsService.add(
+            time
+        ).subscribe((noneRecordingTime) => {
+            this.noneRecordingTimes.push(noneRecordingTime);
+        });
+    }
+
+    confirmDelete(obj) {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
-            //  @TODO Delete
+            this.noTimeRecordingsService.remove(obj).subscribe(() => {
+                this.noneRecordingTimes.splice(this.noneRecordingTimes.indexOf(obj), 1);
+            });
         }
     }
-
 }

@@ -1,26 +1,3 @@
-<hr>
-<p>Périodes de non saisie des temps</p>
-<a class="btn btn-primary" href="#none-recording-time">Ajouter</a>
-<table class="table table-striped table-hover">
-    <thead>
-    <tr>
-        <th>Date début</th>
-        <th>Date fin</th>
-        <th>Motif</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="active" *ngFor="let noneRecordingTime of noneRecordingTimes">
-        <td>{{ noneRecordingTime.fromDate|date }}</td>
-        <td>{{ noneRecordingTime.toDate|date }}</td>
-        <td> {{ noneRecordingTime.reason }}</td>
-        <td>
-            <button (click)="confirmDelete(noneRecordingTime)" class="btn btn-action"><i class="icon icon-cross"></i></button>
-        </td>
-    </tr>
-    </tbody>
-</table>
 <div class="modal" id="none-recording-time">
     <a  class="modal-overlay" aria-label="Close"></a>
     <div class="modal-container">
