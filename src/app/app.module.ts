@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { UsersComponent } from './users/users.component';
 import { MenuComponent } from './menu/menu.component';
 import { NoneRecordingTimesComponent } from './none-recording-times/none-recording-times.component';
-import { RetrieveUsersNoneRecordingTimesService } from './retrieveUsersNoneRecordingTimes.service';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { NoTimeRecordingsService, ProfilesService, UsersService } from '../backend/services';
@@ -48,7 +47,6 @@ export function createRestangularConfigFactory(RestangularProvider) {
     providers: [
         HttpClient,
         AuthentificationService,
-        RetrieveUsersNoneRecordingTimesService,
         NoTimeRecordingsService,
         ProfilesService,
         UsersService,

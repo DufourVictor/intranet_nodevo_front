@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {RetrieveUsersNoneRecordingTimesService} from '../retrieveUsersNoneRecordingTimes.service';
-import {NoneRecordingTime} from '../model/noneRecordingTime';
+import { Component } from '@angular/core';
+import { NoTimeRecording } from '../../backend/model';
+import { NoTimeRecordingsService } from '../../backend/services';
 
 @Component({
     selector: 'app-no-time-recording-form',
@@ -8,6 +8,8 @@ import {NoneRecordingTime} from '../model/noneRecordingTime';
     styleUrls: ['./no-time-recording-form.component.scss']
 })
 export class NoTimeRecordingFormComponent {
-    constructor(private retrieveNoneRecordingTimeService: RetrieveUsersNoneRecordingTimesService) {
+    constructor(
+        private noTimeRecordingsService: NoTimeRecordingsService
+    ) {
     }
 }
