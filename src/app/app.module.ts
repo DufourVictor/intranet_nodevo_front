@@ -15,7 +15,7 @@ import { MenuComponent } from './menu/menu.component';
 import { NoneRecordingTimesComponent } from './none-recording-times/none-recording-times.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserFormComponent } from './user-form/user-form.component';
-import { NoTimeRecordingsService, ProfilesService, UsersService } from '../backend/services';
+import { GroupsService, NoTimeRecordingsService, ProfilesService, UsersService } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
 
@@ -48,6 +48,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         NoTimeRecordingsService,
         ProfilesService,
         UsersService,
+        GroupsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

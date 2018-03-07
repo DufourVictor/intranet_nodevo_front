@@ -25,6 +25,38 @@
                 [ngValue]="profile.id"
             >{{profile.label}}</option>
         </select>
+
+        <select
+            name="group"
+            id="group"
+            class="form-control"
+            [(ngModel)]="user.group.id"
+            #userGroup="ngModel"
+        >
+            <option
+                *ngFor="let group of groups"
+                [ngValue]="group.id"
+            >{{group.label}}</option>
+        </select>
+    </div>
+
+    <div>
+        <select
+            name="manager"
+            id="manager"
+            class="form-control"
+            [(ngModel)]="user.managers"
+            #userGroup="ngModel"
+        >
+            <option
+                *ngFor="let manager of managers"
+                [ngValue]="manager.id"
+            >{{manager.firstName}}</option>
+        </select>
+    </div>
+
+    <div>
+        <textarea name="notes" id="notes" cols="30" rows="3">{{user.notes}}</textarea>
     </div>
 
     <button class="btn btn-primary" type="submit">Save</button>

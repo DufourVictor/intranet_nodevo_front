@@ -6,7 +6,6 @@ export class ProfileBase {
   public static readonly _resource: string = 'profiles';
   get _resource(): string { return ProfileBase._resource; };
 
-  id: number;
   label: string;
 
 }
