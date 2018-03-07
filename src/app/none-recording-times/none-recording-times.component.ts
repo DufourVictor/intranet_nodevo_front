@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NoneRecordingTime} from '../model/noneRecordingTime';
-import {RetrieveUsersNoneRecordingTimesService} from '../retrieveUsersNoneRecordingTimes.service';
+import {NoTimeRecordingsService, UsersService} from '../../backend/services';
+import {NoTimeRecording, User} from '../../backend/model';
 
 @Component({
     selector: 'app-none-recording-times',
@@ -8,19 +8,42 @@ import {RetrieveUsersNoneRecordingTimesService} from '../retrieveUsersNoneRecord
     styleUrls: ['./none-recording-times.component.scss']
 })
 export class NoneRecordingTimesComponent implements OnInit {
-    noneRecordingTimes: NoneRecordingTime[];
-
-    constructor(private retrieveUsersNoneRecordingTimesService: RetrieveUsersNoneRecordingTimesService) {
+    noneRecordingTimes: NoTimeRecording[] = [];
+    active = '';
+    user: User;
+    constructor(
+        private noTimeRecordingsService: NoTimeRecordingsService,
+        private retrieveUserService: UsersService
+    ) {
     }
 
     ngOnInit() {
-        this.retrieveUsersNoneRecordingTimesService.getNoneRecordingTimes().subscribe(data => this.noneRecordingTimes = data);
+        this.noTimeRecordingsService.getAll().subscribe(data => this.noneRecordingTimes = data);
+        this.retrieveUserService.get(1).subscribe(user => {
+            this.user = user;
+        });
     }
 
-    confirmDelete() {
+    add(reason: string, fromDate: Date, toDate: Date) {
+        reason = reason.trim();
+        const time = new NoTimeRecording();
+        time.reason = reason;
+        time.fromDate = fromDate;
+        time.toDate = toDate;
+        time.user = this.user;
+        this.noTimeRecordingsService.add(
+            time
+        ).subscribe((noneRecordingTime) => {
+            this.noneRecordingTimes.push(noneRecordingTime);
+            this.active = '';
+        });
+    }
+
+    confirmDelete(obj) {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
-            //  @TODO Delete
+            this.noTimeRecordingsService.remove(obj).subscribe(() => {
+                this.noneRecordingTimes.splice(this.noneRecordingTimes.indexOf(obj), 1);
+            });
         }
     }
-
 }
