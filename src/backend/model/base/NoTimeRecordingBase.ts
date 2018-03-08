@@ -7,7 +7,6 @@ export class NoTimeRecordingBase {
   public static readonly _resource: string = 'no_time_recordings';
   get _resource(): string { return NoTimeRecordingBase._resource; };
 
-  id: number;
   reason: string;
   fromDate: Date;
   toDate: Date;
