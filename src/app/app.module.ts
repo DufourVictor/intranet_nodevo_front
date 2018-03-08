@@ -15,10 +15,13 @@ import { MenuComponent } from './menu/menu.component';
 import { NoneRecordingTimesComponent } from './none-recording-times/none-recording-times.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserFormComponent } from './user-form/user-form.component';
-import { GroupsService, NoTimeRecordingsService, ProfilesService, UsersService } from '../backend/services';
+import {GroupsService, NoTimeRecordingsService, ProfilesService, TrainingBonusesService, UsersService } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
 import { FormService } from '../backend/forms';
+import { TrainingsBonusComponent } from './trainings-bonus/trainings-bonus.component';
+import { TrainingBonusFormComponent } from './training-bonus-form/training-bonus-form.component';
+import { NoneRecordingTimeFormComponent } from './none-recording-time-form/none-recording-time-form.component';
 
 registerLocaleData(localeFr, 'fr');
 export function createRestangularConfigFactory(RestangularProvider) {
@@ -34,6 +37,9 @@ export function createRestangularConfigFactory(RestangularProvider) {
         NoneRecordingTimesComponent,
         UserDetailsComponent,
         UserFormComponent,
+        TrainingsBonusComponent,
+        TrainingBonusFormComponent,
+        NoneRecordingTimeFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -50,6 +56,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ProfilesService,
         UsersService,
         GroupsService,
+        TrainingBonusesService,
         FormService,
         {
             provide: HTTP_INTERCEPTORS,

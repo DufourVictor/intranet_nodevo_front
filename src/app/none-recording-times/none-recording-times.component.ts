@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {NoTimeRecordingsService, UsersService} from '../../backend/services';
-import {NoTimeRecording, User} from '../../backend/model';
+import { Component, Input, OnInit } from '@angular/core';
+import { NoTimeRecordingsService } from '../../backend/services';
+import { NoTimeRecording, User } from '../../backend/model';
 
 @Component({
     selector: 'app-none-recording-times',
@@ -8,35 +8,34 @@ import {NoTimeRecording, User} from '../../backend/model';
     styleUrls: ['./none-recording-times.component.scss']
 })
 export class NoneRecordingTimesComponent implements OnInit {
-    noneRecordingTimes: NoTimeRecording[] = [];
-    active = '';
-    user: User;
-    constructor(
-        private noTimeRecordingsService: NoTimeRecordingsService,
-        private retrieveUserService: UsersService
-    ) {
+    noneRecordingTimes: NoTimeRecording[];
+    noneRecordingTime: NoTimeRecording = new NoTimeRecording();
+    @Input() user: User;
+    active: string;
+
+    constructor(private noTimeRecordingsService: NoTimeRecordingsService) {
+    }
+
+    getAllNoneRecordingTimes() {
+        this.noTimeRecordingsService.getAllBy('users', this.user.id).subscribe(data => this.noneRecordingTimes = data);
+
     }
 
     ngOnInit() {
-        this.noTimeRecordingsService.getAll().subscribe(data => this.noneRecordingTimes = data);
-        this.retrieveUserService.get(1).subscribe(user => {
-            this.user = user;
-        });
+        this.getAllNoneRecordingTimes();
     }
 
-    add(reason: string, fromDate: Date, toDate: Date) {
-        reason = reason.trim();
-        const time = new NoTimeRecording();
-        time.reason = reason;
-        time.fromDate = fromDate;
-        time.toDate = toDate;
-        time.user = this.user;
-        this.noTimeRecordingsService.add(
-            time
-        ).subscribe((noneRecordingTime) => {
-            this.noneRecordingTimes.push(noneRecordingTime);
-            this.active = '';
-        });
+    activeModal(noneRecordingTime = null) {
+        this.active = 'active';
+        if (noneRecordingTime !== null) {
+            this.noneRecordingTime = noneRecordingTime;
+        }
+    }
+
+    closeModal() {
+        this.active = '';
+        this.noneRecordingTime = new NoTimeRecording();
+        this.getAllNoneRecordingTimes();
     }
 
     confirmDelete(obj) {
