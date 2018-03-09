@@ -1,10 +1,17 @@
-<div class="container">
-    <div class="columns">
-        <div class="column col-2">
-            <app-menu *ngIf="route.url !== '/'"></app-menu>
-        </div>
-        <div class="column col-9">
-            <router-outlet></router-outlet>
-        </div>
+<header class="navbar" *ngIf="username !== null">
+    <section class="navbar-section">
+        <img src="" alt="">
+    </section>
+    <section class="navbar-section">
+        <button class="btn btn-primary" (click)="logout()">Déconnexion</button>
+    </section>
+</header>
+
+<main [ngClass]="{'main' : username !== null}">
+    <aside class="sidenav" *ngIf="username !== null">
+        <app-menu></app-menu>
+    </aside>
+    <div [ngClass]="{'content' : username !== null}">
+        <router-outlet></router-outlet>
     </div>
-</div>
+</main>

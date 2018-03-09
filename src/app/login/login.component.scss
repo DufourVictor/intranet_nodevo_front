@@ -1,13 +1,43 @@
-.loginBlock{
-margin-top: 10%;
-}
+@import "../../variables";
 
-.title{
-  font-size: 15px;
-  font-family: Arial;
-  color: #96d014;
-}
+.login {
+    &-wrapper {
+        height: 100vh;
+        color: #fff;
+        background:
+            url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMUFVU5AwABsQEcwjwbygAAAABJRU5ErkJggg==) repeat,
+            url("http://lorempixel.com/output/business-q-c-1920-1080-5.jpg") no-repeat
+        ;
+    }
 
-.connectionTitle{
-  font-size: 20px;
+    &-container {
+        max-width: 560px;
+        padding-top: 15%;
+
+        .title {
+            color: $primary-color;
+            font-size: 12px;
+            font-weight: 300;
+
+            &-connect {
+                font-size: 24px;
+            }
+        }
+
+        .header {
+            margin-bottom: 70px;
+        }
+
+        .form {
+            &-input {
+                background-color: transparent;
+                border-width: 0;
+                border-bottom-width: 1px;
+            }
+
+            &-group {
+                margin-bottom: 45px;
+            }
+        }
+    }
 }

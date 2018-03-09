@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-
-$primary-color: #A1D614;
-
+@import url('https://fonts.googleapis.com/css?family=Roboto|Material+Icons');
+@import "variables";
 @import "../node_modules/spectre.css/src/spectre";
+@import "mixins";
+
+html, body {
+    font-family: 'Roboto', sans-serif;
+}

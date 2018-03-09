@@ -1,0 +1,3 @@
+.btn-outline-error {
+    @include button-outline-variant($error-color);
+}

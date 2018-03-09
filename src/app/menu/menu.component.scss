@@ -1,0 +1,23 @@
+@import "../../variables";
+
+.nav {
+    &-item {
+        padding: 18px 13px;
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+
+        &:hover {
+            color: $primary-color;
+        }
+
+        &.active {
+            background-color: #151524;
+            border-left: 4px solid $primary-color;
+
+            & > a {
+                font-weight: bold;
+            }
+        }
+    }
+}
