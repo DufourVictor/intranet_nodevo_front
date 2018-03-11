@@ -15,10 +15,17 @@ export class LoginComponent implements OnInit {
     password: FormControl;
     remember: FormControl;
 
-    constructor(private auth: AuthentificationService, private http: HttpClient, private router: Router) {
+    constructor(
+        private auth: AuthentificationService,
+        private http: HttpClient,
+        private router: Router
+    ) {
     }
 
     ngOnInit(): void {
+        if (this.auth.getAccessToken()) {
+            this.router.navigate(['dashboard']);
+        }
         this.username = new FormControl('', Validators.required);
         this.password = new FormControl('', Validators.required);
         this.remember = new FormControl();

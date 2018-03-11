@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../backend/model';
 import { UsersService } from '../../backend/services';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-users',
@@ -8,7 +9,7 @@ import { UsersService } from '../../backend/services';
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    users: Array<User> = [];
+    users: User[] = [];
 
     constructor(
         private usersService: UsersService
@@ -16,18 +17,23 @@ export class UsersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.usersService.getAll().subscribe(users => {
-            this.users = users;
-        });
+        this.usersService.getAll().subscribe(users => this.users = users);
     }
 
     addUser() {
         // TODO : Create
     }
 
-    confirmDelete() {
+    delete(user: User) {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
-            //  @TODO Delete
+            this.usersService.remove(user).subscribe(() => {
+                this.users.splice(this.users.indexOf(user), 1);
+            })
         }
+    }
+
+    toggleEnabled(user: User) {
+        user.enabled = !user.enabled;
+        this.usersService.update(user).subscribe()
     }
 }

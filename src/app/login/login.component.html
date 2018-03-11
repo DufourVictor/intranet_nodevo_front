@@ -1,55 +1,61 @@
-<div class="container loginBlock">
-    <div class="columns">
-        <div class="column col-4 col-mx-auto">
-            <h2 class="text-center title">INTRANET NODEVO</h2>
-            <h1 class="text-center connectionTitle">CONNECTEZ-VOUS</h1>
-
-<form (ngSubmit)="authenticate()" [formGroup]="loginForm" novalidate>
-    <div
-        class="form-group"
-        [ngClass]="{
-            'has-error': username.invalid && (username.touched || username.dirty),
-            'has-success': username.valid && (username.touched || username.dirty)
-        }"
-    >
-        <label class="form-label">Identifiant</label>
-        <input
-            type="text"
-            class="form-input"
-            formControlName="username"
-        >
-        <span class="form-input-hint">Identifiant invalide.</span>
-    </div>
-
-    <div
-        class="form-group"
-        [ngClass]="{
-            'has-error': password.invalid && (password.touched || password.dirty),
-            'has-success': password.valid && (password.touched || password.dirty)
-        }"
-    >
-        <label class="form-label">Mot de passe</label>
-        <input
-            type="password"
-            class="form-input"
-            formControlName="password"
-        >
-        <span class="form-input-hint">Mot de passe incorect.</span>
-    </div>
-
-    <div class="form-group">
-        <label class="form-checkbox">
-            <input type="checkbox" formControlName="remember">
-            <i class="form-icon"></i> Se rappeler de moi
-        </label>
-    </div>
-
-    <div class="column col-4 col-mx-auto">
-    <button class="btn btn-primary btn-lg" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
-    </div>
-
-</form>
+<div class="login-wrapper">
+    <div class="login-container centered">
+        <div class="text-center header">
+            <div class="title text-uppercase">Intranet Nodevo</div>
+            <div class="title-connect text-uppercase text-bold">Connectez-vous</div>
         </div>
+
+        <form (ngSubmit)="authenticate()" [formGroup]="loginForm" novalidate>
+            <div
+                class="form-group"
+                [ngClass]="{
+                'has-error': username.invalid && (username.touched || username.dirty),
+                'has-success': username.valid && (username.touched || username.dirty)
+            }"
+            >
+                <input
+                    type="text"
+                    class="form-input"
+                    formControlName="username"
+                    placeholder="Identifiant"
+                >
+                <span
+                    *ngIf="username.invalid && (username.touched || username.dirty)"
+                    class="form-input-hint"
+                >Identifiant invalide.</span>
+            </div>
+
+            <div
+                class="form-group"
+                [ngClass]="{
+                'has-error': password.invalid && (password.touched || password.dirty),
+                'has-success': password.valid && (password.touched || password.dirty)
+            }"
+            >
+                <input
+                    type="password"
+                    class="form-input"
+                    formControlName="password"
+                    placeholder="Mot de passe"
+                >
+                <span
+                    *ngIf="password.invalid && (password.touched || password.dirty)"
+                    class="form-input-hint"
+                >Mot de passe incorect.</span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-checkbox">
+                    <input type="checkbox" formControlName="remember">
+                    <i class="form-icon"></i> Se rappeler de moi
+                </label>
+            </div>
+
+            <div>
+                <button class="btn btn-primary btn-lg centered" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+            </div>
+
+        </form>
     </div>
 </div>
 

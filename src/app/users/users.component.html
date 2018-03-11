@@ -1,4 +1,11 @@
-<button class="btn btn-primary" (click)="addUser()">Ajouter</button>
+<button
+    class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
+    data-tooltip="Ajouter un utilisateur"
+    (click)="addUser()"
+>
+    <i class="icon icon-plus"></i>
+</button>
+
 <table class="table table-striped table-hover">
     <thead>
     <tr>
@@ -11,18 +18,39 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="active" *ngFor="let user of users">
+    <tr *ngFor="let user of users">
         <td>{{ user.username }}</td>
         <td>{{ user.username }}</td>
-        <td> profil</td>
-        <td>{{ user.roles }}</td>
+        <td>{{ user.profile.label }}</td>
+        <td>role</td>
         <td>{{ user.enabled === true ? 'Actif' : 'Inactif' }}</td>
         <td>
-            <button class="btn btn-action" [routerLink]="['/user/', user.id]"><i class="icon icon-check"></i></button>
-            <button class="btn btn-action"><i class="icon icon-edit"></i></button>
-            <button (click)="confirmDelete()" class="btn btn-action"><i class="icon icon-cross"></i></button>
+            <div class="btn-group btn-group-block">
+                <button
+                    class="btn btn-outline-{{ user.enabled ? 'error' : 'success' }} tooltip"
+                    [attr.data-tooltip]="user.enabled ? 'Désactiver' : 'Activer'"
+                    (click)="toggleEnabled(user)"
+                >
+                    <i class="icon icon-{{ user.enabled ? 'cross' : 'check' }}"></i>
+                </button>
+                <button
+                    class="btn btn-primary tooltip"
+                    data-tooltip="Editer"
+                    [routerLink]="['/user/', user.id]"
+                >
+                    <i class="icon icon-edit"></i>
+                </button>
+                <button
+                    class="btn btn-error tooltip"
+                    data-tooltip="Supprimer"
+                    (click)="delete(user)"
+                >
+                    <i class="icon icon-stop"></i>
+                </button>
+            </div>
         </td>
     </tr>
     </tbody>
 </table>
+
 <app-none-recording-times></app-none-recording-times>

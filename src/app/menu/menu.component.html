@@ -1,10 +1,16 @@
-<ul class="nav">
-  <li class="nav-item active">
-    <a href="#">Paramètrage</a>
-    <ul class="nav">
-      <li class="nav-item">
-        <a routerLink="/users">Utilisateurs</a>
-      </li>
-    </ul>
-  </li>
-</ul>
+<div class="nav">
+
+    <div class="nav-item" routerLink="/dashboard" routerLinkActive="active">
+        Tableau de bord
+    </div>
+
+    <div class="nav-item">
+        Paramètrage
+        <div class="nav">
+            <div class="nav-item" routerLink="/users" routerLinkActive="active">
+                Utilisateurs
+            </div>
+        </div>
+    </div>
+
+</div>
