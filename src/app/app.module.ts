@@ -18,6 +18,7 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { GroupsService, NoTimeRecordingsService, ProfilesService, UsersService } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
+import { FormService } from '../backend/forms';
 
 registerLocaleData(localeFr, 'fr');
 export function createRestangularConfigFactory(RestangularProvider) {
@@ -49,6 +50,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ProfilesService,
         UsersService,
         GroupsService,
+        FormService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

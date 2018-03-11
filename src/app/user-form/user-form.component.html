@@ -1,63 +1,66 @@
-<form (ngSubmit)="save()" #userForm="ngForm">
+<form [formGroup]="form.group" (ngSubmit)="save()">
     <div>
-        <input type="text" class="form-control" disabled [value]="user.trigram">
+        <label>Trigramme</label>
+        <input class="form-input" disabled [value]="user.trigram">
     </div>
 
     <div>
-        <input type="email" class="form-control" name="email" required [(ngModel)]="user.email">
+        <label>Email</label>
+        <input type="email" class="form-control form-input" formControlName="email">
     </div>
 
     <div>
-        <input type="text" class="form-control" name="lastName" required [(ngModel)]="user.lastName">
-        <input type="text" class="form-control" name="firstName" required [(ngModel)]="user.firstName">
+        <label>Nom</label>
+        <input type="text" class="form-control form-input" formControlName="lastName">
+
+        <label>Prénom</label>
+        <input type="text" class="form-control form-input" formControlName="firstName">
     </div>
 
     <div>
+        <label>Profile</label>
         <select
-            name="profile"
-            id="profile"
-            class="form-control"
-            [(ngModel)]="user.profile.id"
-            #userProfile="ngModel"
+            class="form-control form-select"
+            formControlName="profile"
+            [compareWith]="equals"
         >
             <option
                 *ngFor="let profile of profiles"
-                [ngValue]="profile.id"
+                [ngValue]="profile"
             >{{profile.label}}</option>
         </select>
 
+        <label>Groupe</label>
         <select
-            name="group"
-            id="group"
-            class="form-control"
-            [(ngModel)]="user.group.id"
-            #userGroup="ngModel"
+            class="form-control form-select"
+            formControlName="group"
+            [compareWith]="equals"
         >
             <option
                 *ngFor="let group of groups"
-                [ngValue]="group.id"
+                [ngValue]="group"
             >{{group.label}}</option>
         </select>
     </div>
 
     <div>
+        <label>Responsables</label>
         <select
-            name="manager"
-            id="manager"
-            class="form-control"
-            [(ngModel)]="user.managers"
-            #userGroup="ngModel"
+            class="form-control form-select"
+            formControlName="managers"
+            multiple
         >
             <option
                 *ngFor="let manager of managers"
-                [ngValue]="manager.id"
+                [ngValue]="manager"
             >{{manager.firstName}}</option>
         </select>
     </div>
 
     <div>
-        <textarea name="notes" id="notes" cols="30" rows="3">{{user.notes}}</textarea>
+        <label>Notes</label>
+        <textarea class="form-input" rows="3" formControlName="notes">{{user.notes}}</textarea>
     </div>
 
-    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-primary" type="submit">Enregistrer</button>
 </form>
