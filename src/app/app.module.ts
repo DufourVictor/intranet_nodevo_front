@@ -20,6 +20,7 @@ import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
 import { FormService } from '../backend/forms';
 import { EmpowermentComponent } from './empowerment/empowerment.component';
+import { EmpowermentsService } from '../backend/services/Empowerments.service';
 import { TrainingsBonusComponent } from './trainings-bonus/trainings-bonus.component';
 import { TrainingBonusFormComponent } from './training-bonus-form/training-bonus-form.component';
 import { NoneRecordingTimeFormComponent } from './none-recording-time-form/none-recording-time-form.component';
@@ -62,6 +63,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         GroupsService,
         TrainingBonusesService,
         FormService,
+        EmpowermentsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

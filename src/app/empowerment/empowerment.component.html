@@ -1,99 +1,31 @@
-<table class="table table-striped table-hover">
-    <thead>
-    <tr>
-        <th></th>
-        <th>Administrateurs</th>
-        <th>Utilisateurs avec des droits</th>
-        <th>Utilisateurs</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="active">
-        <td>
-            Module Devis
-        </td>
-        <td>
-            <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox">
-                    <i class="form-icon"></i>
-                </label>
-            </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox">
-                    <i class="form-icon"></i>
-                </label>
-            </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox">
-                    <i class="form-icon"></i>
-                </label>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Module Affaire
-        </td>
-        <td>
-            <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox">
-                    <i class="form-icon"></i>
-                </label>
-            </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox">
-                    <i class="form-icon"></i>
-                </label>
-            </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox">
-                    <i class="form-icon"></i>
-                </label>
-            </div>
-        </td>
-    </tr>
-    <tr class="active">
-        <td>
-            Module Paramètrage
-        </td>
-        <td>
-            <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox">
-                    <i class="form-icon"></i>
-                </label>
-            </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox">
-                    <i class="form-icon"></i>
-                </label>
-            </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox">
-                    <i class="form-icon"></i>
-                </label>
-            </div>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div id="empowerments">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-empowerments">
+            <thead>
+            <tr>
+                <th></th>
+                <th *ngFor="let group of groups">{{ group.label }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-template ngFor let-resource [ngForOf]="resources">
+                <tr class="title">
+                    <td class="resource" [attr.colspan]="groups.length + 1">{{ resource.name }}</td>
+                </tr>
+                <tr *ngFor="let access of resource.accesses">
+                    <td class="access">{{ access }}</td>
+
+                    <td *ngFor="let group of groups">
+                        <div class="form-group">
+                            <label class="form-switch">
+                                <input type="checkbox">
+                                <i class="form-icon"></i>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            </tbody>
+        </table>
+    </div>
+</div>

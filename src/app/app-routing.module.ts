@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
-import {EmpowermentComponent} from './empowerment/empowerment.component';
+import { EmpowermentComponent } from './empowerment/empowerment.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
