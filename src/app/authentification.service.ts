@@ -1,10 +1,10 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-let jwtDecode = require('jwt-decode');
 
 @Injectable()
 export class AuthentificationService {
+    jwtDecode = require('jwt-decode');
     onUserSet = new EventEmitter();
 
     constructor(private http: HttpClient) {
@@ -38,6 +38,6 @@ export class AuthentificationService {
     }
 
     public getCurrentUser() {
-        return this.getAccessToken() ? jwtDecode(this.getAccessToken()) : null;
+        return this.getAccessToken() ? this.jwtDecode(this.getAccessToken()) : null;
     }
 }

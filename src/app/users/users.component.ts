@@ -33,7 +33,11 @@ export class UsersComponent implements OnInit {
     }
 
     toggleEnabled(user: User) {
-        user.enabled = !user.enabled;
-        this.usersService.update(user).subscribe()
+        const clone = {...user};
+        clone.enabled = !clone.enabled;
+        this.usersService.update(clone as User).subscribe(
+            success => user.enabled = success.enabled,
+            error => console.error(error)
+        );
     }
 }
