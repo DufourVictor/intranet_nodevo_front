@@ -1,0 +1,64 @@
+<form class="form-horizontal" [formGroup]="form.group" (ngSubmit)="save()">
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="type">Type :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+
+            <select
+                name="type"
+                id="type"
+                class="form-control"
+                formControlName="type"
+            >
+                <option disabled>{{ trainingBonus ? trainingBonus.type : '' }}</option>
+                <option value="Formation">Formation</option>
+                <option value="Prime">Prime</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="date">Date :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                id="date"
+                type="date"
+                formControlName="date"
+            >
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="price">Coût :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                id="price"
+                type="text"
+                formControlName="price"
+            >
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="notes">Notes :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                type="text"
+                id="notes"
+                formControlName="notes"
+            >
+        </div>
+    </div>
+    
+    <button class="btn btn-primary" type="submit">
+        Enregistrer
+    </button>
+</form>
