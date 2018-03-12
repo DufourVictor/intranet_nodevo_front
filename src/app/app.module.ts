@@ -22,6 +22,7 @@ import { FormService } from '../backend/forms';
 import { TrainingsBonusComponent } from './trainings-bonus/trainings-bonus.component';
 import { TrainingBonusFormComponent } from './training-bonus-form/training-bonus-form.component';
 import { NoneRecordingTimeFormComponent } from './none-recording-time-form/none-recording-time-form.component';
+import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
 
 registerLocaleData(localeFr, 'fr');
 export function createRestangularConfigFactory(RestangularProvider) {
@@ -40,6 +41,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         TrainingsBonusComponent,
         TrainingBonusFormComponent,
         NoneRecordingTimeFormComponent,
+        SpectreModalComponent,
     ],
     imports: [
         BrowserModule,

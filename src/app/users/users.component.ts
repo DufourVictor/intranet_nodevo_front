@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../backend/model';
 import { UsersService } from '../../backend/services';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-users',
@@ -20,10 +19,6 @@ export class UsersComponent implements OnInit {
         this.usersService.getAll().subscribe(users => this.users = users);
     }
 
-    addUser() {
-        // TODO : Create
-    }
-
     delete(user: User) {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
             this.usersService.remove(user).subscribe(() => {
@@ -33,7 +28,11 @@ export class UsersComponent implements OnInit {
     }
 
     toggleEnabled(user: User) {
-        user.enabled = !user.enabled;
-        this.usersService.update(user).subscribe()
+        const clone = {...user};
+        clone.enabled = !clone.enabled;
+        this.usersService.update(clone as User).subscribe(
+            success => user.enabled = success.enabled,
+            error => console.error(error)
+        );
     }
 }
