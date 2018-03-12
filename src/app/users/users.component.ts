@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../backend/model';
 import { UsersService } from '../../backend/services';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-users',
@@ -18,10 +17,6 @@ export class UsersComponent implements OnInit {
 
     ngOnInit() {
         this.usersService.getAll().subscribe(users => this.users = users);
-    }
-
-    addUser() {
-        // TODO : Create
     }
 
     delete(user: User) {

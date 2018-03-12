@@ -19,6 +19,7 @@ import { GroupsService, NoTimeRecordingsService, ProfilesService, UsersService }
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
 import { FormService } from '../backend/forms';
+import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
 
 registerLocaleData(localeFr, 'fr');
 export function createRestangularConfigFactory(RestangularProvider) {
@@ -34,6 +35,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         NoneRecordingTimesComponent,
         UserDetailsComponent,
         UserFormComponent,
+        SpectreModalComponent,
     ],
     imports: [
         BrowserModule,
