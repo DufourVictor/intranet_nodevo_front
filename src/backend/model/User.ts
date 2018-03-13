@@ -8,4 +8,13 @@ export class User extends UserBase {
             return (this.firstName.substr(0, 1) + this.lastName.substr(0, 2)).toUpperCase();
         }
     }
+
+    get fullName () {
+        return this.firstName + ' ' + this.lastName;
+    }
+
+    constructor () {
+        super();
+        this.enabled = true;
+    }
 }
