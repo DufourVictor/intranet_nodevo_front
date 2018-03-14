@@ -33,17 +33,6 @@
         </table>
     </div>
 </details>
-<div class="modal {{ active }}" id="modal-training">
-    <a class="modal-overlay" aria-label="Close" (click)="closeModal()"></a>
-    <div class="modal-container">
-        <div class="modal-header">
-            <a class="btn btn-clear float-right" aria-label="Close" (click)="closeModal()"></a>
-            <div class="modal-title h5">Ajouter une prime ou formation</div>
-        </div>
-        <div class="modal-body">
-            <div class="content">
-               <app-training-bonus-form [trainingBonus]="trainingBonus" [user]="user" (saveTraining)="closeModal()"></app-training-bonus-form>
-            </div>
-        </div>
-    </div>
-</div>
+<spectre-modal [title]="modalTitle">
+    <app-training-bonus-form [trainingBonus]="trainingBonus" [user]="user" (saveTraining)="closeModal()"></app-training-bonus-form>
+</spectre-modal>

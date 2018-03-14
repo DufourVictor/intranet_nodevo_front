@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NoTimeRecordingsService } from '../../backend/services';
 import { NoTimeRecording, User } from '../../backend/model';
+import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component';
 
 @Component({
     selector: 'app-none-recording-times',
@@ -11,7 +12,8 @@ export class NoneRecordingTimesComponent implements OnInit {
     noneRecordingTimes: NoTimeRecording[];
     noneRecordingTime: NoTimeRecording = new NoTimeRecording();
     @Input() user: User;
-    active: string;
+    modalTitle = 'Période de non saisie des temps';
+    @ViewChild(SpectreModalComponent) modalToggle: SpectreModalComponent;
 
     constructor(private noTimeRecordingsService: NoTimeRecordingsService) {
     }
@@ -26,15 +28,12 @@ export class NoneRecordingTimesComponent implements OnInit {
     }
 
     activeModal(noneRecordingTime = null) {
-        this.active = 'active';
-        if (noneRecordingTime !== null) {
-            this.noneRecordingTime = noneRecordingTime;
-        }
+        this.noneRecordingTime = noneRecordingTime ? noneRecordingTime : new NoTimeRecording();
+        this.modalToggle.toggleActive();
     }
 
     closeModal() {
-        this.active = '';
-        this.noneRecordingTime = new NoTimeRecording();
+        this.modalToggle.toggleActive();
         this.getAllNoneRecordingTimes();
     }
 

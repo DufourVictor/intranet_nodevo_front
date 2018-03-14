@@ -35,6 +35,7 @@ export class TrainingBonusFormComponent implements OnChanges {
                 trainingBonus.setUser(this.user.id);
                 this.trainingBonusesService.add(trainingBonus).subscribe(() => this.saveTraining.emit());
             }
+            this.form.group.reset();
         } else {
             // force invalid inputs state to display errors
             this.form.displayErrors();

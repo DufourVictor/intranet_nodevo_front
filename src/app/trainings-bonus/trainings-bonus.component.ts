@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TrainingBonusesService } from '../../backend/services';
 import { TrainingBonus, User } from '../../backend/model';
+import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component';
 
 @Component({
     selector: 'app-trainings-bonus',
@@ -11,7 +12,8 @@ export class TrainingsBonusComponent implements OnInit {
     trainingBonuses: TrainingBonus[];
     trainingBonus: TrainingBonus = new TrainingBonus();
     @Input() user: User;
-    active: string;
+    modalTitle = 'Primes ou formations';
+    @ViewChild(SpectreModalComponent) modalToggle: SpectreModalComponent;
 
     constructor(private trainingBonusesService: TrainingBonusesService) {
     }
@@ -25,15 +27,12 @@ export class TrainingsBonusComponent implements OnInit {
     }
 
     activeModal(trainingBonus = null) {
-        this.active = 'active';
-        if (trainingBonus !== null) {
-            this.trainingBonus = trainingBonus;
-        }
+        this.trainingBonus = trainingBonus ? trainingBonus : new TrainingBonus();
+        this.modalToggle.toggleActive();
     }
 
     closeModal() {
-        this.active = '';
-        this.trainingBonus = new TrainingBonus();
+        this.modalToggle.toggleActive();
         this.getAllTraining();
     }
 

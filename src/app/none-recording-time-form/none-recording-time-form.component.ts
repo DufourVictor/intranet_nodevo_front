@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {NoTimeRecording, User} from '../../backend/model';
-import {Form, FormService} from '../../backend/forms';
-import {NoTimeRecordingsService} from '../../backend/services';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { NoTimeRecording, User } from '../../backend/model';
+import { Form, FormService } from '../../backend/forms';
+import { NoTimeRecordingsService } from '../../backend/services';
 
 @Component({
     selector: 'app-none-recording-time-form',
@@ -31,6 +31,7 @@ export class NoneRecordingTimeFormComponent implements OnChanges {
             const noneRecordingTime = this.form.get();
             noneRecordingTime.setUser(this.user.id);
             this.noTimeRecordingsService.add(noneRecordingTime).subscribe(() => this.saveNoTimeRecording.emit());
+            this.form.group.reset();
         } else {
             // force invalid inputs state to display errors
             this.form.displayErrors();
