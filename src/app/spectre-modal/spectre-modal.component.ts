@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, OnInit } from '@angular/core';
+import { Component, ContentChild, Input } from '@angular/core';
 
 @Component({
     selector: 'spectre-modal',
