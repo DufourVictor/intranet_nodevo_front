@@ -1,66 +1,94 @@
-<form [formGroup]="form.group" (ngSubmit)="save()">
-    <div>
-        <label>Trigramme</label>
-        <input class="form-input" disabled [value]="user.trigram">
-    </div>
+<div class="container">
+    <form [formGroup]="form.group" (ngSubmit)="save()">
+        <div class="columns">
+            <div class="form-group column col-6">
+                <label class="form-label">Trigramme</label>
+                <input class="form-input" disabled [value]="user.trigram">
+            </div>
+        </div>
 
-    <div>
-        <label>Email</label>
-        <input type="email" class="form-control form-input" formControlName="email">
-    </div>
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('email').invalid">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control form-input" formControlName="email">
+            </div>
+        </div>
 
-    <div>
-        <label>Nom</label>
-        <input type="text" class="form-control form-input" formControlName="lastName">
+        <div class="columns">
+            <div class="form-group column" [class.has-error]="form.group.get('lastName').invalid">
+                <label class="form-label">Nom</label>
+                <input type="text" class="form-control form-input" formControlName="lastName">
+            </div>
 
-        <label>Prénom</label>
-        <input type="text" class="form-control form-input" formControlName="firstName">
-    </div>
+            <div class="form-group column" [class.has-error]="form.group.get('firstName').invalid">
+                <label class="form-label">Prénom</label>
+                <input type="text" class="form-control form-input" formControlName="firstName">
+            </div>
+        </div>
 
-    <div>
-        <label>Profile</label>
-        <select
-            class="form-control form-select"
-            formControlName="profile"
-            [compareWith]="equals"
-        >
-            <option
-                *ngFor="let profile of profiles"
-                [ngValue]="profile"
-            >{{profile.label}}</option>
-        </select>
+        <div class="columns" *ngIf="undefined === user.id">
+            <div class="form-group column col-6">
+                <label class="form-label">Nom d'utilisateur</label>
+                <input type="text" class="form-input form-control" formControlName="username">
+            </div>
 
-        <label>Groupe</label>
-        <select
-            class="form-control form-select"
-            formControlName="group"
-            [compareWith]="equals"
-        >
-            <option
-                *ngFor="let group of groups"
-                [ngValue]="group"
-            >{{group.label}}</option>
-        </select>
-    </div>
+            <div class="form-group column col-6">
+                <label class="form-label">Mot de passe</label>
+                <input type="text" class="form-input form-control" formControlName="password">
+            </div>
+        </div>
 
-    <div>
-        <label>Responsables</label>
-        <select
-            class="form-control form-select"
-            formControlName="managers"
-            multiple
-        >
-            <option
-                *ngFor="let manager of managers"
-                [ngValue]="manager"
-            >{{manager.firstName}}</option>
-        </select>
-    </div>
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('profile').invalid">
+                <label class="form-label">Profile</label>
+                <select class="form-control form-select" formControlName="profile"
+                        [compareWith]="formService.objectsEquals">
+                    <option
+                        *ngFor="let profile of profiles"
+                        [ngValue]="profile"
+                    >{{profile.label}}
+                    </option>
+                </select>
+            </div>
 
-    <div>
-        <label>Notes</label>
-        <textarea class="form-input" rows="3" formControlName="notes">{{user.notes}}</textarea>
-    </div>
+            <div class="form-group column col-6" [class.has-error]="form.group.get('group').invalid">
+                <label class="form-label">Groupe</label>
+                <select class="form-control form-select" formControlName="group" [compareWith]="formService.objectsEquals">
+                    <option
+                        *ngFor="let group of groups"
+                        [ngValue]="group"
+                    >{{group.label}}
+                    </option>
+                </select>
+            </div>
+        </div>
 
-    <button class="btn btn-primary" type="submit">Enregistrer</button>
-</form>
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('managers').invalid">
+                <label class="form-label">Responsables</label>
+                <select
+                    class="form-control form-select"
+                    formControlName="managers"
+                    multiple
+                >
+                    <option
+                        *ngFor="let manager of managers"
+                        [ngValue]="manager"
+                    >{{ manager.fullName }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('notes').invalid">
+                <label class="form-label">Notes</label>
+                <textarea class="form-input" rows="3" formControlName="notes">{{user.notes}}</textarea>
+            </div>
+        </div>
+
+        <div class="columns">
+            <button class="btn btn-primary column col-4 col-mx-auto" type="submit">Enregistrer</button>
+        </div>
+    </form>
+</div>

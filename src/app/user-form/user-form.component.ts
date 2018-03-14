@@ -3,6 +3,8 @@ import { Group, User } from '../../backend/model';
 import { Profile } from '../../backend/model';
 import { GroupsService, ProfilesService, UsersService } from '../../backend/services';
 import { Form, FormService } from '../../backend/forms';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-form',
@@ -10,17 +12,18 @@ import { Form, FormService } from '../../backend/forms';
     styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
-    @Input() user: User;
+    @Input() user: User = new User();
     profiles: Profile[] = [];
     groups: Group[] = [];
     managers: User[] = [];
     form: Form<User>;
 
     constructor(
+        private router: Router,
         private usersService: UsersService,
         private profilesService: ProfilesService,
         private groupsService: GroupsService,
-        private formService: FormService,
+        protected formService: FormService,
     ) {}
 
     ngOnInit() {
@@ -32,21 +35,17 @@ export class UserFormComponent implements OnInit {
     }
 
     save() {
+        console.log(Object.values(this.form.group.controls).filter((control: FormControl) => control.invalid));
+        console.log(this.form.get());
         if (this.form.group.dirty && this.form.group.valid) {
             const user = this.form.get();
             if (user.id) {
-                this.usersService.update(user).subscribe(user => console.log('yeah!'));
+                this.usersService.update(user).subscribe(() => this.router.navigate(['users']));
             } else {
-                this.usersService.add(user).subscribe(user => console.log('yeah!'));
+                this.usersService.add(user).subscribe();
             }
         } else {
-            // force invalid inputs state to display errors
             this.form.displayErrors();
         }
     }
-
-    equals (item1, item2) {
-        return item1.id === item2.id;
-    }
-
 }
