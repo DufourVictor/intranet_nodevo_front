@@ -1,0 +1,85 @@
+#empowerments {
+    position: relative;
+    margin-top: 20px;
+
+    .table {
+        &-responsive {
+            overflow-x: auto;
+        }
+
+        &-empowerments {
+            tbody {
+                border-bottom: 1px solid #e7e9ed;
+            }
+
+            tr {
+                &.title {
+                    height: 53px;
+                }
+
+                &:nth-child(odd) {
+                    background-color: #f8f9fa;
+                }
+
+                &:nth-child(2n) {
+                    background-color: #fff;
+                }
+
+                th {
+                    text-align: center;
+                    background-color: #fff;
+                    border: none;
+
+                    &:first-child {
+                        width: 150px;
+                        position: absolute;
+                        height: 90px;
+                    }
+
+                    &:nth-child(2) {
+                        padding-left: 150px;
+                    }
+                }
+
+                td {
+                    border: none;
+
+                    &.resource {
+                        padding-left: 20px;
+                        font-weight: 700;
+                        color: #000;
+                        font-size: 18px;
+                        position: absolute;
+                        width: 100%;
+                        background-color: inherit;
+                        z-index: 2;
+
+                        &:first-letter {
+                            text-transform: uppercase;
+                        }
+                    }
+
+                    &.access {
+                        padding-left: 40px;
+                        padding-top: 20px;
+                        position: absolute;
+                        width: 150px;
+                        left: 0;
+                        top: auto;
+                        background-color: inherit;
+                        height: 63px;
+                        z-index: 1;
+                    }
+
+                    &:nth-child(2) {
+                        padding-left: 150px;
+                    }
+
+                    .form-group {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
