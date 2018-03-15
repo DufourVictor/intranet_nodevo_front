@@ -18,7 +18,7 @@
                     <td *ngFor="let group of groups">
                         <div class="form-group">
                             <label class="form-switch">
-                                <input type="checkbox">
+                                <input (change)="toggleAuthorizationSwitch(group.id, resource.name, access)" type="checkbox">
                                 <i class="form-icon"></i>
                             </label>
                         </div>
