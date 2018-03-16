@@ -15,7 +15,14 @@ import { MenuComponent } from './menu/menu.component';
 import { NoneRecordingTimesComponent } from './none-recording-times/none-recording-times.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserFormComponent } from './user-form/user-form.component';
-import {GroupsService, NoTimeRecordingsService, ProfilesService, TrainingBonusesService, UsersService } from '../backend/services';
+import {
+    CostPerYearsService,
+    GroupsService,
+    NoTimeRecordingsService,
+    ProfilesService,
+    TrainingBonusesService,
+    UsersService
+} from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
 import { FormService } from '../backend/forms';
@@ -25,11 +32,15 @@ import { TrainingsBonusComponent } from './trainings-bonus/trainings-bonus.compo
 import { TrainingBonusFormComponent } from './training-bonus-form/training-bonus-form.component';
 import { NoneRecordingTimeFormComponent } from './none-recording-time-form/none-recording-time-form.component';
 import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
+import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
+import { CostPerYearFormComponent } from './cost-per-year-form/cost-per-year-form.component';
 
 registerLocaleData(localeFr, 'fr');
+
 export function createRestangularConfigFactory(RestangularProvider) {
-    return RestangularConfigFactory(RestangularProvider, { baseUrl: 'https://localhost:8443' });
+    return RestangularConfigFactory(RestangularProvider, {baseUrl: 'https://localhost:8443'});
 }
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -45,6 +56,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         TrainingBonusFormComponent,
         NoneRecordingTimeFormComponent,
         SpectreModalComponent,
+        CostPerYearComponent,
+        CostPerYearFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -64,6 +77,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         TrainingBonusesService,
         FormService,
         EmpowermentsService,
+        CostPerYearsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

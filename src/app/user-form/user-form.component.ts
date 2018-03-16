@@ -18,13 +18,12 @@ export class UserFormComponent implements OnInit {
     managers: User[] = [];
     form: Form<User>;
 
-    constructor(
-        private router: Router,
-        private usersService: UsersService,
-        private profilesService: ProfilesService,
-        private groupsService: GroupsService,
-        protected formService: FormService,
-    ) {}
+    constructor(private router: Router,
+                private usersService: UsersService,
+                private profilesService: ProfilesService,
+                private groupsService: GroupsService,
+                protected formService: FormService,) {
+    }
 
     ngOnInit() {
         this.form = this.formService.makeForm<User>(this.user);

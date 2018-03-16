@@ -5,6 +5,7 @@ import { ValidationTypes } from './tools/ValidationTypes';
 import { AppValidators } from './app-validators';
 import { FormGroupValidationMatcherBase } from './FormGroupValidationMatcherBase';
 
+import { CostPerYearValidators } from './CostPerYearValidators';
 import { GroupValidators } from './GroupValidators';
 import { NoTimeRecordingValidators } from './NoTimeRecordingValidators';
 import { ProfileValidators } from './ProfileValidators';
@@ -18,6 +19,7 @@ export {
   AppValidators,
   FormGroupValidationMatcherBase,
 
+  CostPerYearValidators,
   GroupValidators,
   NoTimeRecordingValidators,
   ProfileValidators,

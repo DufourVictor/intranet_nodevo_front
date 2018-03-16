@@ -12,7 +12,8 @@ export class FormService {
         return new Form<T>(this.formBuilder, item);
     }
 
-    objectsEquals (item1, item2) {
+    objectsEquals(item1, item2) {
         return item1.id === item2.id;
     }
+
 }
