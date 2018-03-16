@@ -16,6 +16,7 @@ import { NoneRecordingTimesComponent } from './none-recording-times/none-recordi
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
 import {
+    AclsService,
     BusinessesService,
     GroupsService,
     NoTimeRecordingsService,
@@ -88,6 +89,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         FormService,
         EmpowermentsService,
         BusinessesService,
+        AclsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

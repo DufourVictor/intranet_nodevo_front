@@ -1,3 +1,4 @@
+import { Acl } from './Acl';
 import { Business } from './Business';
 import { Group } from './Group';
 import { NoTimeRecording } from './NoTimeRecording';
@@ -7,10 +8,11 @@ import { User } from './User';
 
 
 export {
-  Business,
-  Group,
-  NoTimeRecording,
-  Profile,
-  TrainingBonus,
-  User,
+    Acl,
+    Business,
+    Group,
+    NoTimeRecording,
+    Profile,
+    TrainingBonus,
+    User,
 }

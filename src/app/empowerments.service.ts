@@ -6,7 +6,6 @@ import { EmpowermentTree } from '../backend/model/EmpowermentTree';
 @Injectable()
 export class EmpowermentsService {
     private url_load_tree = '/load/tree';
-    private url_switch_empowerment = '/switch';
 
     constructor(private http: HttpClient) {
     }
@@ -18,13 +17,5 @@ export class EmpowermentsService {
                 response.groups,
             )
         );
-    }
-
-    switchEmpowerment(groupId, resource, access) {
-        return this.http.post(this.url_switch_empowerment, {
-            groupId: groupId,
-            resource: resource,
-            access: access,
-        });
     }
 }
