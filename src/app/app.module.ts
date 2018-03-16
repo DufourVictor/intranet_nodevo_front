@@ -27,6 +27,7 @@ import { NoneRecordingTimeFormComponent } from './none-recording-time-form/none-
 import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 registerLocaleData(localeFr, 'fr');
 export function createRestangularConfigFactory(RestangularProvider) {
@@ -55,6 +56,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ReactiveFormsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        Ng4LoadingSpinnerModule,
         ToastrModule.forRoot({
             maxOpened: 1,
             timeOut: 1500,
