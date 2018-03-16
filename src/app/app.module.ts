@@ -20,11 +20,13 @@ import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
 import { FormService } from '../backend/forms';
 import { EmpowermentComponent } from './empowerment/empowerment.component';
-import { EmpowermentsService } from '../backend/services/Empowerments.service';
+import { EmpowermentsService } from './empowerments.service';
 import { TrainingsBonusComponent } from './trainings-bonus/trainings-bonus.component';
 import { TrainingBonusFormComponent } from './training-bonus-form/training-bonus-form.component';
 import { NoneRecordingTimeFormComponent } from './none-recording-time-form/none-recording-time-form.component';
 import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeFr, 'fr');
 export function createRestangularConfigFactory(RestangularProvider) {
@@ -52,6 +54,12 @@ export function createRestangularConfigFactory(RestangularProvider) {
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            maxOpened: 1,
+            timeOut: 1500,
+            positionClass: 'toast-bottom-center',
+        }),
         RestangularModule.forRoot([], createRestangularConfigFactory)
     ],
     providers: [

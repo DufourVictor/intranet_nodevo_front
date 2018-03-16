@@ -23,7 +23,7 @@ export class UserFormComponent implements OnInit {
         private usersService: UsersService,
         private profilesService: ProfilesService,
         private groupsService: GroupsService,
-        protected formService: FormService,
+        public formService: FormService,
     ) {}
 
     ngOnInit() {
