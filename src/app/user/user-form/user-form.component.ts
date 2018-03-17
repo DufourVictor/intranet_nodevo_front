@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Group, User } from '../../backend/model';
-import { Profile } from '../../backend/model';
-import { GroupsService, ProfilesService, UsersService } from '../../backend/services';
-import { Form, FormService } from '../../backend/forms';
+import { Group, Profile, User } from '../../../backend/model';
+import { GroupsService, ProfilesService, UsersService } from '../../../backend/services';
+import { Form, FormService } from '../../../backend/forms';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 

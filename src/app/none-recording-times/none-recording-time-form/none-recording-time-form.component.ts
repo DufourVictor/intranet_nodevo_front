@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { NoTimeRecording, User } from '../../backend/model';
-import { Form, FormService } from '../../backend/forms';
-import { NoTimeRecordingsService } from '../../backend/services';
+import { NoTimeRecording, User } from '../../../backend/model/index';
+import { Form, FormService } from '../../../backend/forms/index';
+import { NoTimeRecordingsService } from '../../../backend/services/index';
 
 @Component({
     selector: 'app-none-recording-time-form',
