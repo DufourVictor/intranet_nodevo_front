@@ -20,9 +20,7 @@ export class BusinessDetailsComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             if (params.id) {
-                this.businessesService.get(+params.id).subscribe(business => {
-                    this.business = business;
-                });
+                this.businessesService.get(+params.id).subscribe(business => this.business = business);
             } else {
                 this.business = new Business();
             }
