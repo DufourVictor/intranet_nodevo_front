@@ -15,7 +15,14 @@ import { MenuComponent } from './menu/menu.component';
 import { NoneRecordingTimesComponent } from './none-recording-times/none-recording-times.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
-import {GroupsService, NoTimeRecordingsService, ProfilesService, TrainingBonusesService, UsersService } from '../backend/services';
+import {
+    BusinessesService,
+    GroupsService,
+    NoTimeRecordingsService,
+    ProfilesService,
+    TrainingBonusesService,
+    UsersService
+} from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
 import { FormService } from '../backend/forms';
@@ -27,6 +34,8 @@ import { NoneRecordingTimeFormComponent } from './none-recording-times/none-reco
 import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BusinessComponent } from './business/business.component';
+import { BusinessDetailsComponent } from './business-details/business-details.component';
 
 registerLocaleData(localeFr, 'fr');
 export function createRestangularConfigFactory(RestangularProvider) {
@@ -47,6 +56,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         TrainingBonusFormComponent,
         NoneRecordingTimeFormComponent,
         SpectreModalComponent,
+        BusinessComponent,
+        BusinessDetailsComponent,
     ],
     imports: [
         BrowserModule,
@@ -72,6 +83,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         TrainingBonusesService,
         FormService,
         EmpowermentsService,
+        BusinessesService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
