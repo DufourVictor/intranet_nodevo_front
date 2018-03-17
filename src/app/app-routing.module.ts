@@ -6,6 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './user/users.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { EmpowermentComponent } from './empowerment/empowerment.component';
+import { BusinessComponent } from './business/business.component';
+import { BusinessDetailsComponent } from './business-details/business-details.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -13,7 +15,10 @@ const routes: Routes = [
     { path: 'users', component: UsersComponent },
     { path: 'user', component: UserDetailsComponent },
     { path: 'user/:id', component: UserDetailsComponent },
-    { path: 'empowerment', component: EmpowermentComponent }
+    { path: 'empowerment', component: EmpowermentComponent },
+    { path: 'businesses', component: BusinessComponent },
+    { path: 'business', component: BusinessDetailsComponent },
+    { path: 'business/:id', component: BusinessDetailsComponent },
 ];
 
 @NgModule({

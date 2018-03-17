@@ -3,6 +3,8 @@
 
 import { ValidationTypes } from './tools/ValidationTypes';
 
+import { Business } from '../model/Business';
+import { BusinessValidators } from './BusinessValidators';
 import { Group } from '../model/Group';
 import { GroupValidators } from './GroupValidators';
 import { NoTimeRecording } from '../model/NoTimeRecording';
@@ -26,6 +28,7 @@ export class FormGroupValidationMatcherBase {
 
   setBaseItems() {
     this.items = {};
+    this.items[Business._resource] = {itemClass: Business, validator: BusinessValidators};
     this.items[Group._resource] = {itemClass: Group, validator: GroupValidators};
     this.items[NoTimeRecording._resource] = {itemClass: NoTimeRecording, validator: NoTimeRecordingValidators};
     this.items[Profile._resource] = {itemClass: Profile, validator: ProfileValidators};
