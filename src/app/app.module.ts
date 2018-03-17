@@ -37,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BusinessComponent } from './business/business.component';
 import { BusinessDetailsComponent } from './business-details/business-details.component';
 import { BusinessFormComponent } from './business-form/business-form.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 registerLocaleData(localeFr, 'fr');
 export function createRestangularConfigFactory(RestangularProvider) {
@@ -68,6 +69,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ReactiveFormsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        NgxDatatableModule,
         ToastrModule.forRoot({
             maxOpened: 1,
             timeOut: 1500,
