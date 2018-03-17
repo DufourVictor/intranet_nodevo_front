@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { TrainingBonus, User } from '../../backend/model';
-import { Form, FormService } from '../../backend/forms';
-import { TrainingBonusesService } from '../../backend/services';
+import { TrainingBonus, User } from '../../../backend/model/index';
+import { Form, FormService } from '../../../backend/forms/index';
+import { TrainingBonusesService } from '../../../backend/services/index';
 
 @Component({
     selector: 'app-training-bonus-form',
