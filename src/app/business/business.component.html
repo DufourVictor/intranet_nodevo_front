@@ -20,7 +20,7 @@
   <tbody>
   <tr *ngFor="let business of businesses">
     <td>{{ business.id }}</td>
-    <td>{{ business.arboName }}</td>
+    <td>{{ business.label }}</td>
     <td>{{ business.customer.firstName + ' ' + business.customer.lastName }}</td>
     <td>Devis</td>
     <td>{{ business.enabled === true ? 'Actif' : 'Inactif' }}</td>

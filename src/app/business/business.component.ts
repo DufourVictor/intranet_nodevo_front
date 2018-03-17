@@ -27,11 +27,11 @@ export class BusinessComponent implements OnInit {
     }
 
     toggleEnabled(business: Business) {
-        console.log(business);
         const clone = {...business};
         clone.enabled = !clone.enabled;
         this.businessesService.update(clone as Business).subscribe(
-            () => {
+            (success) => {
+                business.enabled = success.enabled;
                 this.toastr.success('L\'affaire a été mise à jour.', 'Succès !');
             },
             (error) => {

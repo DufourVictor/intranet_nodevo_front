@@ -36,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BusinessComponent } from './business/business.component';
 import { BusinessDetailsComponent } from './business-details/business-details.component';
+import { BusinessFormComponent } from './business-form/business-form.component';
 
 registerLocaleData(localeFr, 'fr');
 export function createRestangularConfigFactory(RestangularProvider) {
@@ -58,6 +59,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         SpectreModalComponent,
         BusinessComponent,
         BusinessDetailsComponent,
+        BusinessFormComponent,
     ],
     imports: [
         BrowserModule,
