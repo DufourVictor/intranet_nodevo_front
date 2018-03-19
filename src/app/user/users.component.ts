@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { User } from '../../backend/model/index';
 import { UsersService } from '../../backend/services/index';
+import { ToastrService } from 'ngx-toastr';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
     selector: 'app-users',
@@ -8,21 +10,38 @@ import { UsersService } from '../../backend/services/index';
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+    @ViewChild('actionTmpl') actionTmpl: TemplateRef<any>;
+    @ViewChild('enabledTmpl') enabledTmpl: TemplateRef<any>;
+    @ViewChild(DatatableComponent) table: DatatableComponent;
+
     users: User[] = [];
+    rows: User[] = [];
+    columns = [];
 
     constructor(
-        private usersService: UsersService
+        private usersService: UsersService,
+        private toastr: ToastrService
     ) {
     }
 
     ngOnInit() {
-        this.usersService.getAll().subscribe(users => this.users = users);
+        this.usersService.getAll().subscribe(users => this.rows = this.users = users);
+
+        this.columns = [
+            {prop: 'firstName', name: 'Prénom'},
+            {prop: 'lastName', name: 'Nom'},
+            {prop: 'profile.label', name: 'Profil'},
+            {prop: 'enabled', name: 'Statut', cellTemplate: this.enabledTmpl},
+            {name: 'Actions', cellTemplate: this.actionTmpl},
+        ];
     }
 
     delete(user: User) {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
             this.usersService.remove(user).subscribe(() => {
+                this.toastr.success(`${user.fullName} a bien été supprimé 🗑`)
                 this.users.splice(this.users.indexOf(user), 1);
+                this.rows.splice(this.rows.indexOf(user), 1);
             })
         }
     }
@@ -31,8 +50,22 @@ export class UsersComponent implements OnInit {
         const clone = {...user};
         clone.enabled = !clone.enabled;
         this.usersService.update(clone as User).subscribe(
-            success => user.enabled = success.enabled,
-            error => console.error(error)
+            success => {
+                user.enabled = success.enabled;
+                this.toastr.success(`L'utilisateur a bien été ${user.enabled ? 'activé' : 'désactivé'} 🎉`);
+            },
+            error => this.toastr.error(`Une erreure est survenue 😢`)
         );
+    }
+
+    updateFilter(event) {
+        const val = event.target.value.toLowerCase();
+
+        this.rows = this.users.filter((user: User) => {
+            return user.firstName.toLowerCase().indexOf(val) !== -1
+                || user.lastName.toLowerCase().indexOf(val) !== -1
+                || !val;
+        });
+        this.table.offset = 0;
     }
 }
