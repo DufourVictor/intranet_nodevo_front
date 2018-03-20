@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthentificationService } from '../authentification.service';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -47,10 +47,7 @@ export class LoginComponent implements OnInit {
                     // TODO : Display error msg for user
                     console.error(error);
                 },
-                () => {
-                    this.router.navigate(['dashboard']);
-                }
-            );
+                () => this.router.navigate(['dashboard']));
         } else {
           this.validateAllFormFields(this.loginForm);
         }
