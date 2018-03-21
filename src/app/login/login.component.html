@@ -9,8 +9,8 @@
             <div
                 class="form-group"
                 [ngClass]="{
-                'has-error': username.invalid && (username.touched || username.dirty),
-                'has-success': username.valid && (username.touched || username.dirty)
+                'has-error': username.invalid && (username.touched || username.dirty) || errorStatus,
+                'has-success': username.valid && (username.touched || username.dirty) || errorStatus
             }"
             >
                 <input
@@ -19,17 +19,13 @@
                     formControlName="username"
                     placeholder="Identifiant"
                 >
-                <span
-                    *ngIf="username.invalid && (username.touched || username.dirty)"
-                    class="form-input-hint"
-                >Identifiant invalide.</span>
             </div>
 
             <div
                 class="form-group"
                 [ngClass]="{
-                'has-error': password.invalid && (password.touched || password.dirty),
-                'has-success': password.valid && (password.touched || password.dirty)
+                'has-error': password.invalid && (password.touched || password.dirty) || errorStatus,
+                'has-success': password.valid && (password.touched || password.dirty) || errorStatus
             }"
             >
                 <input
@@ -39,9 +35,10 @@
                     placeholder="Mot de passe"
                 >
                 <span
-                    *ngIf="password.invalid && (password.touched || password.dirty)"
-                    class="form-input-hint"
-                >Mot de passe incorect.</span>
+                    *ngIf="password.invalid && (password.touched || password.dirty) || errorStatus"
+                    class="errorMsg"
+                >
+                    Merci de saisir des identifiants de connexion corrects.</span>
             </div>
 
             <div class="form-group">
@@ -52,7 +49,9 @@
             </div>
 
             <div>
-                <button class="btn btn-primary btn-lg centered" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+                <button class="btn btn-primary btn-lg centered" type="submit"
+                        [disabled]="!loginForm.valid">Se connecter
+                </button>
             </div>
 
         </form>

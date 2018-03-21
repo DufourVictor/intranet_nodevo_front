@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     username: FormControl;
     password: FormControl;
     remember: FormControl;
+    errorStatus: boolean;
 
     constructor(
         private auth: AuthentificationService,
@@ -44,8 +45,9 @@ export class LoginComponent implements OnInit {
                     this.auth.setAccessToken(data.token, this.remember.value);
                 },
                 (error) => {
-                    // TODO : Display error msg for user
-                    console.error(error);
+                    if(error.status == 401){
+                        this.errorStatus = true;
+                    }
                 },
                 () => this.router.navigate(['dashboard']));
         } else {
