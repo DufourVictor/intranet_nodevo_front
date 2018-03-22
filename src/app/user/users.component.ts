@@ -42,6 +42,7 @@ export class UsersComponent implements OnInit {
                 this.toastr.success(`${user.fullName} a bien été supprimé 🗑`)
                 this.users.splice(this.users.indexOf(user), 1);
                 this.rows.splice(this.rows.indexOf(user), 1);
+                this.toastr.warning(`L'utilisateur a bien été supprimé ! 😕❗️`);
             })
         }
     }
@@ -52,9 +53,9 @@ export class UsersComponent implements OnInit {
         this.usersService.update(clone as User).subscribe(
             success => {
                 user.enabled = success.enabled;
-                this.toastr.success(`L'utilisateur a bien été ${user.enabled ? 'activé' : 'désactivé'} 🎉`);
+                this.toastr.success(`L'utilisateur a bien été ${user.enabled ? 'activé' : 'désactivé'} 👍✅`);
             },
-            error => this.toastr.error(`Une erreure est survenue 😢`)
+            error => this.toastr.error(`Désolé l'utilisateur ${user.fullName} n'a pas pu être mise à jour 😢❌`)
         );
     }
 

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { CostPerYear, User } from '../../backend/model';
 import { Form, FormService } from '../../backend/forms';
 import { CostPerYearsService } from '../../backend/services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-cost-per-year-form',
@@ -16,7 +17,9 @@ export class CostPerYearFormComponent implements OnChanges {
     private _costPerYear: CostPerYear;
 
     constructor(private formService: FormService,
-                private costPerYearsService: CostPerYearsService) {
+                private costPerYearsService: CostPerYearsService,
+                private toastr: ToastrService,
+                ) {
 
     }
 
@@ -35,9 +38,11 @@ export class CostPerYearFormComponent implements OnChanges {
                 this.costPerYearsService.add(costPerYear).subscribe(() => this.saveCost.emit());
             }
             this.form.group.reset();
+            this.toastr.success(`Le coût par année a bien été ajouté ! 👍✅`);
         } else {
             // force invalid inputs state to display errors
             this.form.displayErrors();
+            this.toastr.error(`Désolé le coût par année n'a pas pu être mise à jour ! 😢❌\`);
         }
     }
 

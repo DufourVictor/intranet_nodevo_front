@@ -4,6 +4,7 @@ import { GroupsService, ProfilesService, UsersService } from '../../../backend/s
 import { Form, FormService } from '../../../backend/forms';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-user-form',
@@ -23,6 +24,7 @@ export class UserFormComponent implements OnInit {
         private profilesService: ProfilesService,
         private groupsService: GroupsService,
         public formService: FormService,
+        private toastr: ToastrService,
     ) {}
 
     ngOnInit() {
@@ -43,6 +45,7 @@ export class UserFormComponent implements OnInit {
             } else {
                 this.usersService.add(user).subscribe();
             }
+            this.toastr.success(`L'utilisateur ${user.fullName} a bien été ajouté ! 👍✅`);
         } else {
             this.form.displayErrors();
         }
