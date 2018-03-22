@@ -11,12 +11,12 @@ import { UsersService } from './Users.service';
 
 
 export {
-    AclsService,
-    BusinessesService,
-    CostPerYearsService,
-    GroupsService,
-    NoTimeRecordingsService,
-    ProfilesService,
-    TrainingBonusesService,
-    UsersService,
+  AclsService,
+  BusinessesService,
+  CostPerYearsService,
+  GroupsService,
+  NoTimeRecordingsService,
+  ProfilesService,
+  TrainingBonusesService,
+  UsersService,
 }

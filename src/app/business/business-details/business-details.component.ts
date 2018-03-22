@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Business } from '../../backend/model';
+import { Business } from '../../../backend/model';
 import { ActivatedRoute } from '@angular/router';
-import { BusinessesService } from '../../backend/services';
+import { BusinessesService } from '../../../backend/services';
 
 @Component({
     selector: 'app-business-details',

@@ -32,12 +32,10 @@ export class UserFormComponent implements OnInit {
 
         this.profilesService.getAll().subscribe(profiles => this.profiles = profiles);
         this.groupsService.getAll().subscribe(groups => this.groups = groups);
-        this.usersService.getAll().subscribe(managers => this.managers = managers);
+        this.usersService.getAllByFilter('deleted', false).subscribe(managers => this.managers = managers);
     }
 
     save() {
-        console.log(Object.values(this.form.group.controls).filter((control: FormControl) => control.invalid));
-        console.log(this.form.get());
         if (this.form.group.dirty && this.form.group.valid) {
             const user = this.form.get();
             if (user.id) {

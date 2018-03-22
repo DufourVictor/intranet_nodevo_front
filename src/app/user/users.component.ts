@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.usersService.getAll().subscribe(users => this.rows = this.users = users);
+        this.usersService.getAllByFilter('deleted', false).subscribe(users => this.rows = this.users = users);
 
         this.columns = [
             {prop: 'firstName', name: 'Prénom'},
@@ -38,12 +38,16 @@ export class UsersComponent implements OnInit {
 
     delete(user: User) {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
-            this.usersService.remove(user).subscribe(() => {
-                this.toastr.success(`${user.fullName} a bien été supprimé 🗑`)
-                this.users.splice(this.users.indexOf(user), 1);
-                this.rows.splice(this.rows.indexOf(user), 1);
-                this.toastr.warning(`L'utilisateur a bien été supprimé ! 😕❗️`);
-            })
+            const clone = {...user};
+            clone.enabled = !clone.enabled;
+            clone.deleted = !clone.deleted;
+            this.usersService.update(clone as User).subscribe(
+                successUser => {
+                    user.deleted = successUser.deleted;
+                    this.users.splice(this.users.indexOf(user), 1);
+                    this.toastr.warning(`L'utilisateur a bien été supprimé ! 😕❗️`);
+                }
+            );
         }
     }
 

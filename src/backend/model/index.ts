@@ -9,12 +9,12 @@ import { User } from './User';
 
 
 export {
-    Acl,
-    Business,
-    CostPerYear,
-    Group,
-    NoTimeRecording,
-    Profile,
-    TrainingBonus,
-    User,
+  Acl,
+  Business,
+  CostPerYear,
+  Group,
+  NoTimeRecording,
+  Profile,
+  TrainingBonus,
+  User,
 }
