@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto|Material+Icons');
+@import "variables";
+@import "form";
+@import "~spectre.css/dist/spectre-icons.min";
+@import "~spectre.css/src/spectre";
+@import "mixins";
+@import "~ngx-toastr/toastr";
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+html, body {
+    font-family: 'Roboto', sans-serif;
+}

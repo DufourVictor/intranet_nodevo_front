@@ -1,0 +1,60 @@
+<div class="login-wrapper">
+    <div class="login-container centered">
+        <div class="text-center header">
+            <div class="title text-uppercase">Intranet Nodevo</div>
+            <div class="title-connect text-uppercase text-bold">Connectez-vous</div>
+        </div>
+
+        <form (ngSubmit)="authenticate()" [formGroup]="loginForm" novalidate>
+            <div
+                class="form-group"
+                [ngClass]="{
+                'has-error': username.invalid && (username.touched || username.dirty) || errorStatus,
+                'has-success': username.valid && (username.touched || username.dirty) || errorStatus
+            }"
+            >
+                <input
+                    type="text"
+                    class="form-input"
+                    formControlName="username"
+                    placeholder="Identifiant"
+                >
+            </div>
+
+            <div
+                class="form-group"
+                [ngClass]="{
+                'has-error': password.invalid && (password.touched || password.dirty) || errorStatus,
+                'has-success': password.valid && (password.touched || password.dirty) || errorStatus
+            }"
+            >
+                <input
+                    type="password"
+                    class="form-input"
+                    formControlName="password"
+                    placeholder="Mot de passe"
+                >
+                <span
+                    *ngIf="password.invalid && (password.touched || password.dirty) || errorStatus"
+                    class="errorMsg"
+                >
+                    Merci de saisir des identifiants de connexion corrects.</span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-checkbox">
+                    <input type="checkbox" formControlName="remember">
+                    <i class="form-icon"></i> Se rappeler de moi
+                </label>
+            </div>
+
+            <div>
+                <button class="btn btn-primary btn-lg centered" type="submit"
+                        [disabled]="!loginForm.valid">Se connecter
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+

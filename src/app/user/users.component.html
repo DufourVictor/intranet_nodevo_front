@@ -1,0 +1,53 @@
+<button
+    class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
+    data-tooltip="Ajouter un utilisateur"
+    routerLink="/user"
+>
+    <i class="icon icon-plus"></i>
+</button>
+
+<div>
+    <input
+        type="text"
+        placeholder="Filtrez par prénom ou nom"
+        (keyup)="updateFilter($event)"
+    >
+</div>
+
+<ngx-datatable
+    #table
+    class="material fullscreen"
+    columnMode="force"
+    headerHeight="auto"
+    rowHeight="auto"
+    footerHeight="auto"
+    [rows]="rows"
+    [columns]="columns"
+    [limit]="10"
+></ngx-datatable>
+
+<ng-template #actionTmpl let-row="row">
+    <div class="btn-group btn-group-block">
+        <button
+            class="btn btn-primary tooltip"
+            data-tooltip="Editer"
+            [routerLink]="['/user/', row.id]"
+        >
+            <i class="icon icon-edit"></i>
+        </button>
+        <button
+            class="btn btn-error tooltip"
+            data-tooltip="Supprimer"
+            (click)="delete(row)"
+        >
+            <i class="icon icon-stop"></i>
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #enabledTmpl let-row="row" let-value="value">
+    <label class="form-switch">
+        <input type="checkbox" [checked]="value" (change)="toggleEnabled(row)">
+        <i class="form-icon"></i>
+    </label>
+</ng-template>

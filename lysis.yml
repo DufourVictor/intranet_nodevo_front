@@ -1,0 +1,13 @@
+apis:
+  http://localhost:8080:
+    basePath: 'src/backend'
+    hydraPrefix: 'hydra:'
+    generators:
+      lysis-typescript-classes-generator:
+        dir: 'model'
+      lysis-restangular-services-generator:
+        dir: 'services'
+        classPath: '../model'
+      lysis-angular-form-validators-generator:
+        dir: 'forms'
+        classPath: '../model'

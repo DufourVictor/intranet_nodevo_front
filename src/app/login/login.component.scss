@@ -1,0 +1,49 @@
+@import "../../variables";
+
+.login {
+    &-wrapper {
+        height: 100vh;
+        color: #fff;
+        background:
+            url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMUFVU5AwABsQEcwjwbygAAAABJRU5ErkJggg==) repeat,
+            url("http://lorempixel.com/output/business-q-c-1920-1080-5.jpg") no-repeat
+        ;
+    }
+
+    &-container {
+        max-width: 560px;
+        padding-top: 15%;
+
+        .title {
+            color: $primary-color;
+            font-size: 12px;
+            font-weight: 300;
+
+            &-connect {
+                font-size: 24px;
+            }
+        }
+
+        .header {
+            margin-bottom: 70px;
+        }
+
+        .form {
+            &-input {
+                background-color: transparent;
+                border-width: 0;
+                border-bottom-width: 1px;
+                color: #ffffff;
+            }
+
+            &-group {
+                margin-bottom: 45px;
+            }
+        }
+
+        .errorMsg {
+            color: $error-color;
+        }
+
+    }
+}
