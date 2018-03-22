@@ -44,6 +44,7 @@ import { BusinessFormComponent } from './business/business-form/business-form.co
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
+import { CustomersComponent } from './customers/customers.component';
 import { CostPerYearFormComponent } from './cost-per-year/cost-per-year-form/cost-per-year-form.component';
 import { SidebarModule } from 'ng-sidebar';
 import { AvatarModule } from 'ngx-avatar';
@@ -74,6 +75,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         BusinessFormComponent,
         CostPerYearComponent,
         CostPerYearFormComponent,
+        CustomersComponent,
     ],
     imports: [
         BrowserModule,

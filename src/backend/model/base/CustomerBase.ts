@@ -19,6 +19,7 @@ export class CustomerBase {
   notes: string;
   enabled: boolean;
   business: Business;
+  deleted: boolean;
 
   setBusiness(id: number): CustomerBase {
     this.business = new Business();
