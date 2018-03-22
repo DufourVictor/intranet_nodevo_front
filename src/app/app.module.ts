@@ -16,13 +16,14 @@ import { NoneRecordingTimesComponent } from './none-recording-times/none-recordi
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
 import {
-    AclsService,
-    BusinessesService,
+    CostPerYearsService,
     GroupsService,
     NoTimeRecordingsService,
     ProfilesService,
     TrainingBonusesService,
-    UsersService
+    UsersService,
+    AclsService,
+    BusinessesService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
@@ -40,11 +41,15 @@ import { BusinessDetailsComponent } from './business-details/business-details.co
 import { BusinessFormComponent } from './business-form/business-form.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
+import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
+import { CostPerYearFormComponent } from './cost-per-year-form/cost-per-year-form.component';
 
 registerLocaleData(localeFr, 'fr');
+
 export function createRestangularConfigFactory(RestangularProvider) {
-    return RestangularConfigFactory(RestangularProvider, { baseUrl: 'https://localhost:8443' });
+    return RestangularConfigFactory(RestangularProvider, {baseUrl: 'https://localhost:8443'});
 }
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -63,6 +68,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         BusinessComponent,
         BusinessDetailsComponent,
         BusinessFormComponent,
+        CostPerYearComponent,
+        CostPerYearFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -92,6 +99,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         EmpowermentsService,
         BusinessesService,
         AclsService,
+        CostPerYearsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

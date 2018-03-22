@@ -12,6 +12,7 @@ export class FormService  {
   }
 
     objectsEquals(item1, item2) {
-      return item1.id === item2.id;
+        return item1.id === item2.id;
     }
+
 }
