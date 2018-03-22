@@ -37,12 +37,12 @@ import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BusinessComponent } from './business/business.component';
-import { BusinessDetailsComponent } from './business-details/business-details.component';
-import { BusinessFormComponent } from './business-form/business-form.component';
+import { BusinessDetailsComponent } from './business/business-details/business-details.component';
+import { BusinessFormComponent } from './business/business-form/business-form.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
-import { CostPerYearFormComponent } from './cost-per-year-form/cost-per-year-form.component';
+import { CostPerYearFormComponent } from './cost-per-year/cost-per-year-form/cost-per-year-form.component';
 
 registerLocaleData(localeFr, 'fr');
 
