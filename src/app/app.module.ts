@@ -10,28 +10,37 @@ import { TokenInterceptor } from './token.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent } from './user/users.component';
 import { MenuComponent } from './menu/menu.component';
 import { NoneRecordingTimesComponent } from './none-recording-times/none-recording-times.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
-import { UserFormComponent } from './user-form/user-form.component';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { UserFormComponent } from './user/user-form/user-form.component';
 import {
     CostPerYearsService,
     GroupsService,
     NoTimeRecordingsService,
     ProfilesService,
     TrainingBonusesService,
-    UsersService
+    UsersService,
+    AclsService,
+    BusinessesService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
 import { FormService } from '../backend/forms';
 import { EmpowermentComponent } from './empowerment/empowerment.component';
-import { EmpowermentsService } from '../backend/services/Empowerments.service';
+import { EmpowermentsService } from './empowerments.service';
 import { TrainingsBonusComponent } from './trainings-bonus/trainings-bonus.component';
-import { TrainingBonusFormComponent } from './training-bonus-form/training-bonus-form.component';
-import { NoneRecordingTimeFormComponent } from './none-recording-time-form/none-recording-time-form.component';
+import { TrainingBonusFormComponent } from './trainings-bonus/training-bonus-form/training-bonus-form.component';
+import { NoneRecordingTimeFormComponent } from './none-recording-times/none-recording-time-form/none-recording-time-form.component';
 import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BusinessComponent } from './business/business.component';
+import { BusinessDetailsComponent } from './business-details/business-details.component';
+import { BusinessFormComponent } from './business-form/business-form.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
 import { CostPerYearFormComponent } from './cost-per-year-form/cost-per-year-form.component';
 
@@ -56,6 +65,9 @@ export function createRestangularConfigFactory(RestangularProvider) {
         TrainingBonusFormComponent,
         NoneRecordingTimeFormComponent,
         SpectreModalComponent,
+        BusinessComponent,
+        BusinessDetailsComponent,
+        BusinessFormComponent,
         CostPerYearComponent,
         CostPerYearFormComponent,
     ],
@@ -65,6 +77,14 @@ export function createRestangularConfigFactory(RestangularProvider) {
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
+        BrowserAnimationsModule,
+        NgxDatatableModule,
+        NgHttpLoaderModule,
+        ToastrModule.forRoot({
+            maxOpened: 1,
+            timeOut: 1500,
+            positionClass: 'toast-bottom-center',
+        }),
         RestangularModule.forRoot([], createRestangularConfigFactory)
     ],
     providers: [
@@ -77,6 +97,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         TrainingBonusesService,
         FormService,
         EmpowermentsService,
+        BusinessesService,
+        AclsService,
         CostPerYearsService,
         {
             provide: HTTP_INTERCEPTORS,

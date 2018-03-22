@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Group, User } from '../../backend/model';
-import { Profile } from '../../backend/model';
-import { GroupsService, ProfilesService, UsersService } from '../../backend/services';
-import { Form, FormService } from '../../backend/forms';
+import { Group, Profile, User } from '../../../backend/model';
+import { GroupsService, ProfilesService, UsersService } from '../../../backend/services';
+import { Form, FormService } from '../../../backend/forms';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -18,12 +17,13 @@ export class UserFormComponent implements OnInit {
     managers: User[] = [];
     form: Form<User>;
 
-    constructor(private router: Router,
-                private usersService: UsersService,
-                private profilesService: ProfilesService,
-                private groupsService: GroupsService,
-                protected formService: FormService,) {
-    }
+    constructor(
+        private router: Router,
+        private usersService: UsersService,
+        private profilesService: ProfilesService,
+        private groupsService: GroupsService,
+        public formService: FormService,
+    ) {}
 
     ngOnInit() {
         this.form = this.formService.makeForm<User>(this.user);

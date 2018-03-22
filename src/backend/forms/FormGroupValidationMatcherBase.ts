@@ -3,6 +3,8 @@
 
 import { ValidationTypes } from './tools/ValidationTypes';
 
+import { Acl } from '../model/Acl';
+import { AclValidators } from './AclValidators';
 import { CostPerYear } from '../model/CostPerYear';
 import { CostPerYearValidators } from './CostPerYearValidators';
 import { Group } from '../model/Group';
@@ -28,6 +30,7 @@ export class FormGroupValidationMatcherBase {
 
   setBaseItems() {
     this.items = {};
+    this.items[Acl._resource] = {itemClass: Acl, validator: AclValidators};
     this.items[CostPerYear._resource] = {itemClass: CostPerYear, validator: CostPerYearValidators};
     this.items[Group._resource] = {itemClass: Group, validator: GroupValidators};
     this.items[NoTimeRecording._resource] = {itemClass: NoTimeRecording, validator: NoTimeRecordingValidators};

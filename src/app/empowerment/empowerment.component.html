@@ -18,7 +18,9 @@
                     <td *ngFor="let group of groups">
                         <div class="form-group">
                             <label class="form-switch">
-                                <input type="checkbox">
+                                <input (change)="switchAcl(group.id, resource.name, access, $event)"
+                                       [checked]="existAcl(group.id, resource.name, access) ? 'checked' : ''"
+                                       type="checkbox">
                                 <i class="form-icon"></i>
                             </label>
                         </div>

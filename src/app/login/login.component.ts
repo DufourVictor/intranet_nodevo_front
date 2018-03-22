@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthentificationService } from '../authentification.service';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     username: FormControl;
     password: FormControl;
     remember: FormControl;
+    errorStatus: boolean;
 
     constructor(
         private auth: AuthentificationService,
@@ -44,13 +45,11 @@ export class LoginComponent implements OnInit {
                     this.auth.setAccessToken(data.token, this.remember.value);
                 },
                 (error) => {
-                    // TODO : Display error msg for user
-                    console.error(error);
+                    if(error.status == 401){
+                        this.errorStatus = true;
+                    }
                 },
-                () => {
-                    this.router.navigate(['dashboard']);
-                }
-            );
+                () => this.router.navigate(['dashboard']));
         } else {
           this.validateAllFormFields(this.loginForm);
         }
