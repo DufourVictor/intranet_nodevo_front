@@ -1,18 +1,16 @@
 <ng-sidebar-container *ngIf="user !== null">
     <ng-sidebar
         #sidenav
-        [dock]="true"
-        dockedSize="60px"
         mode="push"
-        [(opened)]="_opened"
-        (mouseenter)="sidenav.open()"
-        (mouseleave)="sidenav.close()"
+        [(opened)]="!_opened"
+        [dock]="_opened"
+        dockedSize="60px"
     >
         <div class="logo">
-            <img src="../assets/logo_nodevo.png" width="120" height="30" alt="Nodevo Logo">
+            <img src="../assets/logo_nodevo.png" width="120" height="30" alt="Nodevo Logo" (click)="sidenav.close()">
 
             <div class="logo_mini">
-                <img src="../assets/logo_nodevo_mini.png" width="30" height="30" alt="Nodevo Logo">
+                <img src="../assets/logo_nodevo_mini.png" width="30" height="30" alt="Nodevo Logo" (click)="sidenav.open()">
             </div>
         </div>
         <app-menu></app-menu>
