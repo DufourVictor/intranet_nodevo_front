@@ -23,7 +23,7 @@ import {
     TrainingBonusesService,
     UsersService,
     AclsService,
-    BusinessesService
+    BusinessesService, CustomersService, ContactsService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
@@ -104,6 +104,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         BusinessesService,
         AclsService,
         CostPerYearsService,
+        CustomersService,
+        ContactsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
