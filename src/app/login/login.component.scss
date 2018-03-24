@@ -1,4 +1,4 @@
-@import "../../variables";
+@import "../../styles/variables";
 
 .login {
     &-wrapper {
@@ -6,7 +6,7 @@
         color: #fff;
         background:
             url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMUFVU5AwABsQEcwjwbygAAAABJRU5ErkJggg==) repeat,
-            url("http://lorempixel.com/output/business-q-c-1920-1080-5.jpg") no-repeat
+            url("../../assets/bg_login.jpg") no-repeat
         ;
     }
 
