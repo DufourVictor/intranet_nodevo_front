@@ -9,6 +9,7 @@ import { EmpowermentComponent } from './empowerment/empowerment.component';
 import { BusinessComponent } from './business/business.component';
 import { CustomersComponent } from './customers/customers.component';
 import { BusinessDetailsComponent } from './business/business-details/business-details.component';
+import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -21,6 +22,8 @@ const routes: Routes = [
     { path: 'business', component: BusinessDetailsComponent },
     { path: 'business/:id', component: BusinessDetailsComponent },
     { path: 'customers', component: CustomersComponent },
+    { path: 'customer', component: CustomerDetailsComponent },
+    { path: 'customer/:id', component: CustomerDetailsComponent },
     { path: 'customers/:id/businesses', component: BusinessComponent },
 ];
 

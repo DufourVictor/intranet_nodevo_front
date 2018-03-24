@@ -62,7 +62,7 @@ export class CustomersComponent implements OnInit {
                     customer.enabled = successCustomer.enabled;
                     this.customers.splice(this.customers.indexOf(customer), 1);
                     this.rows = [...this.customers];
-                    this.toastr.warning(`Le client a bien été supprimé ! 😕❗️`);
+                    this.toastr.warning('Le client a bien été supprimé ! 😕❗️');
                 }
             );
         }

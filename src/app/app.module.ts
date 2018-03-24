@@ -48,6 +48,8 @@ import { CustomersComponent } from './customers/customers.component';
 import { CostPerYearFormComponent } from './cost-per-year/cost-per-year-form/cost-per-year-form.component';
 import { SidebarModule } from 'ng-sidebar';
 import { AvatarModule } from 'ngx-avatar';
+import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
+import { CustomerFormComponent } from './customers/customer-form/customer-form.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -76,6 +78,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         CostPerYearComponent,
         CostPerYearFormComponent,
         CustomersComponent,
+        CustomerDetailsComponent,
+        CustomerFormComponent,
     ],
     imports: [
         BrowserModule,

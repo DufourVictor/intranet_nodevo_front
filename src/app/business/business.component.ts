@@ -51,6 +51,7 @@ export class BusinessComponent implements OnInit {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
             this.businessesService.remove(business).subscribe(() => {
                 this.businesses.splice(this.businesses.indexOf(business), 1);
+                this.toastr.warning('L\'affaire a bien été supprimée 😕❗');
             });
         }
     }
