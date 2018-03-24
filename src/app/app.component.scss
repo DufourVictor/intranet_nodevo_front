@@ -8,6 +8,7 @@ header {
     left: 0;
     width: 100vw;
     z-index: 10;
+    padding-right: 20px;
 }
 
 .logo {
@@ -42,4 +43,10 @@ main {
 
 ng-sidebar-container {
     height: 100vh;
+}
+
+.user-fullname {
+    font-size: 12px;
+    margin-right: 22px;
+    font-weight: normal;
 }

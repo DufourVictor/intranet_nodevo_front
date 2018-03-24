@@ -44,6 +44,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
 import { CostPerYearFormComponent } from './cost-per-year/cost-per-year-form/cost-per-year-form.component';
 import { SidebarModule } from 'ng-sidebar';
+import { AvatarModule } from 'ngx-avatar';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -81,6 +82,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         BrowserAnimationsModule,
         NgxDatatableModule,
         NgHttpLoaderModule,
+        AvatarModule,
         ToastrModule.forRoot({
             maxOpened: 1,
             timeOut: 1500,
