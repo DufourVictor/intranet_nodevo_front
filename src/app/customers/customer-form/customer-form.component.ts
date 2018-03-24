@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Business, Customer } from '../../../backend/model';
+import { Customer } from '../../../backend/model';
 import { Form, FormService } from '../../../backend/forms';
 import { CustomersService } from '../../../backend/services';
 import { ToastrService } from 'ngx-toastr';
@@ -14,12 +14,10 @@ export class CustomerFormComponent implements OnInit {
     @Input() customer: Customer = new Customer();
     form: Form<Customer>;
 
-    constructor(
-        private formService: FormService,
-        private customersService: CustomersService,
-        private toastr: ToastrService,
-        private router: Router
-    ) {
+    constructor(private formService: FormService,
+                private customersService: CustomersService,
+                private toastr: ToastrService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -35,7 +33,6 @@ export class CustomerFormComponent implements OnInit {
                     this.router.navigate(['customers']);
                 });
             } else {
-                customer.deleted = false;
                 customer.enabled = true;
                 this.customersService.add(customer).subscribe(() => {
                     this.toastr.success('Le client a été ajouté 👍✅', 'Succès !');
