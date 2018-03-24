@@ -43,6 +43,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
 import { CostPerYearFormComponent } from './cost-per-year/cost-per-year-form/cost-per-year-form.component';
+import { SidebarModule } from 'ng-sidebar';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -85,7 +86,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
             timeOut: 1500,
             positionClass: 'toast-bottom-center',
         }),
-        RestangularModule.forRoot([], createRestangularConfigFactory)
+        RestangularModule.forRoot([], createRestangularConfigFactory),
+        SidebarModule.forRoot()
     ],
     providers: [
         HttpClient,
