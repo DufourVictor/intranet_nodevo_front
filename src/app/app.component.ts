@@ -11,7 +11,7 @@ import { User } from '../backend/model';
 export class AppComponent {
     title = 'app';
     user: User;
-    _opened = false;
+    _opened = true;
 
     get userFullName() {
         return `${this.user.firstName} ${this.user.lastName}`;
@@ -28,5 +28,9 @@ export class AppComponent {
     logout () {
         this.auth.logout();
         this.router.navigate(['']);
+    }
+
+    display() {
+       this._opened = !this._opened;
     }
 }
