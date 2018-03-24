@@ -51,11 +51,11 @@ export class EmpowermentComponent implements OnInit {
         acl.authorized = !acl.authorized;
         this.aclsService.update(acl).subscribe(
             () => {
-                this.toastr.success('L\'habilitation a été mise à jour 👍', 'Succès !');
+                this.toastr.success('L\'habilitation a été mise à jour 👍✅', 'Succès !');
                 input.target.disabled = !input.target.disabled;
             },
             (error) => {
-                this.toastr.error('L\'habilitation n\'a pas pu être mise à jour ❌', 'Erreur !');
+                this.toastr.error('Désolé l\'habilitation n\'a pas pu être mise à jour 😢❌', 'Erreur !');
             }
         );
     }
@@ -69,11 +69,11 @@ export class EmpowermentComponent implements OnInit {
 
         this.aclsService.add(acl).subscribe(
             () => {
-                this.toastr.success('L\'habilitation a été créée avec succès 👍', 'Succès !');
+                this.toastr.success('L\'habilitation a été créée avec succès 👍✅', 'Succès !');
                 this.getAcls(input);
             },
             (error) => {
-                this.toastr.error('L\'habilitation n\'a pas pu être mise à jour ❌', 'Erreur !');
+                this.toastr.error('Désolé l\'habilitation n\'a pas pu être mise à jour 😢❌', 'Erreur !');
             }
         );
     }

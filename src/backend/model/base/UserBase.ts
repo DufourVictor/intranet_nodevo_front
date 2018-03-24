@@ -15,6 +15,7 @@ export class UserBase {
   firstName: string;
   lastName: string;
   enabled: boolean;
+  deleted: boolean;
   notes: string;
   profile: Profile;
   group: Group;

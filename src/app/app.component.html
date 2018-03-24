@@ -1,18 +1,47 @@
-<header class="navbar" *ngIf="username !== null">
-    <section class="navbar-section">
-        <img src="" alt="">
-    </section>
-    <section class="navbar-section">
-        <button class="btn btn-primary" (click)="logout()">Déconnexion</button>
-    </section>
-</header>
+<ng-sidebar-container *ngIf="user !== null">
+    <ng-sidebar
+        #sidenav
+        [dock]="true"
+        dockedSize="60px"
+        mode="push"
+        [(opened)]="_opened"
+        (mouseenter)="sidenav.open()"
+        (mouseleave)="sidenav.close()"
+    >
+        <div class="logo">
+            <img src="../assets/logo_nodevo.png" width="120" height="30" alt="Nodevo Logo">
 
-<main [ngClass]="{'main' : username !== null}">
-    <aside class="sidenav" *ngIf="username !== null">
+            <div class="logo_mini">
+                <img src="../assets/logo_nodevo_mini.png" width="30" height="30" alt="Nodevo Logo">
+            </div>
+        </div>
         <app-menu></app-menu>
-    </aside>
-    <div [ngClass]="{'content' : username !== null}">
-        <router-outlet></router-outlet>
+    </ng-sidebar>
+
+    <div ng-sidebar-content>
+        <header class="navbar">
+            <section class="navbar-section">
+                <div class="col-ml-auto flex-centered">
+                    <span class="user-fullname">{{ userFullName }}</span>
+                    <div>
+                        <ngx-avatar
+                            [name]="userFullName"
+                            [size]="30"
+                            [textSizeRatio]="2"
+                            class="col-ml-auto"
+                            (clickOnAvatar)="logout()"
+                        ></ngx-avatar>
+                    </div>
+                </div>
+            </section>
+        </header>
+
+        <main>
+            <router-outlet></router-outlet>
+        </main>
     </div>
-</main>
+</ng-sidebar-container>
+
+<router-outlet *ngIf="user === null"></router-outlet>
+
 <spinner></spinner>

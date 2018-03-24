@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import { AuthentificationService } from './authentification.service';
+import { User } from '../backend/model';
 
 @Component({
     selector: 'app-root',
@@ -9,16 +10,19 @@ import { AuthentificationService } from './authentification.service';
 })
 export class AppComponent {
     title = 'app';
-    username: string;
+    user: User;
+    _opened = false;
+
+    get userFullName() {
+        return `${this.user.firstName} ${this.user.lastName}`;
+    }
 
     constructor(
         private auth: AuthentificationService,
         private router: Router
     ) {
-        this.username = auth.getCurrentUser() ? auth.getCurrentUser().username : null;
-        this.auth.onUserSet.subscribe(user => {
-            this.username = user ? user.username : null;
-        })
+        this.user = auth.getCurrentUser();
+        this.auth.onUserSet.subscribe(user => this.user = user);
     }
 
     logout () {

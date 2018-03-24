@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CostPerYear, User } from '../../backend/model';
 import { CostPerYearsService } from '../../backend/services';
 import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-cost-per-year',
@@ -15,7 +16,10 @@ export class CostPerYearComponent implements OnInit {
     modalTitle = 'Coût par année';
     @ViewChild(SpectreModalComponent) modalToggle: SpectreModalComponent;
 
-    constructor(private costPerYearsService: CostPerYearsService) {
+    constructor(
+        private costPerYearsService: CostPerYearsService,
+        private toastr: ToastrService,
+    ) {
     }
 
     getAllCosts() {
@@ -40,6 +44,8 @@ export class CostPerYearComponent implements OnInit {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
             this.costPerYearsService.remove(cost).subscribe(() => {
                 this.costPerYears.splice(this.costPerYears.indexOf(cost), 1);
+
+                this.toastr.warning('Le coût par année a bien été supprimé ! 😕❗️');
             });
         }
     }

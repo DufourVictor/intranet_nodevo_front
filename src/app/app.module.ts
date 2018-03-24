@@ -23,7 +23,7 @@ import {
     TrainingBonusesService,
     UsersService,
     AclsService,
-    BusinessesService
+    BusinessesService, CustomersService, ContactsService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
@@ -37,12 +37,14 @@ import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BusinessComponent } from './business/business.component';
-import { BusinessDetailsComponent } from './business-details/business-details.component';
-import { BusinessFormComponent } from './business-form/business-form.component';
+import { BusinessDetailsComponent } from './business/business-details/business-details.component';
+import { BusinessFormComponent } from './business/business-form/business-form.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
-import { CostPerYearFormComponent } from './cost-per-year-form/cost-per-year-form.component';
+import { CostPerYearFormComponent } from './cost-per-year/cost-per-year-form/cost-per-year-form.component';
+import { SidebarModule } from 'ng-sidebar';
+import { AvatarModule } from 'ngx-avatar';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -80,12 +82,14 @@ export function createRestangularConfigFactory(RestangularProvider) {
         BrowserAnimationsModule,
         NgxDatatableModule,
         NgHttpLoaderModule,
+        AvatarModule,
         ToastrModule.forRoot({
             maxOpened: 1,
             timeOut: 1500,
             positionClass: 'toast-bottom-center',
         }),
-        RestangularModule.forRoot([], createRestangularConfigFactory)
+        RestangularModule.forRoot([], createRestangularConfigFactory),
+        SidebarModule.forRoot()
     ],
     providers: [
         HttpClient,
@@ -100,6 +104,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         BusinessesService,
         AclsService,
         CostPerYearsService,
+        CustomersService,
+        ContactsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Business, User } from '../../backend/model';
-import { Form, FormService } from '../../backend/forms';
+import { Business, Contact, Customer } from '../../../backend/model';
+import { Form, FormService } from '../../../backend/forms';
 import { Router } from '@angular/router';
-import { BusinessesService, UsersService } from '../../backend/services';
+import { BusinessesService, ContactsService, CustomersService } from '../../../backend/services';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -12,21 +12,24 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BusinessFormComponent implements OnInit {
     @Input() business: Business = new Business();
-    customers: User[] = [];
+    customers: Customer[] = [];
+    contacts: Contact[] = [];
     form: Form<Business>;
 
     constructor(
         private router: Router,
         private businessesService: BusinessesService,
-        private usersService: UsersService,
         public formService: FormService,
-        private toastr: ToastrService
+        private customersService: CustomersService,
+        private contactsService: ContactsService,
+        private toastr: ToastrService,
     ) {
     }
 
     ngOnInit() {
         this.form = this.formService.makeForm<Business>(this.business);
-        this.usersService.getAll().subscribe(customers => this.customers = customers);
+        this.customersService.getAllByFilter('deleted', false).subscribe(customers => this.customers = customers);
+        this.contactsService.getAll().subscribe(contacts => this.contacts = contacts);
     }
 
     save() {

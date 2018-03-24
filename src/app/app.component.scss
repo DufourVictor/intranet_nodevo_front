@@ -1,24 +1,52 @@
-header, .sidenav {
-    background: #242536;
-    color: #fff;
-    position: fixed;
-    z-index: 10;
-}
+@import "../styles/variables";
 
 header {
-    min-height: 60px;
+    color: #fff;
+    background: $black-1;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100vw;
+    z-index: 10;
+    padding-right: 20px;
 }
 
-.main {
-    padding-top: 60px;
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $black-2;
+
+    img {
+        display: block;
+    }
+
+    &_mini {
+        position: absolute;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity .1s ease-out;
+    }
 }
 
-.content {
-    margin-left: 200px;
+header, .logo {
+    height: 60px;
 }
 
-.sidenav {
-    min-width: 200px;
+main {
+    margin-top: 60px;
+}
+
+ng-sidebar-container {
     height: 100vh;
+}
+
+.user-fullname {
+    font-size: 12px;
+    margin-right: 22px;
+    font-weight: normal;
 }

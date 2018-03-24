@@ -13,6 +13,7 @@ export class UserValidatorsBase extends FormGroupValidators {
     firstName = [Validators.required];
     lastName = [Validators.required];
     enabled = [Validators.required, AppValidators.boolean];
+    deleted = [Validators.required, AppValidators.boolean];
     notes = null;
     profile = [AppValidators.item];
     group = [AppValidators.item];
