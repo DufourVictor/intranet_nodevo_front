@@ -1,9 +1,9 @@
 <div class="container">
     <form [formGroup]="form.group" (ngSubmit)="save()">
-        <div class="columns" *ngIf="business.id">
+        <div class="columns" *ngIf="business.codeBusiness">
             <div class="form-group column col-6">
                 <label class="form-label">Code affaire</label>
-                <input class="form-input" disabled [value]="business.id">
+                <input class="form-input" disabled [value]="business.codeBusiness">
             </div>
             <div class="form-group column col-6">
                 <label class="form-label">Nom dossier arbo</label>
