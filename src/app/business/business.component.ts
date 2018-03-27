@@ -1,8 +1,9 @@
-import {Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BusinessesService } from '../../backend/services';
 import { Business } from '../../backend/model';
 import { ToastrService } from 'ngx-toastr';
-import {DatatableComponent} from '@swimlane/ngx-datatable';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     selector: 'app-business',
@@ -17,12 +18,25 @@ export class BusinessComponent implements OnInit {
     businesses: Business[] = [];
     rows: Business[] = [];
     columns = [];
+    customerId: number;
 
-    constructor(private businessesService: BusinessesService, private toastr: ToastrService) {
+    constructor(
+        private businessesService: BusinessesService,
+        private toastr: ToastrService,
+        private activatedRoute: ActivatedRoute
+    ) {
     }
 
     ngOnInit() {
-        this.businessesService.getAll().subscribe(data => this.rows = this.businesses = data);
+        this.activatedRoute.params.subscribe((params: Params) => {
+            this.customerId = params['id'];
+        });
+
+        if (this.customerId) {
+            this.businessesService.getAllByFilter('customer', this.customerId).subscribe(data => this.businesses = data);
+        } else {
+            this.businessesService.getAll().subscribe(data => this.businesses = data);
+        }
 
         this.columns = [
             {prop: 'codeBusiness', name: 'Code affaire'},

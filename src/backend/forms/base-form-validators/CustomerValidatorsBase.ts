@@ -7,7 +7,7 @@ import { AppValidators } from '../app-validators';
 import { FormGroupValidators } from '../tools/FormGroupValidators';
 
 export class CustomerValidatorsBase extends FormGroupValidators {
-    codeClient = [Validators.required];
+    codeClient = null;
     businessName = [Validators.required];
     siret = null;
     street = [Validators.required];
@@ -19,4 +19,5 @@ export class CustomerValidatorsBase extends FormGroupValidators {
     notes = null;
     enabled = [AppValidators.boolean];
     business = [AppValidators.item];
+    deleted = [AppValidators.boolean];
 }

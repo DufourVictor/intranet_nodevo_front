@@ -10,7 +10,6 @@ import { AclsService } from '../../backend/services';
     templateUrl: './empowerment.component.html',
     styleUrls: ['./empowerment.component.scss']
 })
-// @TODO : Remove input disabled when the loader will be made
 export class EmpowermentComponent implements OnInit {
     resources: EmpowermentChildren;
     groups: Group;

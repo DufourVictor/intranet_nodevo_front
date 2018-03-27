@@ -39,12 +39,14 @@ export class UsersComponent implements OnInit {
     delete(user: User) {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
             const clone = {...user};
-            clone.enabled = !clone.enabled;
-            clone.deleted = !clone.deleted;
+            clone.enabled = false;
+            clone.deleted = true;
             this.usersService.update(clone as User).subscribe(
                 successUser => {
                     user.deleted = successUser.deleted;
+                    user.enabled = successUser.enabled;
                     this.users.splice(this.users.indexOf(user), 1);
+                    this.rows = [...this.users];
                     this.toastr.warning(`L'utilisateur a bien été supprimé ! 😕❗️`);
                 }
             );
@@ -59,7 +61,7 @@ export class UsersComponent implements OnInit {
                 user.enabled = success.enabled;
                 this.toastr.success(`L'utilisateur a bien été ${user.enabled ? 'activé' : 'désactivé'} 👍✅`);
             },
-            error => this.toastr.error(`Désolé l'utilisateur ${user.fullName} n'a pas pu être mise à jour 😢❌`)
+            error => this.toastr.error(`Désolé l'utilisateur ${user.fullName} n'a pas pu être mis à jour 😢❌`)
         );
     }
 

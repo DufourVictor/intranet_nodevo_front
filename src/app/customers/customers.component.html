@@ -1,0 +1,47 @@
+<ngx-datatable
+    #table
+    class="material fullscreen"
+    columnMode="force"
+    headerHeight="auto"
+    rowHeight="auto"
+    footerHeight="auto"
+    [rows]="rows"
+    [columns]="columns"
+    [limit]="10"
+></ngx-datatable>
+
+<ng-template #businessTmpl let-row="row">
+    <div [routerLink]="['/customers/', row.id, 'businesses']">Voir les affaires</div>
+</ng-template>
+
+<ng-template #enabledTmpl let-row="row" let-value="value">
+    <div [class]="value ? 'actif' : 'inactif'" >
+        {{ value ? 'Actif' : 'Inactif' }}
+    </div>
+</ng-template>
+
+<ng-template #actionTmpl let-row="row">
+    <div class="btn-group btn-group-block">
+        <button
+            class="btn btn-primary tooltip"
+            [attr.data-tooltip]="row.enabled ? 'Désactiver' : 'Activer'"
+            (click)="toggleEnabled(row)"
+        >
+            <i class="icon icon-check"></i>
+        </button>
+        <button
+            class="btn btn-primary tooltip"
+            data-tooltip="Editer"
+            [routerLink]="['/user/', row.id]"
+        >
+            <i class="icon icon-edit"></i>
+        </button>
+        <button
+            class="btn btn-error tooltip"
+            data-tooltip="Supprimer"
+            (click)="delete(row)"
+        >
+            <i class="icon icon-stop"></i>
+        </button>
+    </div>
+</ng-template>
