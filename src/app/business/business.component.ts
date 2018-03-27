@@ -33,9 +33,9 @@ export class BusinessComponent implements OnInit {
         });
 
         if (this.customerId) {
-            this.businessesService.getAllByFilter('customer', this.customerId).subscribe(data => this.businesses = data);
+            this.businessesService.getAllByFilter('customer', this.customerId).subscribe(data => this.businesses = this.rows = data);
         } else {
-            this.businessesService.getAll().subscribe(data => this.businesses = data);
+            this.businessesService.getAll().subscribe(data => this.businesses = this.rows = data);
         }
 
         this.columns = [
