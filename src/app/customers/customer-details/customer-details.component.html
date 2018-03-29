@@ -1,4 +1,5 @@
 <div *ngIf="customer">
     <h1>{{ customer.name }}</h1>
     <app-customer-form [customer]="customer"></app-customer-form>
+    <app-list-business [customer]="customer"></app-list-business>
 </div>
