@@ -3,12 +3,12 @@ import { Business, Customer } from '../../../backend/model';
 import { BusinessesService } from '../../../backend/services';
 
 @Component({
-    selector: 'app-list-business',
-    templateUrl: './list-business.component.html',
-    styleUrls: ['./list-business.component.scss']
+    selector: 'app-list-user-business',
+    templateUrl: './list-user-business.component.html',
+    styleUrls: ['./list-user-business.component.scss']
 })
-export class ListBusinessComponent implements OnInit {
-    @Input() customer: Customer = new Customer();
+export class ListUserBusinessComponent implements OnInit {
+    @Input() customer: Customer;
     businesses: Business[];
 
     constructor(private businessesService: BusinessesService) {
