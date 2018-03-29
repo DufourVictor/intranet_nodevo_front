@@ -7,8 +7,8 @@ import { AppValidators } from '../app-validators';
 import { FormGroupValidators } from '../tools/FormGroupValidators';
 
 export class BusinessValidatorsBase extends FormGroupValidators {
-    codeBusiness = [Validators.required];
-    arboName = [Validators.required];
+    codeBusiness = null;
+    arboName = null;
     label = null;
     notes = null;
     enabled = [AppValidators.boolean];
