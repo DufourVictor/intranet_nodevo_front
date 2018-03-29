@@ -50,6 +50,7 @@ import { SidebarModule } from 'ng-sidebar';
 import { AvatarModule } from 'ngx-avatar';
 import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
 import { CustomerFormComponent } from './customers/customer-form/customer-form.component';
+import { ListUserBusinessComponent } from './business/list-user-business/list-user-business.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -80,6 +81,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         CustomersComponent,
         CustomerDetailsComponent,
         CustomerFormComponent,
+        ListUserBusinessComponent,
     ],
     imports: [
         BrowserModule,
