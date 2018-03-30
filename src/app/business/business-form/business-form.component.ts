@@ -11,9 +11,12 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./business-form.component.scss']
 })
 export class BusinessFormComponent implements OnInit {
+    static BUSINESS_CONTACT = 'Commercial';
+    static TECHNICAL_CONTACT = 'Technique';
     @Input() business: Business = new Business();
     customers: Customer[] = [];
-    contacts: Contact[] = [];
+    businessContacts: Contact[] = [];
+    technicalContacts: Contact[] = [];
     form: Form<Business>;
 
     constructor(
@@ -29,7 +32,16 @@ export class BusinessFormComponent implements OnInit {
     ngOnInit() {
         this.form = this.formService.makeForm<Business>(this.business);
         this.customersService.getAllByFilter('deleted', false).subscribe(customers => this.customers = customers);
-        this.contactsService.getAll().subscribe(contacts => this.contacts = contacts);
+        this.contactsService.getAll().subscribe(contacts => {
+            contacts.forEach((contact: Contact) => {
+                if (BusinessFormComponent.TECHNICAL_CONTACT === contact.type.label) {
+                    this.technicalContacts.push(contact);
+                }
+                if (BusinessFormComponent.BUSINESS_CONTACT === contact.type.label) {
+                    this.businessContacts.push(contact);
+                }
+            });
+        });
     }
 
     save() {
