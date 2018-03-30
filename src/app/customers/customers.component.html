@@ -1,3 +1,11 @@
+<button
+    class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
+    data-tooltip="Ajouter une affaire"
+    routerLink="/customer"
+>
+    <i class="icon icon-plus"></i>
+</button>
+
 <ngx-datatable
     #table
     class="material fullscreen"
@@ -15,24 +23,18 @@
 </ng-template>
 
 <ng-template #enabledTmpl let-row="row" let-value="value">
-    <div [class]="value ? 'actif' : 'inactif'" >
-        {{ value ? 'Actif' : 'Inactif' }}
-    </div>
+    <label class="form-switch">
+        <input type="checkbox" [checked]="value" (change)="toggleEnabled(row)">
+        <i class="form-icon"></i>
+    </label>
 </ng-template>
 
 <ng-template #actionTmpl let-row="row">
     <div class="btn-group btn-group-block">
         <button
             class="btn btn-primary tooltip"
-            [attr.data-tooltip]="row.enabled ? 'Désactiver' : 'Activer'"
-            (click)="toggleEnabled(row)"
-        >
-            <i class="icon icon-check"></i>
-        </button>
-        <button
-            class="btn btn-primary tooltip"
             data-tooltip="Editer"
-            [routerLink]="['/user/', row.id]"
+            [routerLink]="['/customer/', row.id]"
         >
             <i class="icon icon-edit"></i>
         </button>

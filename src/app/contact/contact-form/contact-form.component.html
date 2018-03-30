@@ -1,0 +1,90 @@
+<form class="form-horizontal" [formGroup]="form.group" (ngSubmit)="save()">
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="lastName">Prénom :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                type="text"
+                id="lastName"
+                formControlName="lastName"
+            >
+        </div>
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="firstName">Nom :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                type="text"
+                id="firstName"
+                formControlName="firstName"
+            >
+        </div>
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="phone">Tel :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                id="phone"
+                type="text"
+                formControlName="phone"
+            >
+        </div>
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="mobilePhone">Tel Mob :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                id="mobilePhone"
+                type="text"
+                formControlName="mobilePhone"
+            >
+        </div>
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="email">Mail :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                type="text"
+                id="email"
+                formControlName="email"
+            >
+        </div>
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="jobFunction">Fonction :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                type="text"
+                id="jobFunction"
+                formControlName="jobFunction"
+            >
+        </div>
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="jobFunction">Type :</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('type').invalid">
+                <select
+                    class="form-control form-select"
+                    formControlName="type"
+                >
+                    <option
+                        *ngFor="let type of types"
+                        [ngValue]="type"
+                    >{{ type.label }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">
+        Enregistrer
+    </button>
+</form>

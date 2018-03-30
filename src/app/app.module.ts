@@ -25,7 +25,8 @@ import {
     AclsService,
     BusinessesService,
     CustomersService,
-    ContactsService
+    ContactsService,
+    TypesService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
@@ -48,6 +49,11 @@ import { CustomersComponent } from './customers/customers.component';
 import { CostPerYearFormComponent } from './cost-per-year/cost-per-year-form/cost-per-year-form.component';
 import { SidebarModule } from 'ng-sidebar';
 import { AvatarModule } from 'ngx-avatar';
+import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
+import { CustomerFormComponent } from './customers/customer-form/customer-form.component';
+import { ListUserBusinessComponent } from './business/list-user-business/list-user-business.component';
+import { ContactComponent } from './contact/contact.component';
+import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -76,6 +82,11 @@ export function createRestangularConfigFactory(RestangularProvider) {
         CostPerYearComponent,
         CostPerYearFormComponent,
         CustomersComponent,
+        CustomerDetailsComponent,
+        CustomerFormComponent,
+        ContactComponent,
+        ContactFormComponent,
+        ListUserBusinessComponent,
     ],
     imports: [
         BrowserModule,
@@ -110,6 +121,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         CostPerYearsService,
         CustomersService,
         ContactsService,
+        TypesService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

@@ -7,7 +7,12 @@ import { AppValidators } from '../app-validators';
 import { FormGroupValidators } from '../tools/FormGroupValidators';
 
 export class ContactValidatorsBase extends FormGroupValidators {
+    lastName = [Validators.required];
+    firstName = [Validators.required];
+    email = [Validators.required];
     customer = [AppValidators.item];
+    jobFunction = null;
+    phone = null;
     mobilePhone = null;
     type = [AppValidators.item];
 }

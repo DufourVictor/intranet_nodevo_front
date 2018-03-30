@@ -18,10 +18,8 @@ export class UsersComponent implements OnInit {
     rows: User[] = [];
     columns = [];
 
-    constructor(
-        private usersService: UsersService,
-        private toastr: ToastrService
-    ) {
+    constructor(private usersService: UsersService,
+                private toastr: ToastrService) {
     }
 
     ngOnInit() {

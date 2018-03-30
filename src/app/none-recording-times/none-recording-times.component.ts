@@ -20,7 +20,6 @@ export class NoneRecordingTimesComponent implements OnInit {
 
     getAllNoneRecordingTimes() {
         this.noTimeRecordingsService.getAllBy('users', this.user.id).subscribe(data => this.noneRecordingTimes = data);
-
     }
 
     ngOnInit() {

@@ -1,0 +1,34 @@
+<details class="accordion">
+  <summary class="accordion-header">
+    <hr>
+    <i class="icon icon-arrow-right mr-1"></i>
+    Liste des affaires
+  </summary>
+  <div class="accordion-body">
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th>Code affaire</th>
+        <th>Libellé</th>
+        <th>Contact commercial</th>
+        <th>Contact technique</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let business of businesses">
+        <td>{{ business.codeBusiness }}</td>
+        <td>{{ business.label }}</td>
+        <td>{{ business.businessContact.id }}</td>
+        <td>{{ business.technicalContact.id }}</td>
+        <td>{{ business.enabled ? 'Actif' : 'Inactif' }}</td>
+        <td>
+          <button [routerLink]="['/business/', business.id]"  class="btn btn-action"><i class="icon icon-search"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+

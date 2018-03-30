@@ -1,0 +1,70 @@
+<div class="container">
+    <form [formGroup]="form.group" (ngSubmit)="save()">
+        <div class="columns" *ngIf="customer.id">
+            <div class="form-group column col-6">
+                <label class="form-label">Code client</label>
+                <input class="form-input" disabled [value]="customer.codeClient">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('name').invalid">
+                <label class="form-label">Nom du client</label>
+                <input type="text" class="form-control form-input" formControlName="name">
+            </div>
+            <div class="form-group column col-6" [class.has-error]="form.group.get('businessName').invalid">
+                <label class="form-label">Raison sociale</label>
+                <input type="text" class="form-control form-input" formControlName="businessName">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('siret').invalid">
+                <label class="form-label">N° SIRET</label>
+                <input type="text" class="form-control form-input" formControlName="siret" minlength="14"
+                       maxlength="14">
+            </div>
+            <div class="form-group column col-6" [class.has-error]="form.group.get('street').invalid">
+                <label class="form-label">Adresse</label>
+                <input type="text" class="form-control form-input" formControlName="street">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('street2').invalid">
+                <label class="form-label">Complément d'adresse</label>
+                <input type="text" class="form-control form-input" formControlName="street2">
+            </div>
+            <div class="form-group column col-6" [class.has-error]="form.group.get('zipCode').invalid">
+                <label class="form-label">Code postal</label>
+                <input type="text" class="form-control form-input" formControlName="zipCode" minlength="5"
+                       maxlength="5">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('city').invalid">
+                <label class="form-label">Ville</label>
+                <input type="text" class="form-control form-input" formControlName="city">
+            </div>
+            <div class="form-group column col-6" [class.has-error]="form.group.get('phone').invalid">
+                <label class="form-label">Téléphone</label>
+                <input type="text" class="form-control form-input" formControlName="phone" minlength="10"
+                       maxlength="10">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-12" [class.has-error]="form.group.get('notes').invalid">
+                <label class="form-label">Notes</label>
+                <textarea class="form-input" rows="5" formControlName="notes">{{ customer.notes }}</textarea>
+            </div>
+        </div>
+
+        <div class="columns">
+            <button class="btn btn-primary column col-4 col-mx-auto" type="submit">Enregistrer</button>
+            <button class="btn btn-error col-4 col-mx-auto" routerLink="/customers">Retour à la liste</button>
+        </div>
+        <app-contact [customer]="customer"></app-contact>
+    </form>
+</div>
