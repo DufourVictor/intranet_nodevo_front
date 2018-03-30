@@ -39,11 +39,16 @@ export class UserFormComponent implements OnInit {
         if (this.form.group.dirty && this.form.group.valid) {
             const user = this.form.get();
             if (user.id) {
-                this.usersService.update(user).subscribe(() => this.router.navigate(['users']));
+                this.usersService.update(user).subscribe(() => {
+                    this.router.navigate(['users']);
+                    this.toastr.success(`L'utilisateur ${user.fullName} a bien été mis à jour ! 👍✅`);
+                });
             } else {
-                this.usersService.add(user).subscribe();
+                this.usersService.add(user).subscribe(() => {
+                    this.router.navigate(['users']);
+                    this.toastr.success(`L'utilisateur ${user.fullName} a bien été ajouté ! 👍✅`);
+                });
             }
-            this.toastr.success(`L'utilisateur ${user.fullName} a bien été ajouté ! 👍✅`);
         } else {
             this.form.displayErrors();
         }
