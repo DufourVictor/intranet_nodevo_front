@@ -35,9 +35,9 @@
                 <select class="form-control form-select" formControlName="businessContact"
                         [compareWith]="formService.objectsEquals">
                     <option
-                            *ngFor="let contact of contacts"
+                            *ngFor="let contact of businessContacts"
                             [ngValue]="contact"
-                    >{{ contact.mobilePhone }}
+                    >{{ contact.fullName }}
                     </option>
                 </select>
             </div>
@@ -46,9 +46,9 @@
                 <select class="form-control form-select" formControlName="technicalContact"
                         [compareWith]="formService.objectsEquals">
                     <option
-                            *ngFor="let contact of contacts"
+                            *ngFor="let contact of technicalContacts"
                             [ngValue]="contact"
-                    >{{ contact.mobilePhone }}
+                    >{{ contact.fullName }}
                     </option>
                 </select>
             </div>

@@ -20,8 +20,8 @@
       <tr *ngFor="let business of businesses">
         <td>{{ business.codeBusiness }}</td>
         <td>{{ business.label }}</td>
-        <td>{{ business.businessContact.id }}</td>
-        <td>{{ business.technicalContact.id }}</td>
+        <td>{{ business.businessContact.firstName + ' ' + business.businessContact.lastName }}</td>
+        <td>{{ business.technicalContact.firstName + ' ' + business.technicalContact.lastName }}</td>
         <td>{{ business.enabled ? 'Actif' : 'Inactif' }}</td>
         <td>
           <button [routerLink]="['/business/', business.id]"  class="btn btn-action"><i class="icon icon-search"></i></button>
