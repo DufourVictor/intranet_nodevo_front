@@ -8,7 +8,12 @@ export class ContactBase {
   public static readonly _resource: string = 'contacts';
   get _resource(): string { return ContactBase._resource; };
 
+  lastName: string;
+  firstName: string;
+  email: string;
   customer: Customer;
+  jobFunction: string;
+  phone: string;
   mobilePhone: string;
   type: Type;
 
