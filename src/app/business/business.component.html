@@ -29,14 +29,14 @@
 <ng-template #actionTmpl let-row="row">
     <div class="btn-group btn-group-block">
         <button
-            class="btn btn-primary tooltip"
+            class="btn btn-primary tooltip tooltip-right"
             data-tooltip="Editer"
             [routerLink]="['/business/', row.id]"
         >
             <i class="icon icon-edit"></i>
         </button>
         <button
-            class="btn btn-error tooltip"
+            class="btn btn-error tooltip tooltip-left"
             data-tooltip="Supprimer"
             (click)="delete(row)"
         >
