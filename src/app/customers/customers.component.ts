@@ -45,7 +45,7 @@ export class CustomersComponent implements OnInit {
         this.customersService.update(clone as Customer).subscribe(
             success => {
                 customer.enabled = success.enabled;
-                this.toastr.success(`L'utilisateur a bien été ${customer.enabled ? 'activé' : 'désactivé'} 🎉`);
+                this.toastr.success(`Le client a bien été ${customer.enabled ? 'activé' : 'désactivé'} 🎉`);
             },
             error => this.toastr.error(`Une erreur est survenue 😢`)
         );

@@ -26,9 +26,9 @@
                 <td>{{ contact.mobilePhone }}</td>
                 <td>{{ contact.email }}</td>
                 <td>
-                    <button class="btn btn-action" (click)="activeModal(contact)"><i class="icon icon-edit"></i>
+                    <button class="btn btn-primary" (click)="activeModal(contact)"><i class="material-icons">edit</i>
                     </button>
-                    <button class="btn btn-action" (click)="confirmDelete(contact)"><i class="icon icon-cross"></i>
+                    <button class="btn btn-error" (click)="confirmDelete(contact)"><i class="material-icons">delete</i>
                     </button>
                 </td>
             </tr>

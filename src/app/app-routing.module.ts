@@ -15,18 +15,36 @@ import { QuotationComponent } from './quotation/quotation.component';
 const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'users', component: UsersComponent },
-    { path: 'user', component: UserDetailsComponent },
-    { path: 'user/:id', component: UserDetailsComponent },
+    {
+        path: 'crm',
+        children: [
+            { path: '', redirectTo: 'customers', pathMatch: 'full' },
+            { path: 'customers', component: CustomersComponent, data: { title: 'Liste des clients', display: true } },
+            { path: 'customer', component: CustomerDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'customer/:id', component: CustomerDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'customers/:id/businesses', component: BusinessComponent, data: { display: false, displayTabs: false } },
+        ]
+    },
+    {
+        path: 'gescom',
+        children: [
+            { path: '', redirectTo: 'businesses', pathMatch: 'full' },
+            { path: 'businesses', component: BusinessComponent, data: { title: 'Affaires', display: true } },
+            { path: 'business', component: BusinessDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'business/:id', component: BusinessDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'quotations', component: QuotationComponent, data: { title: 'Devis', display: true } },
+        ]
+    },
     { path: 'empowerment', component: EmpowermentComponent },
-    { path: 'businesses', component: BusinessComponent },
-    { path: 'business', component: BusinessDetailsComponent },
-    { path: 'business/:id', component: BusinessDetailsComponent },
-    { path: 'customers', component: CustomersComponent },
-    { path: 'customer', component: CustomerDetailsComponent },
-    { path: 'customer/:id', component: CustomerDetailsComponent },
-    { path: 'customers/:id/businesses', component: BusinessComponent },
-    { path: 'quotations', component: QuotationComponent },
+    {
+        path: 'settings',
+        children: [
+            { path: '', redirectTo: 'users', pathMatch: 'full' },
+            { path: 'users', component: UsersComponent, data: { title: 'Utilisateurs', display: true } },
+            { path: 'user', component: UserDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'user/:id', component: UserDetailsComponent, data: { display: false, displayTabs: false } },
+        ]
+    },
 ];
 
 @NgModule({
