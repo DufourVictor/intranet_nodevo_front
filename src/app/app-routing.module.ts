@@ -10,6 +10,7 @@ import { BusinessComponent } from './business/business.component';
 import { CustomersComponent } from './customers/customers.component';
 import { BusinessDetailsComponent } from './business/business-details/business-details.component';
 import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
+import { QuotationComponent } from './quotation/quotation.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
     { path: 'customer', component: CustomerDetailsComponent },
     { path: 'customer/:id', component: CustomerDetailsComponent },
     { path: 'customers/:id/businesses', component: BusinessComponent },
+    { path: 'quotations', component: QuotationComponent },
 ];
 
 @NgModule({
