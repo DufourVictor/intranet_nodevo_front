@@ -56,6 +56,7 @@ import { ListUserBusinessComponent } from './business/list-user-business/list-us
 import { ContactComponent } from './contact/contact.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 import { QuotationComponent } from './quotation/quotation.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -101,6 +102,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         NgxDatatableModule,
         NgHttpLoaderModule,
         AvatarModule,
+        NgSelectModule,
         ToastrModule.forRoot({
             maxOpened: 1,
             timeOut: 1500,
