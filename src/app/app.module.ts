@@ -26,7 +26,8 @@ import {
     BusinessesService,
     CustomersService,
     ContactsService,
-    TypesService
+    TypesService,
+    QuotationsService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
@@ -54,6 +55,7 @@ import { CustomerFormComponent } from './customers/customer-form/customer-form.c
 import { ListUserBusinessComponent } from './business/list-user-business/list-user-business.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
+import { QuotationComponent } from './quotation/quotation.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -87,6 +89,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ContactComponent,
         ContactFormComponent,
         ListUserBusinessComponent,
+        QuotationComponent,
     ],
     imports: [
         BrowserModule,
@@ -122,6 +125,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         CustomersService,
         ContactsService,
         TypesService,
+        QuotationsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

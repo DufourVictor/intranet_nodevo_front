@@ -1,7 +1,7 @@
 <button
     class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
-    data-tooltip="Ajouter une affaire"
-    routerLink="/business"
+    data-tooltip="Ajouter un devis"
+    routerLink="/quotation"
 >
     <i class="icon icon-plus"></i>
 </button>
@@ -31,7 +31,7 @@
         <button
             class="btn btn-primary tooltip tooltip-right"
             data-tooltip="Editer"
-            [routerLink]="['/business/', row.id]"
+            [routerLink]="['/quotation/', row.id]"
         >
             <i class="icon icon-edit"></i>
         </button>
@@ -43,11 +43,4 @@
             <i class="icon icon-stop"></i>
         </button>
     </div>
-</ng-template>
-
-<ng-template #enabledTmpl let-row="row" let-value="value">
-    <label class="form-switch">
-        <input type="checkbox" [checked]="value" (change)="toggleEnabled(row)">
-        <i class="form-icon"></i>
-    </label>
 </ng-template>
