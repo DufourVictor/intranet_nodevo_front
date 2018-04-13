@@ -14,13 +14,16 @@ export class TabsComponent {
     constructor(private router: Router) {
         router.events.subscribe((route) => {
             if (route instanceof ResolveEnd) {
-                this.displayTabs = route.state.root.firstChild.firstChild ?
-                    route.state.root.firstChild.firstChild.data.displayTabs :
-                    null
-                ;
+                let firstChild = route.state.root;
 
-                const firstChildren = route.state.root.children[0];
-                const routeConfig = firstChildren.routeConfig;
+                while (firstChild.firstChild) {
+                    firstChild = firstChild.firstChild;
+                }
+
+                this.displayTabs = firstChild ? firstChild.data.displayTabs : null;
+
+                const routeConfig = route.state.root.children[0].routeConfig;
+
                 const path = `/${routeConfig.path}/`;
                 if (path !== this.parentUrl) {
                     this.tabsLink = [];
