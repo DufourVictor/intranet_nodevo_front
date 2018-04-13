@@ -8,14 +8,14 @@ export class ContactBase {
   public static readonly _resource: string = 'contacts';
   get _resource(): string { return ContactBase._resource; };
 
-  firstName: string;
-  lastName: string;
-  email: string;
   customer: Customer;
   jobFunction: string;
   phone: string;
   mobilePhone: string;
   type: Type;
+  firstName: string;
+  lastName: string;
+  email: string;
 
   setCustomer(id: number): ContactBase {
     this.customer = new Customer();

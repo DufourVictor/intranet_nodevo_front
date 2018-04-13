@@ -10,16 +10,17 @@ export class UserBase {
   get _resource(): string { return UserBase._resource; };
 
   username: string;
+  plainPassword: string;
   password: string;
-  email: string;
-  firstName: string;
-  lastName: string;
   enabled: boolean;
   deleted: boolean;
   notes: string;
   profile: Profile;
   group: Group;
   managers: User;
+  firstName: string;
+  lastName: string;
+  email: string;
 
   setProfile(id: number): UserBase {
     this.profile = new Profile();
