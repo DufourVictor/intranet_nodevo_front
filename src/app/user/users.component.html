@@ -6,13 +6,14 @@
     <i class="icon icon-plus"></i>
 </button>
 
-<div>
-    <input
-        type="text"
-        placeholder="Filtrez par prénom ou nom"
-        (keyup)="updateFilter($event)"
-    >
-</div>
+<app-table-filters
+    [searchProperties]="['firstName', 'lastName', 'trigram']"
+    [filterProperties]="[
+        {name: 'firstName', label: 'Prénom', type: 'text'},
+        {name: 'lastName', label: 'Nom', type: 'text'},
+        {name: 'profile', subname: 'label', label: 'Profil', type: 'text'}
+    ]"
+></app-table-filters>
 
 <ngx-datatable
     #table

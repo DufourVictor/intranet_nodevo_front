@@ -64,6 +64,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
 import { QuotationFormComponent } from './quotation/quotation-form/quotation-form.component';
+import { TableFiltersComponent } from './table-filters/table-filters.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -101,6 +102,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         TabsComponent,
         QuotationDetailsComponent,
         QuotationFormComponent,
+        TableFiltersComponent,
     ],
     imports: [
         BrowserModule,
