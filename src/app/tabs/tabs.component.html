@@ -1,0 +1,5 @@
+<ul class="tab" *ngIf="displayingTabs()">
+    <li class="tab-item" routerLinkActive="active" *ngFor="let tabLink of tabsLink">
+        <a [routerLink]="parentUrl + tabLink.path">{{ tabLink.data.title }}</a>
+    </li>
+</ul>

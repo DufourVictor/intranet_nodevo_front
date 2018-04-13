@@ -56,6 +56,7 @@ import { ListUserBusinessComponent } from './business/list-user-business/list-us
 import { ContactComponent } from './contact/contact.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 import { QuotationComponent } from './quotation/quotation.component';
+import { TabsComponent } from './tabs/tabs.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 registerLocaleData(localeFr, 'fr');
@@ -91,6 +92,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ContactFormComponent,
         ListUserBusinessComponent,
         QuotationComponent,
+        TabsComponent,
     ],
     imports: [
         BrowserModule,

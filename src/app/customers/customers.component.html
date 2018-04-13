@@ -1,7 +1,7 @@
 <button
     class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
     data-tooltip="Ajouter une affaire"
-    routerLink="/customer"
+    routerLink="/crm/customer"
 >
     <i class="icon icon-plus"></i>
 </button>
@@ -19,7 +19,7 @@
 ></ngx-datatable>
 
 <ng-template #businessTmpl let-row="row">
-    <div [routerLink]="['/customers/', row.id, 'businesses']">Voir les affaires</div>
+    <div [routerLink]="['/crm/customers/', row.id, 'businesses']">Voir les affaires</div>
 </ng-template>
 
 <ng-template #enabledTmpl let-row="row" let-value="value">
@@ -34,16 +34,16 @@
         <button
             class="btn btn-primary tooltip tooltip-right"
             data-tooltip="Editer"
-            [routerLink]="['/customer/', row.id]"
+            [routerLink]="['/crm/customer/', row.id]"
         >
-            <i class="icon icon-edit"></i>
+            <i class="material-icons">edit</i>
         </button>
         <button
             class="btn btn-error tooltip tooltip-left"
             data-tooltip="Supprimer"
             (click)="delete(row)"
         >
-            <i class="icon icon-stop"></i>
+            <i class="material-icons">delete</i>
         </button>
     </div>
 </ng-template>
