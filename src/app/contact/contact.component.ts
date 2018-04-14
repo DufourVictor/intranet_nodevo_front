@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Contact, Customer, User } from '../../backend/model';
+import { Contact, Customer } from '../../backend/model';
 import { ContactsService } from '../../backend/services';
 import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component';
 import { ToastrService } from 'ngx-toastr';
@@ -23,7 +23,7 @@ export class ContactComponent implements OnInit {
     }
 
     getAllContact() {
-        this.contactService.getAllBy('customers', this.customer.id).subscribe(cpys => this.contacts = cpys);
+        this.contactService.getAllBy('customers', this.customer.id).subscribe(contacts => this.contacts = contacts);
     }
 
     ngOnInit() {

@@ -5,9 +5,8 @@ import { CGV } from '../CGV';
 import { Business } from '../Business';
 import { Status } from '../Status';
 import { PaymentConditions } from '../PaymentConditions';
+import { Customer } from '../Customer';
 import { Contact } from '../Contact';
-import { DetailQuotation } from '../DetailQuotation';
-import { Line } from '../Line';
 import { Provision } from '../Provision';
 
 export class QuotationBase {
@@ -21,18 +20,12 @@ export class QuotationBase {
   enabledCgv: boolean;
   customerNotes: string;
   privateNotes: string;
-  amountHtArOptional: number;
-  amountHtArPrincipal: number;
-  totalHt: number;
-  totalTva: number;
-  totalTtc: number;
   cgv: CGV;
   business: Business;
   status: Status;
   paymentConditions: PaymentConditions;
-  customerContact: Contact;
-  detailQuotation: DetailQuotation;
-  line: Line;
+  customer: Customer;
+  contact: Contact;
   provision: Provision;
 
   setCgv(id: number): QuotationBase {
@@ -63,24 +56,17 @@ export class QuotationBase {
     return this;
   }
 
-  setCustomerContact(id: number): QuotationBase {
-    this.customerContact = new Contact();
-    this.customerContact.id = id;
-    this.customerContact['@id'] = '/contacts/' + id;
+  setCustomer(id: number): QuotationBase {
+    this.customer = new Customer();
+    this.customer.id = id;
+    this.customer['@id'] = '/customers/' + id;
     return this;
   }
 
-  setDetailQuotation(id: number): QuotationBase {
-    this.detailQuotation = new DetailQuotation();
-    this.detailQuotation.id = id;
-    this.detailQuotation['@id'] = '/detail_quotations/' + id;
-    return this;
-  }
-
-  setLine(id: number): QuotationBase {
-    this.line = new Line();
-    this.line.id = id;
-    this.line['@id'] = '/lines/' + id;
+  setContact(id: number): QuotationBase {
+    this.contact = new Contact();
+    this.contact.id = id;
+    this.contact['@id'] = '/contacts/' + id;
     return this;
   }
 
