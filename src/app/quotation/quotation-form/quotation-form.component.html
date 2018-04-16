@@ -1,0 +1,157 @@
+<div class="container">
+    <form [formGroup]="form.group" (ngSubmit)="save()">
+        <div class="columns" *ngIf="quotation.id">
+            <div class="form-group column col-6">
+                <label class="form-label">Code devis</label>
+                <input class="form-input" disabled [value]="quotation.codeQuotation">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-6">
+                <label class="form-label">Client</label>
+                <select class="form-control form-select" formControlName="customer" #customerInput
+                        [compareWith]="formService.objectsEquals" (change)="customerChange()">
+                    <option
+                        *ngFor="let customer of customers"
+                        [ngValue]="customer"
+                    >
+                        {{ customer.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group column col-6" *ngIf="customerInput.value !== ''">
+                <label class="form-label">Contact client</label>
+                <ng-select
+                    [items]="contacts"
+                    [multiple]="false"
+                    formControlName="contact"
+                    bindLabel="fullName"
+                    [(ngModel)]="quotation.contact"
+                ></ng-select>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('business').invalid">
+                <label class="form-label">Affaire</label>
+                <ng-select
+                    [items]="businesses"
+                    [multiple]="true"
+                    formControlName="business"
+                    bindLabel="label"
+                    [(ngModel)]="quotation.business"
+                ></ng-select>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column" [class.has-error]="form.group.get('label').invalid">
+                <label class="form-label">Intitulé du devis</label>
+                <input type="text" class="form-control form-input" formControlName="label">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('provision').invalid">
+                <label class="form-label">Type de prestation</label>
+                <select class="form-control form-select" formControlName="provision"
+                        [compareWith]="formService.objectsEquals">
+                    <option *ngFor="let provision of provisions" [ngValue]="provision">{{ provision.label }}</option>
+                </select>
+            </div>
+            <div class="form-group column col-6" [class.has-error]="form.group.get('status').invalid">
+                <label class="form-label">Etat</label>
+                <select class="form-control form-select" formControlName="status"
+                        [compareWith]="formService.objectsEquals">
+                    <option *ngFor="let statu of status" [ngValue]="statu">{{ statu.label }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="columns" *ngIf="quotation.id">
+            <div class="form-group column" [class.has-error]="form.group.get('business').invalid">
+                <label class="form-label">Contact commercial</label>
+                <input type="text" class="form-control form-input" formControlName="business">
+            </div>
+            <div class="form-group column" [class.has-error]="form.group.get('business').invalid">
+                <label class="form-label">Contact technique</label>
+                <input type="text" class="form-control form-input" formControlName="business">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column" [class.has-error]="form.group.get('createdAt').invalid" *ngIf="quotation.id">
+                <label class="form-label" for="createdAt">Date de création</label>
+                <input
+                    class="form-input"
+                    type="date"
+                    id="createdAt"
+                    formControlName="createdAt"
+                >
+            </div>
+            <div class="form-group column" [class.has-error]="form.group.get('validedAt').invalid" *ngIf="quotation.id">
+                <label class="form-label" for="validedAt">Date de validation</label>
+                <input
+                    class="form-input"
+                    type="date"
+                    id="validedAt"
+                    formControlName="validedAt"
+                >
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column" [class.has-error]="form.group.get('enabledCgv').invalid">
+                <div class="form-group">
+                    <label class="form-label">Afficher les cgv</label>
+                    <label class="form-radio">
+                        <input type="radio" formControlName="enabledCgv" [value]=true>
+                        <i class="form-icon"></i> Oui
+                    </label>
+                    <label class="form-radio">
+                        <input type="radio" formControlName="enabledCgv" [value]=false>
+                        <i class="form-icon"></i> Non
+                    </label>
+                </div>
+            </div>
+            <div class="form-group column col-6" [class.has-error]="form.group.get('cgv').invalid">
+                <label class="form-label">CGV</label>
+                <select class="form-control form-select" formControlName="cgv"
+                        [compareWith]="formService.objectsEquals">
+                    <option *ngFor="let cgv of cgvs" [ngValue]="cgv">{{ cgv.label }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('paymentConditions').invalid">
+                <label class="form-label">Conditions de paiement</label>
+                <select class="form-control form-select" formControlName="paymentConditions"
+                        [compareWith]="formService.objectsEquals">
+                    <option *ngFor="let paymentCondition of paymentConditions" [ngValue]="paymentCondition">
+                        {{ paymentCondition.label }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column" [class.has-error]="form.group.get('customerNotes').invalid">
+                <label class="form-label">Notes clients</label>
+                <input type="text" class="form-control form-input" formControlName="customerNotes">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column" [class.has-error]="form.group.get('privateNotes').invalid">
+                <label class="form-label">Notes privées</label>
+                <input type="text" class="form-control form-input" formControlName="privateNotes">
+            </div>
+        </div>
+
+        <div class="columns">
+            <button class="btn btn-primary column col-4 col-mx-auto" type="submit">Enregistrer</button>
+            <a class="btn btn-error col-4 col-mx-auto" routerLink="/quotations">Retour à la liste</a>
+        </div>
+    </form>
+</div>

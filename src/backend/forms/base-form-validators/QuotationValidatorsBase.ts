@@ -14,17 +14,11 @@ export class QuotationValidatorsBase extends FormGroupValidators {
     enabledCgv = [AppValidators.boolean];
     customerNotes = null;
     privateNotes = null;
-    amountHtArOptional = [CustomValidators.number];
-    amountHtArPrincipal = [CustomValidators.number];
-    totalHt = [CustomValidators.number];
-    totalTva = [CustomValidators.number];
-    totalTtc = [CustomValidators.number];
     cgv = [AppValidators.item];
     business = [AppValidators.item];
     status = [AppValidators.item];
     paymentConditions = [AppValidators.item];
-    customerContact = [AppValidators.item];
-    detailQuotation = [AppValidators.item];
-    line = [AppValidators.item];
+    customer = [AppValidators.item];
+    contact = [AppValidators.item];
     provision = [AppValidators.item];
 }

@@ -11,6 +11,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { BusinessDetailsComponent } from './business/business-details/business-details.component';
 import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
 import { QuotationComponent } from './quotation/quotation.component';
+import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -33,6 +34,8 @@ const routes: Routes = [
             { path: 'business', component: BusinessDetailsComponent, data: { display: false, displayTabs: false } },
             { path: 'business/:id', component: BusinessDetailsComponent, data: { display: false, displayTabs: false } },
             { path: 'quotations', component: QuotationComponent, data: { title: 'Devis', display: true } },
+            { path: 'quotation', component: QuotationDetailsComponent, data: { display: false, displayTabs: false }  },
+            { path: 'quotation/:id', component: QuotationDetailsComponent, data: { display: false, displayTabs: false }  },
         ]
     },
     { path: 'empowerment', component: EmpowermentComponent },

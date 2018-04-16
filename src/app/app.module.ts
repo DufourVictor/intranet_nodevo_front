@@ -27,7 +27,11 @@ import {
     CustomersService,
     ContactsService,
     TypesService,
-    QuotationsService
+    QuotationsService,
+    ProvisionsService,
+    StatusesService,
+    CGVsService,
+    PaymentConditionsService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
@@ -58,6 +62,8 @@ import { ContactFormComponent } from './contact/contact-form/contact-form.compon
 import { QuotationComponent } from './quotation/quotation.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
+import { QuotationFormComponent } from './quotation/quotation-form/quotation-form.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -93,6 +99,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ListUserBusinessComponent,
         QuotationComponent,
         TabsComponent,
+        QuotationDetailsComponent,
+        QuotationFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -130,6 +138,10 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ContactsService,
         TypesService,
         QuotationsService,
+        ProvisionsService,
+        StatusesService,
+        CGVsService,
+        PaymentConditionsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

@@ -30,7 +30,7 @@ export class QuotationComponent implements OnInit {
             {prop: 'codeQuotation', name: 'Code devis'},
             {prop: 'label', name: 'Intitulé du devis'},
             {prop: 'business.label', name: 'Affaire'},
-            {prop: 'customer', name: 'Client'},
+            {prop: 'customer.name', name: 'Client'},
             {prop: 'provision.label', name: 'Type de prestation'},
             {prop: 'totalHt', name: 'Prix HT'},
             {prop: 'status.label', name: 'Etat'},
@@ -52,7 +52,7 @@ export class QuotationComponent implements OnInit {
         const val = event.target.value.toLowerCase();
 
         this.rows = this.quotations.filter((quotation: Quotation) => {
-            return quotation.customerContact.fullName.toLowerCase().indexOf(val) !== -1
+            return quotation.customer.name.toLowerCase().indexOf(val) !== -1
                 || !val;
         });
         this.table.offset = 0;
