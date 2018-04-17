@@ -15,7 +15,7 @@ import { QuotationDetailsComponent } from './quotation/quotation-details/quotati
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard', component: DashboardComponent, data: { state: 'dashboard' } },
     {
         path: 'crm',
         children: [
@@ -43,9 +43,9 @@ const routes: Routes = [
         path: 'settings',
         children: [
             { path: '', redirectTo: 'users', pathMatch: 'full' },
-            { path: 'users', component: UsersComponent, data: { title: 'Utilisateurs', display: true } },
-            { path: 'user', component: UserDetailsComponent, data: { display: false, displayTabs: false } },
-            { path: 'user/:id', component: UserDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'users', component: UsersComponent, data: { title: 'Utilisateurs', display: true, state: 'settings/users' } },
+            { path: 'user', component: UserDetailsComponent, data: { display: false, displayTabs: false, state: 'settings/user' } },
+            { path: 'user/:id', component: UserDetailsComponent, data: { display: false, displayTabs: false, state: 'settings/user' } },
         ]
     },
 ];

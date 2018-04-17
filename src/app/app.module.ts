@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
@@ -16,22 +17,22 @@ import { NoneRecordingTimesComponent } from './none-recording-times/none-recordi
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
 import {
-    CostPerYearsService,
-    GroupsService,
-    NoTimeRecordingsService,
-    ProfilesService,
-    TrainingBonusesService,
-    UsersService,
     AclsService,
     BusinessesService,
-    CustomersService,
-    ContactsService,
-    TypesService,
-    QuotationsService,
-    ProvisionsService,
-    StatusesService,
     CGVsService,
-    PaymentConditionsService
+    ContactsService,
+    CostPerYearsService,
+    CustomersService,
+    GroupsService,
+    NoTimeRecordingsService,
+    PaymentConditionsService,
+    ProfilesService,
+    ProvisionsService,
+    QuotationsService,
+    StatusesService,
+    TrainingBonusesService,
+    TypesService,
+    UsersService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
@@ -43,7 +44,6 @@ import { TrainingBonusFormComponent } from './trainings-bonus/training-bonus-for
 import { NoneRecordingTimeFormComponent } from './none-recording-times/none-recording-time-form/none-recording-time-form.component';
 import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
 import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BusinessComponent } from './business/business.component';
 import { BusinessDetailsComponent } from './business/business-details/business-details.component';
 import { BusinessFormComponent } from './business/business-form/business-form.component';
@@ -104,11 +104,11 @@ export function createRestangularConfigFactory(RestangularProvider) {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        BrowserAnimationsModule,
         NgxDatatableModule,
         NgHttpLoaderModule,
         AvatarModule,
