@@ -16,5 +16,6 @@ export class User extends UserBase {
     constructor () {
         super();
         this.enabled = true;
+        this.deleted = false;
     }
 }

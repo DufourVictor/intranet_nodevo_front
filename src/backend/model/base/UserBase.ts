@@ -10,6 +10,7 @@ export class UserBase {
   get _resource(): string { return UserBase._resource; };
 
   username: string;
+  plainPassword: string;
   password: string;
   enabled: boolean;
   deleted: boolean;
