@@ -11,7 +11,7 @@ import { User } from '../backend/model';
 export class AppComponent {
     title = 'app';
     user: User;
-    _opened = true;
+    opened = true;
 
     get userFullName() {
         return `${this.user.firstName} ${this.user.lastName}`;
@@ -31,6 +31,6 @@ export class AppComponent {
     }
 
     display() {
-       this._opened = !this._opened;
+       this.opened = !this.opened;
     }
 }

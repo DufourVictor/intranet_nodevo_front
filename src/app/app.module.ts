@@ -48,6 +48,7 @@ import { BusinessComponent } from './business/business.component';
 import { BusinessDetailsComponent } from './business/business-details/business-details.component';
 import { BusinessFormComponent } from './business/business-form/business-form.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxErrorsModule } from '@ultimate/ngxerrors';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
 import { CustomersComponent } from './customers/customers.component';
@@ -117,6 +118,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         NgHttpLoaderModule,
         AvatarModule,
         NgSelectModule,
+        NgxErrorsModule,
         ToastrModule.forRoot({
             maxOpened: 1,
             timeOut: 1500,

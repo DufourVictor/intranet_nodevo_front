@@ -2,8 +2,8 @@
     <ng-sidebar
         #sidenav
         mode="push"
-        [(opened)]="_opened"
-        [dock]="!_opened"
+        [(opened)]="opened"
+        [dock]="!opened"
         dockedSize="60px"
     >
         <div class="logo">
