@@ -64,7 +64,5 @@ export class FilterTable {
     deleteObject = (object) => {
         this.stacks.splice(this.stacks.indexOf(object), 1);
         this.rows = [...this.stacks];
-
-        return new Promise();
     }
 }

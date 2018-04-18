@@ -52,9 +52,10 @@ export class UsersComponent extends FilterTable implements OnInit {
             object.enabled = false;
             object.deleted = true;
             this.service.update(object).subscribe(
-                this.deleteObject.then(() => {
-                  this.toastr.warning(`L'utilisateur a bien été supprimé 😕❗`)
-                }),
+                (obj) => {
+                    this.deleteObject(obj);
+                    this.toastr.warning(`L'utilisateur a bien été supprimé 😕❗`);
+                },
                 () => {
                     object.enabled = true;
                     object.deleted = false;
