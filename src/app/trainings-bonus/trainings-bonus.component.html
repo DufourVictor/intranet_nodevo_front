@@ -23,9 +23,9 @@
                 <td>{{ trainBonus.price }}</td>
                 <td>{{ trainBonus.notes }}</td>
                 <td>
-                    <button class="btn btn-action" (click)="activeModal(trainBonus);"><i class="icon icon-edit"></i>
+                    <button class="btn btn-primary" (click)="activeModal(trainBonus);"><i class="material-icons">edit</i>
                     </button>
-                    <button class="btn btn-action" (click)="confirmDelete(trainBonus)"><i class="icon icon-cross"></i>
+                    <button class="btn btn-error" (click)="confirmDelete(trainBonus)"><i class="material-icons">delete</i>
                     </button>
                 </td>
             </tr>

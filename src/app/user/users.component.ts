@@ -3,29 +3,29 @@ import { User } from '../../backend/model/index';
 import { UsersService } from '../../backend/services/index';
 import { ToastrService } from 'ngx-toastr';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { FilterTable } from '../mixins/FilterTable';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends FilterTable implements OnInit {
     @ViewChild('actionTmpl') actionTmpl: TemplateRef<any>;
     @ViewChild('enabledTmpl') enabledTmpl: TemplateRef<any>;
     @ViewChild(DatatableComponent) table: DatatableComponent;
 
-    users: User[] = [];
-    rows: User[] = [];
-    columns = [];
-
     constructor(
         private usersService: UsersService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private route: ActivatedRoute
     ) {
+        super(usersService, route, ['firstName', 'lastName']);
     }
 
     ngOnInit() {
-        this.usersService.getAll().subscribe(users => this.rows = this.users = users);
+        this.service.getAllByFilter('deleted', false).subscribe(this.setStack);
 
         this.columns = [
             {prop: 'firstName', name: 'Prénom'},
@@ -36,36 +36,30 @@ export class UsersComponent implements OnInit {
         ];
     }
 
-    delete(user: User) {
-        if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
-            this.usersService.remove(user).subscribe(() => {
-                this.toastr.success(`${user.fullName} a bien été supprimé 🗑`)
-                this.users.splice(this.users.indexOf(user), 1);
-                this.rows.splice(this.rows.indexOf(user), 1);
-            })
-        }
-    }
-
     toggleEnabled(user: User) {
-        const clone = {...user};
-        clone.enabled = !clone.enabled;
-        this.usersService.update(clone as User).subscribe(
-            success => {
-                user.enabled = success.enabled;
-                this.toastr.success(`L'utilisateur a bien été ${user.enabled ? 'activé' : 'désactivé'} 🎉`);
-            },
-            error => this.toastr.error(`Une erreure est survenue 😢`)
+        user.enabled = !user.enabled;
+        this.service.update(user as User).subscribe(
+            () => this.toastr.success(`L'utilisateur a bien été ${user.enabled ? 'activé' : 'désactivé'} 👍✅`),
+            () => {
+                user.enabled = !user.enabled;
+                this.toastr.error(`Désolé l'utilisateur ${user.fullName} n'a pas pu être mis à jour 😢❌`)
+            }
         );
     }
 
-    updateFilter(event) {
-        const val = event.target.value.toLowerCase();
-
-        this.rows = this.users.filter((user: User) => {
-            return user.firstName.toLowerCase().indexOf(val) !== -1
-                || user.lastName.toLowerCase().indexOf(val) !== -1
-                || !val;
-        });
-        this.table.offset = 0;
+    delete(object) {
+        if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
+            object.enabled = false;
+            object.deleted = true;
+            this.service.update(object).subscribe(
+                this.deleteObject.then(() => {
+                  this.toastr.warning(`L'utilisateur a bien été supprimé 😕❗`)
+                }),
+                () => {
+                    object.enabled = true;
+                    object.deleted = false;
+                }
+            );
+        }
     }
 }

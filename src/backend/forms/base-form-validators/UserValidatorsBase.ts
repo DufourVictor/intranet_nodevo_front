@@ -8,13 +8,15 @@ import { FormGroupValidators } from '../tools/FormGroupValidators';
 
 export class UserValidatorsBase extends FormGroupValidators {
     username = [Validators.required];
+    plainPassword = [Validators.required];
     password = [Validators.required];
-    email = [Validators.required];
-    firstName = [Validators.required];
-    lastName = [Validators.required];
     enabled = [Validators.required, AppValidators.boolean];
+    deleted = [Validators.required, AppValidators.boolean];
     notes = null;
     profile = [AppValidators.item];
     group = [AppValidators.item];
     managers = [AppValidators.item];
+    firstName = [Validators.required];
+    lastName = [Validators.required];
+    email = [Validators.required];
 }

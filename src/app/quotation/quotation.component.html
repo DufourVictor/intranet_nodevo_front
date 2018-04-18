@@ -1,0 +1,46 @@
+<button
+    class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
+    data-tooltip="Ajouter un devis"
+    routerLink="/quotation"
+>
+    <i class="icon icon-plus"></i>
+</button>
+
+<div>
+    <input
+        type="text"
+        placeholder="Filtrez par client"
+        (keyup)="updateFilter($event)"
+    >
+</div>
+
+<ngx-datatable
+    #table
+    class="material fullscreen"
+    columnMode="force"
+    headerHeight="auto"
+    rowHeight="auto"
+    footerHeight="auto"
+    [rows]="rows"
+    [columns]="columns"
+    [limit]="10"
+></ngx-datatable>
+
+<ng-template #actionTmpl let-row="row">
+    <div class="btn-group btn-group-block">
+        <button
+            class="btn btn-primary tooltip tooltip-right"
+            data-tooltip="Editer"
+            [routerLink]="['/quotation/', row.id]"
+        >
+            <i class="material-icons">edit</i>
+        </button>
+        <button
+            class="btn btn-error tooltip tooltip-left"
+            data-tooltip="Supprimer"
+            (click)="delete(row)"
+        >
+            <i class="material-icons">delete</i>
+        </button>
+    </div>
+</ng-template>

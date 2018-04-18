@@ -1,0 +1,8 @@
+<div *ngIf="customer">
+    <h1>{{ customer.name }}</h1>
+    <app-customer-form [customer]="customer"></app-customer-form>
+    <div class="details" *ngIf="customer.id">
+        <app-list-user-business [customer]="customer" ></app-list-user-business>
+        <app-contact [customer]="customer" *ngIf="customer.id"></app-contact>
+    </div>
+</div>

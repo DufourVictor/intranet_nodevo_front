@@ -1,9 +1,9 @@
 <div class="container">
     <form [formGroup]="form.group" (ngSubmit)="save()">
-        <div class="columns" *ngIf="business.id">
+        <div class="columns" *ngIf="business.codeBusiness">
             <div class="form-group column col-6">
                 <label class="form-label">Code affaire</label>
-                <input class="form-input" disabled [value]="business.id">
+                <input class="form-input" disabled [value]="business.codeBusiness">
             </div>
             <div class="form-group column col-6">
                 <label class="form-label">Nom dossier arbo</label>
@@ -19,7 +19,7 @@
                     <option
                             *ngFor="let customer of customers"
                             [ngValue]="customer"
-                    >{{ customer.fullName }}
+                    >{{ customer.name }}
                     </option>
                 </select>
             </div>
@@ -28,7 +28,31 @@
                 <input type="text" class="form-control form-input" formControlName="label">
             </div>
         </div>
-            <!-- @TODO contact commercial/technique -->
+
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="form.group.get('businessContact').invalid">
+                <label class="form-label">Contact commercial</label>
+                <select class="form-control form-select" formControlName="businessContact"
+                        [compareWith]="formService.objectsEquals">
+                    <option
+                            *ngFor="let contact of businessContacts"
+                            [ngValue]="contact"
+                    >{{ contact.fullName }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group column col-6" [class.has-error]="form.group.get('technicalContact').invalid">
+                <label class="form-label">Contact technique</label>
+                <select class="form-control form-select" formControlName="technicalContact"
+                        [compareWith]="formService.objectsEquals">
+                    <option
+                            *ngFor="let contact of technicalContacts"
+                            [ngValue]="contact"
+                    >{{ contact.fullName }}
+                    </option>
+                </select>
+            </div>
+        </div>
 
         <div class="columns">
             <div class="form-group column col-6" [class.has-error]="form.group.get('notes').invalid">

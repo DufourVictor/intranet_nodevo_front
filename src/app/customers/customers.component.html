@@ -1,0 +1,49 @@
+<button
+    class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
+    data-tooltip="Ajouter une affaire"
+    routerLink="/crm/customer"
+>
+    <i class="icon icon-plus"></i>
+</button>
+
+<ngx-datatable
+    #table
+    class="material fullscreen"
+    columnMode="force"
+    headerHeight="auto"
+    rowHeight="auto"
+    footerHeight="auto"
+    [rows]="rows"
+    [columns]="columns"
+    [limit]="10"
+></ngx-datatable>
+
+<ng-template #businessTmpl let-row="row">
+    <div [routerLink]="['/crm/customers/', row.id, 'businesses']">Voir les affaires</div>
+</ng-template>
+
+<ng-template #enabledTmpl let-row="row" let-value="value">
+    <label class="form-switch">
+        <input type="checkbox" [checked]="value" (change)="toggleEnabled(row)">
+        <i class="form-icon"></i>
+    </label>
+</ng-template>
+
+<ng-template #actionTmpl let-row="row">
+    <div class="btn-group btn-group-block">
+        <button
+            class="btn btn-primary tooltip tooltip-right"
+            data-tooltip="Editer"
+            [routerLink]="['/crm/customer/', row.id]"
+        >
+            <i class="material-icons">edit</i>
+        </button>
+        <button
+            class="btn btn-error tooltip tooltip-left"
+            data-tooltip="Supprimer"
+            (click)="delete(row)"
+        >
+            <i class="material-icons">delete</i>
+        </button>
+    </div>
+</ng-template>

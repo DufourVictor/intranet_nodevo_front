@@ -23,7 +23,15 @@ import {
     TrainingBonusesService,
     UsersService,
     AclsService,
-    BusinessesService
+    BusinessesService,
+    CustomersService,
+    ContactsService,
+    TypesService,
+    QuotationsService,
+    ProvisionsService,
+    StatusesService,
+    CGVsService,
+    PaymentConditionsService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
@@ -37,12 +45,26 @@ import { SpectreModalComponent } from './spectre-modal/spectre-modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BusinessComponent } from './business/business.component';
-import { BusinessDetailsComponent } from './business-details/business-details.component';
-import { BusinessFormComponent } from './business-form/business-form.component';
+import { BusinessDetailsComponent } from './business/business-details/business-details.component';
+import { BusinessFormComponent } from './business/business-form/business-form.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { CostPerYearComponent } from './cost-per-year/cost-per-year.component';
-import { CostPerYearFormComponent } from './cost-per-year-form/cost-per-year-form.component';
+import { CustomersComponent } from './customers/customers.component';
+import { CostPerYearFormComponent } from './cost-per-year/cost-per-year-form/cost-per-year-form.component';
+import { SidebarModule } from 'ng-sidebar';
+import { AvatarModule } from 'ngx-avatar';
+import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
+import { CustomerFormComponent } from './customers/customer-form/customer-form.component';
+import { ListUserBusinessComponent } from './business/list-user-business/list-user-business.component';
+import { ContactComponent } from './contact/contact.component';
+import { ContactFormComponent } from './contact/contact-form/contact-form.component';
+import { QuotationComponent } from './quotation/quotation.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
+import { QuotationFormComponent } from './quotation/quotation-form/quotation-form.component';
+import { TableFiltersComponent } from './table-filters/table-filters.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -70,6 +92,17 @@ export function createRestangularConfigFactory(RestangularProvider) {
         BusinessFormComponent,
         CostPerYearComponent,
         CostPerYearFormComponent,
+        CustomersComponent,
+        CustomerDetailsComponent,
+        CustomerFormComponent,
+        ContactComponent,
+        ContactFormComponent,
+        ListUserBusinessComponent,
+        QuotationComponent,
+        TabsComponent,
+        QuotationDetailsComponent,
+        QuotationFormComponent,
+        TableFiltersComponent,
     ],
     imports: [
         BrowserModule,
@@ -80,12 +113,15 @@ export function createRestangularConfigFactory(RestangularProvider) {
         BrowserAnimationsModule,
         NgxDatatableModule,
         NgHttpLoaderModule,
+        AvatarModule,
+        NgSelectModule,
         ToastrModule.forRoot({
             maxOpened: 1,
             timeOut: 1500,
             positionClass: 'toast-bottom-center',
         }),
-        RestangularModule.forRoot([], createRestangularConfigFactory)
+        RestangularModule.forRoot([], createRestangularConfigFactory),
+        SidebarModule.forRoot()
     ],
     providers: [
         HttpClient,
@@ -100,6 +136,14 @@ export function createRestangularConfigFactory(RestangularProvider) {
         BusinessesService,
         AclsService,
         CostPerYearsService,
+        CustomersService,
+        ContactsService,
+        TypesService,
+        QuotationsService,
+        ProvisionsService,
+        StatusesService,
+        CGVsService,
+        PaymentConditionsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

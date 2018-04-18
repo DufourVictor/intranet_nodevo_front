@@ -7,18 +7,47 @@ import { UsersComponent } from './user/users.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { EmpowermentComponent } from './empowerment/empowerment.component';
 import { BusinessComponent } from './business/business.component';
-import { BusinessDetailsComponent } from './business-details/business-details.component';
+import { CustomersComponent } from './customers/customers.component';
+import { BusinessDetailsComponent } from './business/business-details/business-details.component';
+import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
+import { QuotationComponent } from './quotation/quotation.component';
+import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'users', component: UsersComponent },
-    { path: 'user', component: UserDetailsComponent },
-    { path: 'user/:id', component: UserDetailsComponent },
+    {
+        path: 'crm',
+        children: [
+            { path: '', redirectTo: 'customers', pathMatch: 'full' },
+            { path: 'customers', component: CustomersComponent, data: { title: 'Liste des clients', display: true } },
+            { path: 'customer', component: CustomerDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'customer/:id', component: CustomerDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'customers/:id/businesses', component: BusinessComponent, data: { display: false, displayTabs: false } },
+        ]
+    },
+    {
+        path: 'gescom',
+        children: [
+            { path: '', redirectTo: 'businesses', pathMatch: 'full' },
+            { path: 'businesses', component: BusinessComponent, data: { title: 'Affaires', display: true } },
+            { path: 'business', component: BusinessDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'business/:id', component: BusinessDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'quotations', component: QuotationComponent, data: { title: 'Devis', display: true } },
+            { path: 'quotation', component: QuotationDetailsComponent, data: { display: false, displayTabs: false }  },
+            { path: 'quotation/:id', component: QuotationDetailsComponent, data: { display: false, displayTabs: false }  },
+        ]
+    },
     { path: 'empowerment', component: EmpowermentComponent },
-    { path: 'businesses', component: BusinessComponent },
-    { path: 'business', component: BusinessDetailsComponent },
-    { path: 'business/:id', component: BusinessDetailsComponent },
+    {
+        path: 'settings',
+        children: [
+            { path: '', redirectTo: 'users', pathMatch: 'full' },
+            { path: 'users', component: UsersComponent, data: { title: 'Utilisateurs', display: true } },
+            { path: 'user', component: UserDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'user/:id', component: UserDetailsComponent, data: { display: false, displayTabs: false } },
+        ]
+    },
 ];
 
 @NgModule({

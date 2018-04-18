@@ -1,0 +1,32 @@
+@import "variables";
+
+.ng-sidebar {
+    background-color: $black-1;
+
+    &--closed {
+        .nav--item {
+            &.active {
+                background-color: $primary-color !important;
+            }
+
+            .material-icons {
+                left: calc(100% - 19px);
+                transform: translateX(-100%);
+            }
+        }
+    }
+
+    &--opened {
+        .nav--item .material-icons {
+            left: 17px;
+        }
+        
+        .logo_mini {
+            opacity: 0;
+        }
+    }
+
+    &__content {
+        background-color: #F4F4F4;
+    }
+}

@@ -1,55 +1,53 @@
 <button
-        class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
-        data-tooltip="Ajouter une affaire"
-        routerLink="/business"
+    class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
+    data-tooltip="Ajouter une affaire"
+    routerLink="/gescom/business"
 >
-  <i class="icon icon-plus"></i>
+    <i class="icon icon-plus"></i>
 </button>
 
-<table class="table table-striped table-hover">
-  <thead>
-  <tr>
-    <th>Code affaire</th>
-    <th>Nom de l'affaire</th>
-    <th>Client</th>
-    <th>Devis</th>
-    <th>Statut</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let business of businesses">
-    <td>{{ business.id }}</td>
-    <td>{{ business.label }}</td>
-    <td>{{ business.customer.firstName + ' ' + business.customer.lastName }}</td>
-    <td>Devis</td>
-    <td>{{ business.enabled === true ? 'Actif' : 'Inactif' }}</td>
-    <td>
-      <div class="btn-group btn-group-block">
-        <button
-                class="btn btn-outline-{{ business.enabled ? 'error' : 'success' }} tooltip"
-                [attr.data-tooltip]="business.enabled ? 'Désactiver' : 'Activer'"
-                (click)="toggleEnabled(business)"
-        >
-          <i class="icon icon-{{ business.enabled ? 'cross' : 'check' }}"></i>
-        </button>
-        <button
-                class="btn btn-primary tooltip"
-                data-tooltip="Editer"
-                [routerLink]="['/business/', business.id]"
-        >
-          <i class="icon icon-edit"></i>
-        </button>
-        <button
-                class="btn btn-error tooltip"
-                data-tooltip="Supprimer"
-                (click)="delete(business)"
-        >
-          <i class="icon icon-stop"></i>
-        </button>
-      </div>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div>
+    <input
+        type="text"
+        placeholder="Filtrez par client"
+        (keyup)="updateFilter($event)"
+    >
+</div>
 
+<ngx-datatable
+    #table
+    class="material fullscreen"
+    columnMode="force"
+    headerHeight="auto"
+    rowHeight="auto"
+    footerHeight="auto"
+    [rows]="rows"
+    [columns]="columns"
+    [limit]="10"
+></ngx-datatable>
+
+<ng-template #actionTmpl let-row="row">
+    <div class="btn-group btn-group-block">
+        <button
+            class="btn btn-primary tooltip tooltip-right"
+            data-tooltip="Editer"
+            [routerLink]="['/gescom/business/', row.id]"
+        >
+            <i class="material-icons">edit</i>
+        </button>
+        <button
+            class="btn btn-error tooltip tooltip-left"
+            data-tooltip="Supprimer"
+            (click)="delete(row)"
+        >
+            <i class="material-icons">delete</i>
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #enabledTmpl let-row="row" let-value="value">
+    <label class="form-switch">
+        <input type="checkbox" [checked]="value" (change)="toggleEnabled(row)">
+        <i class="form-icon"></i>
+    </label>
+</ng-template>

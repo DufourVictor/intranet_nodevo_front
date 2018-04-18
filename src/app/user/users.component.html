@@ -1,18 +1,19 @@
 <button
     class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
     data-tooltip="Ajouter un utilisateur"
-    routerLink="/user"
+    routerLink="/settings/user"
 >
     <i class="icon icon-plus"></i>
 </button>
 
-<div>
-    <input
-        type="text"
-        placeholder="Filtrez par prénom ou nom"
-        (keyup)="updateFilter($event)"
-    >
-</div>
+<app-table-filters
+    [searchProperties]="['firstName', 'lastName', 'trigram']"
+    [filterProperties]="[
+        {name: 'firstName', label: 'Prénom', type: 'text'},
+        {name: 'lastName', label: 'Nom', type: 'text'},
+        {name: 'profile', subname: 'label', label: 'Profil', type: 'text'}
+    ]"
+></app-table-filters>
 
 <ngx-datatable
     #table
@@ -29,18 +30,18 @@
 <ng-template #actionTmpl let-row="row">
     <div class="btn-group btn-group-block">
         <button
-            class="btn btn-primary tooltip"
+            class="btn btn-primary tooltip tooltip-right"
             data-tooltip="Editer"
-            [routerLink]="['/user/', row.id]"
+            [routerLink]="['/settings/user/', row.id]"
         >
-            <i class="icon icon-edit"></i>
+            <i class="material-icons">edit</i>
         </button>
         <button
-            class="btn btn-error tooltip"
+            class="btn btn-error tooltip tooltip-left"
             data-tooltip="Supprimer"
             (click)="delete(row)"
         >
-            <i class="icon icon-stop"></i>
+            <i class="material-icons">delete</i>
         </button>
     </div>
 </ng-template>

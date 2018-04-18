@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+
+.tab {
+    padding: 0 10px;
+    background-color: #FFFFFF;
+
+    .tab-item {
+        margin: 10px 10px 0 10px;
+
+        &.active a {
+            color: #4A4A4A;
+        }
+
+        a {
+            padding-bottom: 10px;
+            color: #9B9B9B;
+            font-size: 18px;
+            font-weight: 300;
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+    }
+}

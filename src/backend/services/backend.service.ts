@@ -38,10 +38,14 @@ export abstract class BackendService<T> {
     this.idField = idField;
   }
 
-  makeCriterias(pageNumber: number, criterias: Object): Object {
-    if (!criterias) criterias = {};
-    if (pageNumber) criterias['page'] = pageNumber;
-    return criterias;
+  makeCriteriasCopy(criterias: Object, additionalCriterias: Object = {}): Object {
+    return Object.assign({}, criterias, additionalCriterias);
+  }
+
+  makeCriterias(pageNumber: number, criterias: Object = {}): Object {
+    var pageCriteria = this.makeCriteriasCopy(criterias);
+    if (pageNumber) pageCriteria['page'] = pageNumber;
+    return pageCriteria;
   }
 
   get(id: any): Observable<T> {
@@ -57,8 +61,9 @@ export abstract class BackendService<T> {
   }
 
   getAllByFilter(filter: string, value: any, pageNumber?: number, criterias: Object = {}): Observable<T[]> {
-    criterias[filter] = value;
-    return this.getAll(pageNumber, criterias);
+    var getCriterias = this.makeCriteriasCopy(criterias);;
+    getCriterias[filter] = value;
+    return this.getAll(pageNumber, getCriterias);
   }
 
   add(item: T): Observable<T> {
