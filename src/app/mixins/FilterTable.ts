@@ -40,6 +40,10 @@ export class FilterTable {
         route.params.subscribe(evt => this.updateFilter(evt, searchFilters))
     }
 
+    cleanString = (string) => {
+        return string.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    }
+
     updateFilter = (filters, searchFilters) => {
         if (Object.values(filters).length === 0) {
             this.rows = this.stacks;
@@ -48,12 +52,12 @@ export class FilterTable {
         Object.entries(filters).forEach(([label, value]) => {
             if (label === 'search') {
                 this.rows = this.stacks.filter(stack => searchFilters
-                    .filter(filter => stack[filter].toLowerCase().includes(value))
+                    .filter(filter => this.cleanString(stack[filter]).includes(this.cleanString(value)))
                     .length > 0
                 );
             } else {
                 this.rows = this.stacks.filter(filter =>
-                    (filter[label].label || filter[label]).toLowerCase().includes(value)
+                    this.cleanString((filter[label].label || filter[label])).includes(this.cleanString(value))
                 )
             }
         });
