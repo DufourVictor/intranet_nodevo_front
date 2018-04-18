@@ -1,37 +1,30 @@
-<details class="accordion">
-    <input type="radio" id="accordion-1" name="accordion-radio" hidden>
-    <summary class="accordion-header">
-        <i class="icon icon-arrow-right mr-1"></i>
-        Filtres
-    </summary>
-    <div class="accordion-body">
-        <form [formGroup]="filterForm">
-
-            <div class="columns">
-
-                <div class="form-group filter-search column col-12">
-                    <input
-                        class="form-input"
-                        type="text"
-                        name="search"
-                        placeholder="Rechercher"
-                        formControlName="search"
-                        (keyup)="onFilter($event)"
-                    >
-                </div>
-
-                <div class="form-group column col-4" *ngFor="let filterProperty of filterProperties">
-                    <input
-                        class="form-input"
-                        [type]="filterProperty.type"
-                        [name]="filterProperty.name"
-                        [placeholder]="filterProperty.label"
-                        [formControlName]="filterProperty.name"
-                        (keyup)="onFilter($event)"
-                    >
-                </div>
-
+<div class="card">
+    <form [formGroup]="filterForm">
+        <div class="columns">
+            <div class="column col-12 text-center filtered-text">
+                Filtrer par
             </div>
-        </form>
-    </div>
-</details>
+            <div class="form-group filter-search column col-12">
+                <input
+                    class="form-input"
+                    type="text"
+                    name="search"
+                    placeholder="Rechercher"
+                    formControlName="search"
+                    (keyup)="onFilter()"
+                >
+            </div>
+
+            <div class="form-group column col-4" *ngFor="let filterProperty of filterProperties">
+                <input
+                    class="form-input"
+                    [type]="filterProperty.type"
+                    [name]="filterProperty.name"
+                    [placeholder]="filterProperty.label"
+                    [formControlName]="filterProperty.name"
+                    (keyup)="onFilter()"
+                >
+            </div>
+        </div>
+    </form>
+</div>

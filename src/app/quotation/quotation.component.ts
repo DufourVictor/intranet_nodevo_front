@@ -34,7 +34,7 @@ export class QuotationComponent implements OnInit {
             {prop: 'provision.label', name: 'Type de prestation'},
             {prop: 'totalHt', name: 'Prix HT'},
             {prop: 'status.label', name: 'Etat'},
-            {name: 'Actions', cellTemplate: this.actionTmpl},
+            {name: '', cellTemplate: this.actionTmpl},
         ];
     }
 
@@ -47,15 +47,4 @@ export class QuotationComponent implements OnInit {
             });
         }
     }
-
-    updateFilter(event) {
-        const val = event.target.value.toLowerCase();
-
-        this.rows = this.quotations.filter((quotation: Quotation) => {
-            return quotation.customer.name.toLowerCase().indexOf(val) !== -1
-                || !val;
-        });
-        this.table.offset = 0;
-    }
-
 }

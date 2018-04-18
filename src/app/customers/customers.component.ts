@@ -35,7 +35,7 @@ export class CustomersComponent implements OnInit {
             {prop: 'zipCode', name: 'Code postal'},
             {prop: 'city', name: 'Ville'},
             {prop: 'enabled', name: 'Statut', cellTemplate: this.enabledTmpl},
-            {name: 'Actions', cellTemplate: this.actionTmpl},
+            {name: '', cellTemplate: this.actionTmpl},
         ];
     }
 
@@ -45,6 +45,7 @@ export class CustomersComponent implements OnInit {
         this.customersService.update(clone as Customer).subscribe(
             success => {
                 customer.enabled = success.enabled;
+                this.rows = [...this.customers];
                 this.toastr.success(`Le client a bien été ${customer.enabled ? 'activé' : 'désactivé'} 🎉`);
             },
             error => this.toastr.error(`Une erreur est survenue 😢`)
