@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BusinessesService } from '../../backend/services';
-import { Business } from '../../backend/model';
+import { Business, Customer } from '../../backend/model';
 import { ToastrService } from 'ngx-toastr';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -43,7 +43,7 @@ export class BusinessComponent implements OnInit {
             {prop: 'label', name: 'Nom de l\'affaire'},
             {prop: 'customer.name', name: 'Nom du client'},
             {prop: 'enabled', name: 'Statut', cellTemplate: this.enabledTmpl},
-            {name: 'Actions', cellTemplate: this.actionTmpl},
+            {name: '', cellTemplate: this.actionTmpl},
         ];
     }
 
@@ -63,19 +63,10 @@ export class BusinessComponent implements OnInit {
         this.businessesService.update(clone as Business).subscribe(
             (success) => {
                 business.enabled = success.enabled;
+                this.rows = [...this.businesses];
                 this.toastr.success(`L'affaire a bien été ${business.enabled ? 'activé' : 'désactivé'} 👍✅`);
             },
             error => this.toastr.error(`Désolé l'affaire ${business.label} n'a pas pu être mise à jour 😢❌`)
         );
-    }
-
-    updateFilter(event) {
-        const val = event.target.value.toLowerCase();
-
-        this.rows = this.businesses.filter((business: Business) => {
-            return business.customer.name.toLowerCase().indexOf(val) !== -1
-                || !val;
-        });
-        this.table.offset = 0;
     }
 }

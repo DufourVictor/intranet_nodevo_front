@@ -58,7 +58,7 @@ export class FilterTable {
             } else {
                 this.rows = this.stacks.filter(filter =>
                     this.cleanString((filter[label].label || filter[label])).includes(this.cleanString(value))
-                )
+                );
             }
         });
     }

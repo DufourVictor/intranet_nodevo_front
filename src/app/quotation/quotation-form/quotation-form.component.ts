@@ -31,7 +31,7 @@ export class QuotationFormComponent implements OnInit {
     paymentConditions: PaymentConditions[] = [];
 
     constructor(
-        private formService: FormService,
+        public formService: FormService,
         private quotationsService: QuotationsService,
         private businessesService: BusinessesService,
         private customersService: CustomersService,
