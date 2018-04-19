@@ -5,9 +5,9 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { QuotationsService } from '../../backend/services';
 
 @Component({
-  selector: 'app-quotation',
-  templateUrl: './quotation.component.html',
-  styleUrls: ['./quotation.component.scss']
+    selector: 'app-quotation',
+    templateUrl: './quotation.component.html',
+    styleUrls: ['./quotation.component.scss']
 })
 export class QuotationComponent implements OnInit {
     @ViewChild('actionTmpl') actionTmpl: TemplateRef<any>;
@@ -46,5 +46,14 @@ export class QuotationComponent implements OnInit {
                 this.toastr.warning('Le devis a bien été supprimée 😕❗');
             });
         }
+    }
+
+    duplicate(quotation: Quotation) {
+        const duplicateQuotation = new Quotation();
+        this.quotationService.add(duplicateQuotation.getDuplicateQuotation(duplicateQuotation, quotation)).subscribe((data) => {
+            this.quotations.push(data);
+            this.rows = [...this.quotations];
+            this.toastr.success('Le devis a été dupliqué 👍✅📑', 'Succès !');
+        });
     }
 }
