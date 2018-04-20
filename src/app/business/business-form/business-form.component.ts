@@ -50,13 +50,13 @@ export class BusinessFormComponent implements OnInit {
             if (business.id) {
                 this.businessesService.update(business).subscribe(() => {
                     this.toastr.success('L\'affaire a été mise à jour.', 'Succès !');
-                    this.router.navigate(['businesses']);
+                    this.router.navigate(['gescom/businesses']);
                 });
             } else {
                 business.enabled = true;
                 this.businessesService.add(business).subscribe(() => {
                     this.toastr.success('L\'affaire a été ajoutée.', 'Succès !');
-                    this.router.navigate(['businesses']);
+                    this.router.navigate(['gescom/businesses']);
                 });
             }
         } else {

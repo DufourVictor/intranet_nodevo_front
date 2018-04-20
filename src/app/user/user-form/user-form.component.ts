@@ -45,7 +45,7 @@ export class UserFormComponent implements OnInit {
                 });
             } else {
                 this.usersService.add(user).subscribe(() => {
-                    this.router.navigate(['users']);
+                    this.router.navigate(['settings/users']);
                     this.toastr.success(`L'utilisateur ${user.fullName} a bien été ajouté ! 👍✅`);
                 });
             }
