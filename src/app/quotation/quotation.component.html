@@ -20,6 +20,9 @@
     ></ngx-datatable>
 
     <ng-template #actionTmpl let-row="row">
+        <i class="material-icons" (click)="duplicate(row)">
+            content_copy
+        </i>
         <i class="material-icons" [routerLink]="['/gescom/quotation/', row.id]">
             mode_edit
         </i>
