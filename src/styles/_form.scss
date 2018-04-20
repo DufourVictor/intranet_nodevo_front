@@ -1,9 +1,12 @@
+@import "variables";
+
 form {
-    input, select {
+    input, select, ng-select {
         min-height: 50px;
     }
 
     label {
         font-weight: normal;
+        color: $grey;
     }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { TrainingBonusesService } from '../../backend/services';
 import { TrainingBonus, User } from '../../backend/model';
 import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component';
@@ -9,17 +9,32 @@ import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component'
     styleUrls: ['./trainings-bonus.component.scss']
 })
 export class TrainingsBonusComponent implements OnInit {
+    @ViewChild(SpectreModalComponent) modalToggle: SpectreModalComponent;
+    @ViewChild('dateTmpl') dateTmpl: TemplateRef<any>;
+    @ViewChild('actionTmpl') actionTmpl: TemplateRef<any>;
+
+    @Input() user: User;
     trainingBonuses: TrainingBonus[];
     trainingBonus: TrainingBonus = new TrainingBonus();
-    @Input() user: User;
     modalTitle = 'Primes ou formations';
-    @ViewChild(SpectreModalComponent) modalToggle: SpectreModalComponent;
+    rows: TrainingBonus[] = [];
+    columns = [];
 
     constructor(private trainingBonusesService: TrainingBonusesService) {
     }
 
     getAllTraining() {
-        this.trainingBonusesService.getAllBy('users', this.user.id).subscribe(data => this.trainingBonuses = data);
+        this.trainingBonusesService.getAllBy('users', this.user.id).subscribe(
+            data => this.rows = this.trainingBonuses = data
+        );
+
+        this.columns = [
+            {prop: 'type', name: 'Type'},
+            {prop: 'date', name: 'Date', cellTemplate: this.dateTmpl},
+            {prop: 'price', name: 'Coût'},
+            {prop: 'notes', name: 'Note'},
+            {name: '', cellTemplate: this.actionTmpl},
+        ];
     }
 
     ngOnInit() {
