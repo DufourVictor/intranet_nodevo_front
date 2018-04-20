@@ -32,14 +32,14 @@ export class CustomerFormComponent implements OnInit {
             if (customer.id) {
                 this.customersService.update(customer).subscribe(() => {
                     this.toastr.success('Le client a été mis à jour 👍✅', 'Succès !');
-                    this.router.navigate(['customers']);
+                    this.router.navigate(['/crm/customers']);
                 });
             } else {
                 customer.deleted = false;
                 customer.enabled = true;
                 this.customersService.add(customer).subscribe(() => {
                     this.toastr.success('Le client a été ajouté 👍✅', 'Succès !');
-                    this.router.navigate(['customers']);
+                    this.router.navigate(['crm/customers']);
                 });
             }
         } else {
