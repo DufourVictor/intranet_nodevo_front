@@ -12,6 +12,7 @@ import { BusinessDetailsComponent } from './business/business-details/business-d
 import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
 import { QuotationComponent } from './quotation/quotation.component';
 import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
+import { DirectoryComponent } from './directory/directory.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
             { path: 'customer', component: CustomerDetailsComponent, data: { display: false, displayTabs: false } },
             { path: 'customer/:id', component: CustomerDetailsComponent, data: { display: false, displayTabs: false } },
             { path: 'customers/:id/businesses', component: BusinessComponent, data: { display: false, displayTabs: false } },
+            { path: 'directory', component: DirectoryComponent, data: { title: 'Annuaire', display: true } },
         ]
     },
     {

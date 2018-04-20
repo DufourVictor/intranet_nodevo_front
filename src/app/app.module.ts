@@ -65,6 +65,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
 import { QuotationFormComponent } from './quotation/quotation-form/quotation-form.component';
 import { TableFiltersComponent } from './table-filters/table-filters.component';
+import { DirectoryComponent } from './directory/directory.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -103,6 +104,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         QuotationDetailsComponent,
         QuotationFormComponent,
         TableFiltersComponent,
+        DirectoryComponent,
     ],
     imports: [
         BrowserModule,
