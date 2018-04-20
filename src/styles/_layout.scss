@@ -1,5 +1,48 @@
+@import "variables";
+
 .card {
     margin: 20px;
     padding: 30px;
     border-radius: 5px !important;
+
+    &.form {
+        margin-top: 80px;
+
+        h3 {
+            text-align: center;
+            margin-bottom: 0;
+            font-size: 35px;
+        }
+    }
+
+    .list {
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        .accordion {
+            &-header {
+                padding: 0 !important;
+                padding-left: 10px !important;
+                cursor: pointer;
+                font-size: 21px;
+                border-left: 5px solid $primary-color;
+
+                i {
+                    float: right;
+                    font-size: 15px;
+                    margin-top: 8px;
+                }
+            }
+
+            &-body {
+                margin-top: 20px;
+
+                .add {
+                    cursor: pointer;
+                    color: $primary-color;
+                }
+            }
+        }
+    }
 }

@@ -1,4 +1,6 @@
-<div class="container">
+<div class="card form">
+    <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+
     <form [formGroup]="form.group" (ngSubmit)="save()">
         <div class="columns" *ngIf="user.trigram">
             <div class="form-group column col-6">

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Contact, Customer } from '../../backend/model';
 import { ContactsService } from '../../backend/services';
 import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component';
@@ -10,11 +10,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+    @ViewChild(SpectreModalComponent) modalToggle: SpectreModalComponent;
+    @ViewChild('actionTmpl') actionTmpl: TemplateRef<any>;
+
+    @Input() customer: Customer;
     contacts: Contact[] = [];
     contact: Contact = new Contact();
-    @Input() customer: Customer;
     modalTitle = 'Contact client';
-    @ViewChild(SpectreModalComponent) modalToggle: SpectreModalComponent;
+    rows: Contact[] = [];
+    columns = [];
 
     constructor(
         private contactService: ContactsService,
@@ -23,7 +27,19 @@ export class ContactComponent implements OnInit {
     }
 
     getAllContact() {
-        this.contactService.getAllBy('customers', this.customer.id).subscribe(contacts => this.contacts = contacts);
+        this.contactService.getAllBy('customers', this.customer.id).subscribe(
+            contacts => this.rows = this.contacts = contacts
+        );
+
+        this.columns = [
+            {prop: 'lastName', name: 'Nom'},
+            {prop: 'firstName', name: 'Prénom'},
+            {prop: 'jobFunction', name: 'Fonction'},
+            {prop: 'phone', name: 'Tél. bureau'},
+            {prop: 'mobilePhone', name: 'Tél. mobile'},
+            {prop: 'email', name: 'Email'},
+            {name: '', cellTemplate: this.actionTmpl},
+        ];
     }
 
     ngOnInit() {
