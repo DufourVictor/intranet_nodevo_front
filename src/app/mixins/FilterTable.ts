@@ -37,11 +37,11 @@ export class FilterTable {
         searchFilters: Array<string>
     ) {
         this.service = service;
-        route.params.subscribe(evt => this.updateFilter(evt, searchFilters))
+        route.params.subscribe(evt => this.updateFilter(evt, searchFilters));
     }
 
     cleanString = (string) => {
-        return string.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+        return string.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
     updateFilter = (filters, searchFilters) => {
@@ -55,9 +55,14 @@ export class FilterTable {
                     .filter(filter => this.cleanString(stack[filter]).includes(this.cleanString(value)))
                     .length > 0
                 );
+            } else if (label.includes('.')) {
+                const [name, subname] = label.split('.');
+                this.rows = this.stacks.filter(filter =>
+                    this.cleanString(filter[name][subname]).includes(this.cleanString(value))
+                );
             } else {
                 this.rows = this.stacks.filter(filter =>
-                    this.cleanString((filter[label].label || filter[label])).includes(this.cleanString(value))
+                    this.cleanString(filter[label]).includes(this.cleanString(value))
                 );
             }
         });
