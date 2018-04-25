@@ -16,6 +16,7 @@ export class BusinessBase {
   businessContact: Contact;
   technicalContact: Contact;
   customer: Customer;
+  deleted: boolean;
 
   setBusinessContact(id: number): BusinessBase {
     this.businessContact = new Contact();

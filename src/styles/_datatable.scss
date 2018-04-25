@@ -28,6 +28,8 @@
 
                 &-cell {
                     padding: .5rem .3rem !important;
+                    display: flex;
+                    align-items: center;
 
                     .enabled {
                         &-true {

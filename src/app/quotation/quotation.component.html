@@ -6,6 +6,18 @@
     <i class="icon icon-plus"></i>
 </button>
 
+<app-table-filters
+    [searchProperties]="['codeQuotation', 'label', 'business', 'customer', 'provision', 'status']"
+    [filterProperties]="[
+        {name: 'codeQuotation', label: 'Code devis', type: 'text'},
+        {name: 'label', label: 'Intitulé du devis', type: 'text'},
+        {name: 'business', subname: 'label', label: 'Nom de l\'affaire', type: 'text'},
+        {name: 'customer', subname: 'name', label: 'Nom du client', type: 'text'},
+        {name: 'provision', subname: 'label', label: 'Type de prestation', type: 'text'},
+        {name: 'status', subname: 'label', label: 'Etat du devis', type: 'text'}
+    ]"
+></app-table-filters>
+
 <div class="card">
     <ngx-datatable
         #table
