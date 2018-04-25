@@ -2,30 +2,30 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CustomersService } from '../../backend/services';
 import { Customer } from '../../backend/model';
 import { ToastrService } from 'ngx-toastr';
+import { FilterTable } from '../mixins/FilterTable';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-customers',
     templateUrl: './customers.component.html',
     styleUrls: ['./customers.component.scss']
 })
-export class CustomersComponent implements OnInit {
+export class CustomersComponent extends FilterTable implements OnInit {
     @ViewChild('businessTmpl') businessTmpl: TemplateRef<any>;
     @ViewChild('quotesTmpl') quotesTmpl: TemplateRef<any>;
     @ViewChild('enabledTmpl') enabledTmpl: TemplateRef<any>;
     @ViewChild('actionTmpl') actionTmpl: TemplateRef<any>;
 
-    customers: Customer[] = [];
-    rows: Customer[] = [];
-    columns = [];
-
     constructor(
         private customersService: CustomersService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private route: ActivatedRoute
     ) {
+        super(customersService, route, ['codeClient', 'name', 'city']);
     }
 
     ngOnInit(): void {
-        this.customersService.getAllByFilter('deleted', false).subscribe(customers => this.rows = this.customers = customers);
+        this.customersService.getAllByFilter('deleted', false).subscribe(this.setStack);
 
         this.columns = [
             {prop: 'codeClient', name: 'Code client'},
@@ -40,30 +40,28 @@ export class CustomersComponent implements OnInit {
     }
 
     toggleEnabled(customer: Customer): void {
-        const clone = {...customer};
-        clone.enabled = !clone.enabled;
-        this.customersService.update(clone as Customer).subscribe(
-            success => {
-                customer.enabled = success.enabled;
-                this.rows = [...this.customers];
-                this.toastr.success(`Le client a bien été ${customer.enabled ? 'activé' : 'désactivé'} 🎉`);
-            },
-            error => this.toastr.error(`Une erreur est survenue 😢`)
+        customer.enabled = !customer.enabled;
+        this.customersService.update(customer as Customer).subscribe(
+            () => this.toastr.success(`Le client a bien été ${customer.enabled ? 'activé' : 'désactivé'} 🎉`),
+            () => {
+                customer.enabled = !customer.enabled;
+                this.toastr.error(`Désolé le client n'a pas pu être mis à jour 😢❌`);
+            }
         );
     }
 
     delete(customer: Customer): void {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
-            const clone = {...customer};
-            clone.enabled = false;
-            clone.deleted = true;
-            this.customersService.update(clone as Customer).subscribe(
-                successCustomer => {
-                    customer.deleted = successCustomer.deleted;
-                    customer.enabled = successCustomer.enabled;
-                    this.customers.splice(this.customers.indexOf(customer), 1);
-                    this.rows = [...this.customers];
-                    this.toastr.warning('Le client a bien été supprimé ! 😕❗️');
+            customer.enabled = false;
+            customer.deleted = true;
+            this.customersService.update(customer as Customer).subscribe(
+                () => {
+                    this.deleteObject(customer);
+                    this.toastr.warning(`Le client a bien été supprimé ! 😕❗`);
+                },
+                () => {
+                    customer.enabled = true;
+                    customer.deleted = false;
                 }
             );
         }

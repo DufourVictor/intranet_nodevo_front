@@ -6,6 +6,15 @@
     <i class="icon icon-plus"></i>
 </button>
 
+<app-table-filters
+    [searchProperties]="['codeClient', 'name', 'city']"
+    [filterProperties]="[
+        {name: 'codeClient', label: 'Code client', type: 'text'},
+        {name: 'name', label: 'Nom du client', type: 'text'},
+        {name: 'city', label: 'Ville', type: 'text'}
+    ]"
+></app-table-filters>
+
 <div class="card">
     <ngx-datatable
         #table

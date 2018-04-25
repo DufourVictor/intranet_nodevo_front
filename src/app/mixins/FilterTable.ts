@@ -69,4 +69,9 @@ export class FilterTable {
         this.stacks.splice(this.stacks.indexOf(object), 1);
         this.rows = [...this.stacks];
     }
+
+    addObject = (object) => {
+        this.stacks.push(object);
+        this.rows = [...this.stacks];
+    }
 }
