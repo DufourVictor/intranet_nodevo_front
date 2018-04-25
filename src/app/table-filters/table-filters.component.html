@@ -21,7 +21,9 @@
                     [type]="filterProperty.type"
                     [name]="filterProperty.name"
                     [placeholder]="filterProperty.label"
-                    [formControlName]="filterProperty.name"
+                    [formControlName]="filterProperty.subname ?
+                        filterProperty.name + '.' + filterProperty.subname :
+                        filterProperty.name"
                     (keyup)="onFilter()"
                 >
             </div>

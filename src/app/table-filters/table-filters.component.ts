@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class TableFiltersComponent implements OnInit {
     @Input() searchProperties: Array<string>;
-    @Input() filterProperties: [{ name, type, label }];
+    @Input() filterProperties: [{ name, type, label, subname }];
     filterForm: FormGroup;
 
     constructor(
@@ -22,7 +22,11 @@ export class TableFiltersComponent implements OnInit {
         this.filterForm = this.fb.group({
             search: '',
             ...this.filterProperties.reduce((group, property) => {
-                group[property.name] = '';
+                if (property.subname) {
+                    group[`${property.name}.${property.subname}`] = '';
+                } else {
+                    group[property.name] = '';
+                }
                 return group;
             }, {})
         });
@@ -32,10 +36,9 @@ export class TableFiltersComponent implements OnInit {
         const queryParams = Object.entries(this.filterForm.controls)
             .filter(control => control[1].value !== '')
             .reduce((params, param) => {
-                params[param[0]] = param[1].value
+                params[param[0]] = param[1].value;
                 return params;
-            }, {})
+            }, {});
         this.router.navigate([this.router.url.split(';')[0], queryParams]);
     }
-
 }
