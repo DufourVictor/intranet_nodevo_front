@@ -30,9 +30,11 @@
                     formControlName="contact"
                     bindLabel="fullName"
                     [(ngModel)]="quotation.contact"
+                    [compareWith]="formService.objectsEquals"
                 ></ng-select>
             </div>
         </div>
+
         <div class="columns">
             <div class="form-group column col-6" [class.has-error]="form.group.get('business').invalid">
                 <label class="form-label">Affaire</label>
@@ -70,13 +72,23 @@
         </div>
 
         <div class="columns" *ngIf="quotation.id">
-            <div class="form-group column" [class.has-error]="form.group.get('business').invalid">
+            <div class="form-group column">
                 <label class="form-label">Contact commercial</label>
-                <input type="text" class="form-control form-input" formControlName="business">
+                <input
+                  type="text"
+                  class="form-control form-input"
+                  disabled
+                  [value]="quotation.business.businessContact.firstName + ' ' + quotation.business.businessContact.lastName"
+                >
             </div>
-            <div class="form-group column" [class.has-error]="form.group.get('business').invalid">
+            <div class="form-group column">
                 <label class="form-label">Contact technique</label>
-                <input type="text" class="form-control form-input" formControlName="business">
+                <input
+                  type="text"
+                  class="form-control form-input"
+                  disabled
+                  [value]="quotation.business.technicalContact.firstName + ' ' + quotation.business.technicalContact.lastName"
+                >
             </div>
         </div>
 
