@@ -23,7 +23,7 @@ export class BusinessComponent extends FilterTable implements OnInit {
         private toastr: ToastrService,
         private activatedRoute: ActivatedRoute
     ) {
-        super(businessesService, activatedRoute, ['codeBusiness', 'label']);
+        super(businessesService, activatedRoute, ['codeBusiness', 'label', {name: 'customer', subname: 'name'}]);
     }
 
     ngOnInit() {

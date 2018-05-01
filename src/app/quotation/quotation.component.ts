@@ -22,7 +22,14 @@ export class QuotationComponent extends FilterTable implements OnInit {
         private toastr: ToastrService,
         private route: ActivatedRoute
     ) {
-        super(quotationService, route, ['codeQuotation']);
+        super(quotationService, route, [
+            'codeQuotation',
+            'label',
+            {name: 'business', subname: 'label'},
+            {name: 'customer', subname: 'name'},
+            {name: 'provision', subname: 'label'},
+            {name: 'status', subname: 'label'},
+        ]);
     }
 
     ngOnInit() {

@@ -34,7 +34,7 @@ export class FilterTable {
     constructor(
         service,
         route: ActivatedRoute,
-        searchFilters: Array<string>
+        searchFilters: Array
     ) {
         this.service = service;
         route.params.subscribe(evt => this.updateFilter(evt, searchFilters));
@@ -51,10 +51,11 @@ export class FilterTable {
 
         Object.entries(filters).forEach(([label, value]) => {
             if (label === 'search') {
-                this.rows = this.stacks.filter(stack => searchFilters
-                    .filter(filter => this.cleanString(stack[filter]).includes(this.cleanString(value)))
-                    .length > 0
-                );
+                this.rows = this.stacks.filter(stack => searchFilters.filter(filter =>
+                    this.cleanString(
+                        stack[filter] ? stack[filter] : stack[filter.name][filter.subname]
+                    ).includes(this.cleanString(value))
+                ).length > 0);
             } else if (label.includes('.')) {
                 const [name, subname] = label.split('.');
                 this.rows = this.stacks.filter(filter =>

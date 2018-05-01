@@ -7,12 +7,12 @@
 </button>
 
 <app-table-filters
-    [searchProperties]="['lastName', 'firstName']"
+    [searchProperties]="['lastName', 'firstName', {name: 'customer', subname: 'name'}, 'jobFunction', 'phone', 'email']"
     [filterProperties]="[
         {name: 'lastName', label: 'Nom', type: 'text'},
         {name: 'firstName', label: 'Prénom', type: 'text'},
         {name: 'customer', subname: 'name', label: 'Client', type: 'text'},
-        {name: 'function', label: 'Fonction', type: 'text'},
+        {name: 'jobFunction', label: 'Fonction', type: 'text'},
         {name: 'phone', label: 'Numéro', type: 'text'},
         {name: 'email', label: 'Email', type: 'text'}
     ]"

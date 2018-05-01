@@ -7,7 +7,7 @@
 </button>
 
 <app-table-filters
-    [searchProperties]="['codeBusiness', 'label', 'customer']"
+    [searchProperties]="['codeBusiness', 'label', {name: 'customer', subname: 'name'}]"
     [filterProperties]="[
         {name: 'codeBusiness', label: 'Code affaire', type: 'text'},
         {name: 'label', label: 'Nom de l\'affaire', type: 'text'},

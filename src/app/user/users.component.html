@@ -7,7 +7,7 @@
 </button>
 
 <app-table-filters
-    [searchProperties]="['firstName', 'lastName', 'trigram']"
+    [searchProperties]="['firstName', 'lastName', {name: 'profile', subname: 'label'}]"
     [filterProperties]="[
         {name: 'firstName', label: 'Prénom', type: 'text'},
         {name: 'lastName', label: 'Nom', type: 'text'},

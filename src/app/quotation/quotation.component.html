@@ -7,7 +7,14 @@
 </button>
 
 <app-table-filters
-    [searchProperties]="['codeQuotation', 'label', 'business', 'customer', 'provision', 'status']"
+    [searchProperties]="[
+        'codeQuotation',
+        'label',
+        {name: 'business', subname: 'label'},
+        {name: 'customer', subname: 'name'},
+        {name: 'provision', subname: 'label'},
+        {name: 'status', subname: 'label'}
+    ]"
     [filterProperties]="[
         {name: 'codeQuotation', label: 'Code devis', type: 'text'},
         {name: 'label', label: 'Intitulé du devis', type: 'text'},

@@ -21,7 +21,7 @@ export class DirectoryComponent extends FilterTable implements OnInit {
         private contactsService: ContactsService,
         private route: ActivatedRoute
     ) {
-        super(contactsService, route, ['lastName', 'firstName', 'jobFunction', 'phone', 'email']);
+        super(contactsService, route, ['lastName', 'firstName', {name: 'customer', subname: 'name'}, 'jobFunction', 'phone', 'email']);
     }
 
     ngOnInit(): void {
