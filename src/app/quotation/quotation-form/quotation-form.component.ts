@@ -53,6 +53,7 @@ export class QuotationFormComponent implements OnInit {
         this.statusService.getAll().subscribe((status) => this.status = status);
         this.paymentConditionsService.getAll().subscribe((paymentConditions) => this.paymentConditions = paymentConditions);
         this.cgvService.getAll().subscribe((cgvs) => this.cgvs = cgvs);
+        this.customerChange();
     }
 
     customerChange () {
