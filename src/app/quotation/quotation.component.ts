@@ -3,6 +3,7 @@ import { Quotation } from '../../backend/model';
 import { ToastrService } from 'ngx-toastr';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { QuotationsService } from '../../backend/services';
+import { id } from '@swimlane/ngx-datatable/release/utils';
 
 @Component({
     selector: 'app-quotation',
@@ -49,8 +50,14 @@ export class QuotationComponent implements OnInit {
     }
 
     duplicate(quotation: Quotation) {
-        const duplicateQuotation = new Quotation();
-        this.quotationService.add(duplicateQuotation.getDuplicateQuotation(duplicateQuotation, quotation)).subscribe((data) => {
+
+        const duplicateQuotation = Object.create(quotation);
+
+        duplicateQuotation.id = null;
+        duplicateQuotation['@id'] = null;
+        duplicateQuotation['@type'] = null;
+
+        this.quotationService.add(duplicateQuotation).subscribe((data) => {
             this.quotations.push(data);
             this.rows = [...this.quotations];
             this.toastr.success('Le devis a été dupliqué 👍✅📑', 'Succès !');
