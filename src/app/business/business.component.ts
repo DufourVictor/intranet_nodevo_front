@@ -4,20 +4,18 @@ import { Business, Customer } from '../../backend/model';
 import { ToastrService } from 'ngx-toastr';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ActivatedRoute, Params } from '@angular/router';
+import { FilterTable } from '../mixins/FilterTable';
 
 @Component({
     selector: 'app-business',
     templateUrl: './business.component.html',
     styleUrls: ['./business.component.scss']
 })
-export class BusinessComponent implements OnInit {
+export class BusinessComponent extends FilterTable implements OnInit {
     @ViewChild('actionTmpl') actionTmpl: TemplateRef<any>;
     @ViewChild('enabledTmpl') enabledTmpl: TemplateRef<any>;
     @ViewChild(DatatableComponent) table: DatatableComponent;
 
-    businesses: Business[] = [];
-    rows: Business[] = [];
-    columns = [];
     customerId: number;
 
     constructor(
@@ -25,6 +23,7 @@ export class BusinessComponent implements OnInit {
         private toastr: ToastrService,
         private activatedRoute: ActivatedRoute
     ) {
+        super(businessesService, activatedRoute, ['codeBusiness', 'label', {name: 'customer', subname: 'name'}]);
     }
 
     ngOnInit() {
@@ -33,9 +32,9 @@ export class BusinessComponent implements OnInit {
         });
 
         if (this.customerId) {
-            this.businessesService.getAllByFilter('customer', this.customerId).subscribe(data => this.businesses = this.rows = data);
+            this.businessesService.getAllByFilter('customer', this.customerId).subscribe(this.setStack);
         } else {
-            this.businessesService.getAll().subscribe(data => this.businesses = this.rows = data);
+            this.businessesService.getAllByFilter('deleted', false).subscribe(this.setStack);
         }
 
         this.columns = [
@@ -49,24 +48,29 @@ export class BusinessComponent implements OnInit {
 
     delete(business: Business) {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
-            this.businessesService.remove(business).subscribe(() => {
-                this.businesses.splice(this.businesses.indexOf(business), 1);
-                this.rows = [...this.businesses];
-                this.toastr.warning('L\'affaire a bien été supprimée 😕❗');
-            });
+            business.enabled = false;
+            business.deleted = true;
+            this.businessesService.update(business).subscribe(
+                () => {
+                    this.deleteObject(business);
+                    this.toastr.warning('L\'affaire a bien été supprimée 😕❗');
+                },
+                () => {
+                    business.enabled = true;
+                    business.deleted = false;
+                }
+            );
         }
     }
 
     toggleEnabled(business: Business) {
-        const clone = {...business};
-        clone.enabled = !clone.enabled;
-        this.businessesService.update(clone as Business).subscribe(
-            (success) => {
-                business.enabled = success.enabled;
-                this.rows = [...this.businesses];
-                this.toastr.success(`L'affaire a bien été ${business.enabled ? 'activé' : 'désactivé'} 👍✅`);
-            },
-            error => this.toastr.error(`Désolé l'affaire ${business.label} n'a pas pu être mise à jour 😢❌`)
+        business.enabled = !business.enabled;
+        this.businessesService.update(business as Business).subscribe(
+            () => this.toastr.success(`L'affaire a bien été ${business.enabled ? 'activé' : 'désactivé'} 👍✅`),
+            () => {
+                business.enabled = !business.enabled;
+                this.toastr.error(`Désolé l'affaire ${business.label} n'a pas pu être mise à jour 😢❌`);
+            }
         );
     }
 }

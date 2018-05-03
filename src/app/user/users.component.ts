@@ -21,7 +21,7 @@ export class UsersComponent extends FilterTable implements OnInit {
         private toastr: ToastrService,
         private route: ActivatedRoute
     ) {
-        super(usersService, route, ['firstName', 'lastName']);
+        super(usersService, route, ['firstName', 'lastName', {name: 'profile', subname: 'label'}]);
     }
 
     ngOnInit() {

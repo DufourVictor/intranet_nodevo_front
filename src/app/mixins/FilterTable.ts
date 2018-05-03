@@ -34,14 +34,14 @@ export class FilterTable {
     constructor(
         service,
         route: ActivatedRoute,
-        searchFilters: Array<string>
+        searchFilters: Array
     ) {
         this.service = service;
-        route.params.subscribe(evt => this.updateFilter(evt, searchFilters))
+        route.params.subscribe(evt => this.updateFilter(evt, searchFilters));
     }
 
     cleanString = (string) => {
-        return string.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+        return string.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
     updateFilter = (filters, searchFilters) => {
@@ -51,13 +51,19 @@ export class FilterTable {
 
         Object.entries(filters).forEach(([label, value]) => {
             if (label === 'search') {
-                this.rows = this.stacks.filter(stack => searchFilters
-                    .filter(filter => this.cleanString(stack[filter]).includes(this.cleanString(value)))
-                    .length > 0
+                this.rows = this.stacks.filter(stack => searchFilters.filter(filter =>
+                    this.cleanString(
+                        stack[filter] ? stack[filter] : stack[filter.name][filter.subname]
+                    ).includes(this.cleanString(value))
+                ).length > 0);
+            } else if (label.includes('.')) {
+                const [name, subname] = label.split('.');
+                this.rows = this.stacks.filter(filter =>
+                    this.cleanString(filter[name][subname]).includes(this.cleanString(value))
                 );
             } else {
                 this.rows = this.stacks.filter(filter =>
-                    this.cleanString((filter[label].label || filter[label])).includes(this.cleanString(value))
+                    this.cleanString(filter[label]).includes(this.cleanString(value))
                 );
             }
         });
@@ -67,6 +73,11 @@ export class FilterTable {
 
     deleteObject = (object) => {
         this.stacks.splice(this.stacks.indexOf(object), 1);
+        this.rows = [...this.stacks];
+    }
+
+    addObject = (object) => {
+        this.stacks.push(object);
         this.rows = [...this.stacks];
     }
 }
