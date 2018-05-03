@@ -34,9 +34,9 @@ export class TableFiltersComponent implements OnInit {
 
     onFilter() {
         const queryParams = Object.entries(this.filterForm.controls)
-            .filter(control => control[1].value !== '')
-            .reduce((params, param) => {
-                params[param[0]] = param[1].value;
+            .filter(([, {value}]) => value !== '')
+            .reduce((params, [key, {value}]) => {
+                params[key] = value;
                 return params;
             }, {});
         this.router.navigate([this.router.url.split(';')[0], queryParams]);
