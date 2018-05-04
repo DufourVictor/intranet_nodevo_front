@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { CostPerYear, User } from '../../../backend/model/index';
-import { Form, FormService } from '../../../backend/forms/index';
-import { CostPerYearsService } from '../../../backend/services/index';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { CostPerYear, User } from '../../../backend/model';
+import { Form, FormService } from '../../../backend/forms';
+import { CostPerYearsService } from '../../../backend/services';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -32,12 +32,17 @@ export class CostPerYearFormComponent implements OnChanges {
         if (this.form.group.dirty && this.form.group.valid) {
             const costPerYear = this.form.get();
             if (costPerYear.id) {
-                this.costPerYearsService.update(costPerYear).subscribe(() => this.saveCost.emit());
+                this.costPerYearsService.update(costPerYear).subscribe(() => {
+                    this.saveCost.emit();
+                    this.toastr.success(`Le coût par année a bien été ajouté ! 👍✅`);
+                });
             } else {
                 costPerYear.setUser(this.user.id);
-                this.costPerYearsService.add(costPerYear).subscribe(() => this.saveCost.emit());
+                this.costPerYearsService.add(costPerYear).subscribe(() => {
+                    this.saveCost.emit();
+                    this.toastr.success(`Le coût par année a bien été ajouté ! 👍✅`);
+                });
             }
-            this.toastr.success(`Le coût par année a bien été ajouté ! 👍✅`);
             this.form.group.reset();
         } else {
             // force invalid inputs state to display errors
