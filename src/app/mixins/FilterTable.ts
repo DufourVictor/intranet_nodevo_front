@@ -34,7 +34,7 @@ export class FilterTable {
     constructor(
         service,
         route: ActivatedRoute,
-        searchFilters: Array
+        searchFilters: Array<any>
     ) {
         this.service = service;
         route.params.subscribe(evt => this.updateFilter(evt, searchFilters));

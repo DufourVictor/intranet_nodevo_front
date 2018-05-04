@@ -17,3 +17,7 @@
 html, body {
     font-family: 'Roboto', sans-serif;
 }
+
+.ng-select.has-error .ng-control {
+  border-color: $error-color;
+}
