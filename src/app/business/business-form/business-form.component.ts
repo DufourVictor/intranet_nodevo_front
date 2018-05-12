@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Business, Contact, Customer } from '../../../backend/model';
 import { Form, FormService } from '../../../backend/forms';
-import { Router } from '@angular/router';
 import { BusinessesService, ContactsService, CustomersService } from '../../../backend/services';
 import { ToastrService } from 'ngx-toastr';
 
@@ -20,19 +20,27 @@ export class BusinessFormComponent implements OnInit {
     form: Form<Business>;
 
     constructor(
-        private router: Router,
-        private businessesService: BusinessesService,
+        protected router: Router,
+        protected businessesService: BusinessesService,
         public formService: FormService,
-        private customersService: CustomersService,
-        private contactsService: ContactsService,
-        private toastr: ToastrService,
+        protected customersService: CustomersService,
+        protected contactsService: ContactsService,
+        protected toastr: ToastrService,
     ) {
     }
 
     ngOnInit() {
         this.form = this.formService.makeForm<Business>(this.business);
         this.customersService.getAllByFilter('deleted', false).subscribe(customers => this.customers = customers);
-        this.contactsService.getAll().subscribe(contacts => {
+        if (this.business.id) {
+            this.customerChange();
+        }
+    }
+
+    customerChange() {
+        this.businessContacts = [];
+        this.technicalContacts = [];
+        this.contactsService.getAllBy('customers', this.form.get().customer.id).subscribe(contacts => {
             contacts.forEach((contact: Contact) => {
                 if (BusinessFormComponent.TECHNICAL_CONTACT === contact.type.label) {
                     this.technicalContacts.push(contact);
@@ -54,6 +62,7 @@ export class BusinessFormComponent implements OnInit {
                 });
             } else {
                 business.enabled = true;
+                business.deleted = false;
                 this.businessesService.add(business).subscribe(() => {
                     this.toastr.success('L\'affaire a été ajoutée.', 'Succès !');
                     this.router.navigate(['gescom/businesses']);

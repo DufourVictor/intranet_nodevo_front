@@ -17,7 +17,7 @@
             <div class="form-group column col-6" [class.has-error]="form.group.get('customer').invalid">
                 <label class="form-label">Client</label>
                 <select class="form-control form-select" formControlName="customer"
-                        [compareWith]="formService.objectsEquals">
+                        [compareWith]="formService.objectsEquals" (change)="customerChange()">
                     <option
                             *ngFor="let customer of customers"
                             [ngValue]="customer"
