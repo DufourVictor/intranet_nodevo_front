@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { TrainingBonus, User } from '../../../backend/model';
 import { Form, FormService } from '../../../backend/forms';
 import { TrainingBonusesService } from '../../../backend/services';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-training-bonus-form',

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Business, Customer } from '../../../backend/model';
+import { Customer } from '../../../backend/model';
 import { Form, FormService } from '../../../backend/forms';
 import { CustomersService } from '../../../backend/services';
 import { ToastrService } from 'ngx-toastr';

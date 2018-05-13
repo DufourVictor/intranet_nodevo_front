@@ -36,7 +36,7 @@ export class UserFormComponent implements OnInit {
     }
 
     save() {
-        if (this.form.group.dirty && this.form.group.valid) {
+        if (this.form.group.dirty && (this.form.group.valid || (this.user.id && this.form.group.controls.plainPassword.invalid))) {
             const user = this.form.get();
             if (user.id) {
                 this.usersService.update(user).subscribe(() => {

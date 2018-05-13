@@ -1,5 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Business, CGV, Contact, Customer, PaymentConditions, Provision, Quotation, Status } from '../../../backend/model';
+import {
+    Business,
+    CGV,
+    Contact,
+    Customer,
+    PaymentConditions,
+    Provision,
+    Quotation,
+    Status
+} from '../../../backend/model';
 import { Form, FormService } from '../../../backend/forms';
 import {
     BusinessesService,

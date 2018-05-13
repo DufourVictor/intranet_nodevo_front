@@ -5,7 +5,6 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { QuotationsService } from '../../backend/services';
 import { FilterTable } from '../mixins/FilterTable';
 import { ActivatedRoute } from '@angular/router';
-import { id } from '@swimlane/ngx-datatable/release/utils';
 
 @Component({
     selector: 'app-quotation',
