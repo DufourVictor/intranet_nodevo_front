@@ -23,16 +23,12 @@
         ></ngx-datatable>
 
         <ng-template #dateTmpl let-value="value" let-row="row">
-            {{ value|date }}
+            {{ value | date:'longDate':'':'fr' }}
         </ng-template>
 
         <ng-template #actionTmpl let-row="row">
-            <i class="material-icons" (click)="activeModal(row)">
-                mode_edit
-            </i>
-            <i class="material-icons" (click)="confirmDelete(row)">
-                delete_forever
-            </i>
+            <i class="material-icons" (click)="activeModal(row)">mode_edit</i>
+            <i class="material-icons" (click)="confirmDelete(row)">delete_forever</i>
         </ng-template>
     </div>
 </details>
