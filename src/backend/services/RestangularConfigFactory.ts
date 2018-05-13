@@ -1,6 +1,6 @@
 // This file should not be modified, as it can be overwritten by the generator.
 
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 export function RestangularConfigFactory(RestangularProvider, config) {
   RestangularProvider.setBaseUrl(config.baseUrl);
