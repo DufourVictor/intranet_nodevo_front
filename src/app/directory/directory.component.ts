@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Contact } from '../../backend/model';
 import { ContactsService } from '../../backend/services';
-import { Angular2Csv } from 'angular2-csv';
+import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { FilterTable } from '../mixins/FilterTable';
 import { ActivatedRoute } from '@angular/router';
@@ -51,7 +51,7 @@ export class DirectoryComponent extends FilterTable implements OnInit {
             fieldSeparator: ';',
             headers: head,
         };
-        new Angular2Csv(this.exportContact, this.fileName, options);
+        new Angular5Csv(this.exportContact, this.fileName, options);
     }
 
     exportData() {
