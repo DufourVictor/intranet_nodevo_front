@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Group, Profile, User } from '../../../backend/model';
 import { GroupsService, ProfilesService, UsersService } from '../../../backend/services';
 import { Form, FormService } from '../../../backend/forms';
-import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-user-form',
@@ -13,9 +13,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserFormComponent implements OnInit {
     @Input() user: User = new User();
-    profiles: Profile[] = [];
-    groups: Group[] = [];
-    managers: User[] = [];
+    profiles: Observable<Profile[]>;
+    groups: Observable<Group[]>;
+    managers: Observable<User[]>;
     form: Form<User>;
 
     constructor(
@@ -30,25 +30,18 @@ export class UserFormComponent implements OnInit {
     ngOnInit() {
         this.form = this.formService.makeForm<User>(this.user);
 
-        this.profilesService.getAll().subscribe(profiles => this.profiles = profiles);
-        this.groupsService.getAll().subscribe(groups => this.groups = groups);
-        this.usersService.getAllByFilter('deleted', false).subscribe(managers => this.managers = managers);
+        this.profiles = this.profilesService.getAll();
+        this.groups = this.groupsService.getAll();
+        this.managers = this.usersService.getAllByFilter('deleted', false);
     }
 
     save() {
         if (this.form.group.dirty && (this.form.group.valid || (this.user.id && this.form.group.controls.plainPassword.invalid))) {
             const user = this.form.get();
-            if (user.id) {
-                this.usersService.update(user).subscribe(() => {
-                    this.router.navigate(['users']);
-                    this.toastr.success(`L'utilisateur ${user.fullName} a bien été mis à jour ! 👍✅`);
-                });
-            } else {
-                this.usersService.add(user).subscribe(() => {
-                    this.router.navigate(['settings/users']);
-                    this.toastr.success(`L'utilisateur ${user.fullName} a bien été ajouté ! 👍✅`);
-                });
-            }
+            this.usersService[user.id ? 'update' : 'add'](user).subscribe(() => {
+                this.router.navigate(['settings/users']);
+                this.toastr.success(`L'utilisateur ${user.fullName} a bien été ${user.id ? 'mis à jour' : 'ajouté'} ! 👍✅`);
+            });
         } else {
             this.form.displayErrors();
         }

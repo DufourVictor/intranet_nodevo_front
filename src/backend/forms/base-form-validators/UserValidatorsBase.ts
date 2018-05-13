@@ -8,8 +8,8 @@ import { FormGroupValidators } from '../tools/FormGroupValidators';
 
 export class UserValidatorsBase extends FormGroupValidators {
     username = [Validators.required];
-    plainPassword = [Validators.required];
-    password = [Validators.required];
+    plainPassword = null;
+    password = null;
     enabled = [Validators.required, AppValidators.boolean];
     deleted = [Validators.required, AppValidators.boolean];
     notes = null;
