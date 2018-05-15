@@ -16,22 +16,22 @@ import { NoneRecordingTimesComponent } from './none-recording-times/none-recordi
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
 import {
-    CostPerYearsService,
-    GroupsService,
-    NoTimeRecordingsService,
-    ProfilesService,
-    TrainingBonusesService,
-    UsersService,
     AclsService,
     BusinessesService,
-    CustomersService,
-    ContactsService,
-    TypesService,
-    QuotationsService,
-    ProvisionsService,
-    StatusesService,
     CGVsService,
-    PaymentConditionsService
+    ContactsService,
+    CostPerYearsService,
+    CustomersService,
+    GroupsService,
+    NoTimeRecordingsService,
+    PaymentConditionsService,
+    ProfilesService,
+    ProvisionsService,
+    QuotationsService,
+    StatusesService,
+    TrainingBonusesService,
+    TypesService,
+    UsersService
 } from '../backend/services';
 import { RestangularModule } from 'ngx-restangular';
 import { RestangularConfigFactory } from '../backend/services/RestangularConfigFactory';
