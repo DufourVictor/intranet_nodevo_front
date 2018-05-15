@@ -5,9 +5,7 @@
     </summary>
     <div class="accordion-body">
         <div class="text-right">
-            <i class="material-icons add" (click)="activeModal()">
-                add_circle
-            </i>
+            <i class="material-icons add" (click)="activeModal()">add_circle</i>
         </div>
 
         <ngx-datatable
@@ -23,12 +21,8 @@
         ></ngx-datatable>
 
         <ng-template #actionTmpl let-row="row">
-            <i class="material-icons" (click)="activeModal(row)">
-                mode_edit
-            </i>
-            <i class="material-icons" (click)="confirmDelete(row)">
-                delete_forever
-            </i>
+            <i class="material-icons" (click)="activeModal(row)">mode_edit</i>
+            <i class="material-icons" (click)="confirmDelete(row)">delete_forever</i>
         </ng-template>
     </div>
 </details>
