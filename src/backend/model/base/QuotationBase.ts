@@ -20,6 +20,8 @@ export class QuotationBase {
   enabledCgv: boolean;
   customerNotes: string;
   privateNotes: string;
+  signAt: Date;
+  reason: string;
   cgv: CGV;
   business: Business;
   status: Status;
