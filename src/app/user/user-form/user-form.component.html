@@ -63,7 +63,7 @@
                 <select class="form-control form-select" formControlName="profile"
                         [compareWith]="formService.objectsEquals">
                     <option
-                        *ngFor="let profile of profiles"
+                        *ngFor="let profile of profiles | async"
                         [ngValue]="profile"
                     >{{profile.label}}
                     </option>
@@ -77,7 +77,7 @@
                 <label class="form-label">Groupe</label>
                 <select class="form-control form-select" formControlName="group" [compareWith]="formService.objectsEquals">
                     <option
-                        *ngFor="let group of groups"
+                        *ngFor="let group of groups | async"
                         [ngValue]="group"
                     >{{group.label}}
                     </option>
@@ -92,12 +92,13 @@
             <div class="form-group column col-6" [class.has-error]="managersError.hasError('*', 'touched')">
                 <label class="form-label">Responsables</label>
                 <ng-select
-                    [items]="managers"
+                    [items]="managers | async"
                     [multiple]="true"
                     formControlName="managers"
                     bindLabel="fullName"
                     [(ngModel)]="user.managers"
                     [class.has-error]="managersError.hasError('*', 'touched')"
+                    [compareWith]="formService.objectsEquals"
                 ></ng-select>
                 <div ngxErrors="managers" #managersError="ngxErrors">
                     <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>

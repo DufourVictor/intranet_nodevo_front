@@ -17,7 +17,7 @@ export class UserBase {
   notes: string;
   profile: Profile;
   group: Group;
-  managers: User;
+  managers: User[];
   firstName: string;
   lastName: string;
   email: string;
@@ -33,13 +33,6 @@ export class UserBase {
     this.group = new Group();
     this.group.id = id;
     this.group['@id'] = '/groups/' + id;
-    return this;
-  }
-
-  setManagers(id: number): UserBase {
-    this.managers = new User();
-    this.managers.id = id;
-    this.managers['@id'] = '/users/' + id;
     return this;
   }
 

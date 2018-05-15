@@ -2,7 +2,6 @@ import { UserBase } from './base/UserBase';
 
 export class User extends UserBase {
     id: number;
-    private _trigram: string;
 
     get trigram(): string {
         if (this.firstName && this.lastName) {
