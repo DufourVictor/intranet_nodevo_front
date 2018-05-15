@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BusinessesService } from '../../backend/services';
-import { Business, Customer } from '../../backend/model';
+import { Business } from '../../backend/model';
 import { ToastrService } from 'ngx-toastr';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ActivatedRoute, Params } from '@angular/router';

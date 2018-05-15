@@ -14,9 +14,7 @@
                 <label class="form-label">Email</label>
                 <input type="email" class="form-control form-input" formControlName="email">
                 <div ngxErrors="email" #emailError="ngxErrors">
-                    <p class="form-input-hint" ngxError="required" when="touched">
-                        Le champ est requis
-                    </p>
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
         </div>
@@ -26,9 +24,7 @@
                 <label class="form-label">Nom</label>
                 <input type="text" class="form-control form-input" formControlName="lastName">
                 <div ngxErrors="lastName" #lastNameError="ngxErrors">
-                    <p class="form-input-hint" ngxError="required" when="touched">
-                        Le champ est requis
-                    </p>
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
 
@@ -36,31 +32,27 @@
                 <label class="form-label">Prénom</label>
                 <input type="text" class="form-control form-input" formControlName="firstName">
                 <div ngxErrors="firstName" #firstNameError="ngxErrors">
-                    <p class="form-input-hint" ngxError="required" when="touched">
-                        Le champ est requis
-                    </p>
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
         </div>
 
-        <div class="columns" *ngIf="undefined === user.id">
+        <div class="columns">
             <div class="form-group column col-6" [class.has-error]="usernameError.hasError('*', 'touched')">
                 <label class="form-label">Nom d'utilisateur</label>
                 <input type="text" class="form-input form-control" formControlName="username">
                 <div ngxErrors="username" #usernameError="ngxErrors">
-                    <p class="form-input-hint" ngxError="required" when="touched">
-                        Le champ est requis
-                    </p>
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
 
             <div class="form-group column col-6" [class.has-error]="passwordError.hasError('*', 'touched')">
-                <label class="form-label">Mot de passe</label>
+                <label class="form-label">
+                    Mot de passe <span *ngIf="user.id">(remplir que si vous souhaitez changer le mot de passe)</span>
+                </label>
                 <input type="text" class="form-input form-control" formControlName="plainPassword">
                 <div ngxErrors="plainPassword" #passwordError="ngxErrors">
-                    <p class="form-input-hint" ngxError="required" when="touched">
-                        Le champ est requis
-                    </p>
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
         </div>
@@ -77,9 +69,7 @@
                     </option>
                 </select>
                 <div ngxErrors="profile" #profileError="ngxErrors">
-                    <p class="form-input-hint" ngxError="required" when="touched">
-                        Le champ est requis
-                    </p>
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
 
@@ -93,9 +83,7 @@
                     </option>
                 </select>
                 <div ngxErrors="profile" #profileError="ngxErrors">
-                    <p class="form-input-hint" ngxError="required" when="touched">
-                        Le champ est requis
-                    </p>
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
         </div>
@@ -112,9 +100,7 @@
                     [class.has-error]="managersError.hasError('*', 'touched')"
                 ></ng-select>
                 <div ngxErrors="managers" #managersError="ngxErrors">
-                    <p class="form-input-hint" ngxError="required" when="touched">
-                        Le champ est requis
-                    </p>
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
         </div>
@@ -124,9 +110,7 @@
                 <label class="form-label">Notes</label>
                 <textarea class="form-input" rows="3" formControlName="notes">{{user.notes}}</textarea>
                 <div ngxErrors="notes" #notesError="ngxErrors">
-                    <p class="form-input-hint" ngxError="required" when="touched">
-                        Le champ est requis
-                    </p>
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
         </div>
