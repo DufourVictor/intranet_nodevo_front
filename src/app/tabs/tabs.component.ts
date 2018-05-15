@@ -9,7 +9,6 @@ import { ResolveEnd, Route, Router, Routes } from '@angular/router';
 export class TabsComponent {
     tabsLink: Routes = [];
     parentUrl: string;
-    displayTabs: boolean;
 
     constructor(private router: Router) {
         router.events.subscribe((route) => {
@@ -19,8 +18,6 @@ export class TabsComponent {
                 while (firstChild.firstChild) {
                     firstChild = firstChild.firstChild;
                 }
-
-                this.displayTabs = firstChild ? firstChild.data.displayTabs : null;
 
                 const routeConfig = route.state.root.children[0].routeConfig;
 
@@ -44,6 +41,6 @@ export class TabsComponent {
     }
 
     displayingTabs(): boolean {
-        return 0 < this.tabsLink.length && false !== this.displayTabs;
+        return 0 < this.tabsLink.length;
     }
 }

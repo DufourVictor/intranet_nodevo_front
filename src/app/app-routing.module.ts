@@ -22,8 +22,8 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'customers', pathMatch: 'full' },
             { path: 'customers', component: CustomersComponent, data: { title: 'Liste des clients', display: true } },
-            { path: 'customer', component: CustomerDetailsComponent, data: { display: false, displayTabs: false } },
-            { path: 'customer/:id', component: CustomerDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'customer', component: CustomerDetailsComponent, data: { display: false } },
+            { path: 'customer/:id', component: CustomerDetailsComponent, data: { display: false } },
             { path: 'customers/:id/businesses', component: BusinessComponent, data: { display: false, displayTabs: false } },
             { path: 'directory', component: DirectoryComponent, data: { title: 'Annuaire', display: true } },
         ]
@@ -33,11 +33,11 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'businesses', pathMatch: 'full' },
             { path: 'businesses', component: BusinessComponent, data: { title: 'Affaires', display: true } },
-            { path: 'business', component: BusinessDetailsComponent, data: { display: false, displayTabs: false } },
-            { path: 'business/:id', component: BusinessDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'business', component: BusinessDetailsComponent, data: { display: false } },
+            { path: 'business/:id', component: BusinessDetailsComponent, data: { display: false } },
             { path: 'quotations', component: QuotationComponent, data: { title: 'Devis', display: true } },
-            { path: 'quotation', component: QuotationDetailsComponent, data: { display: false, displayTabs: false }  },
-            { path: 'quotation/:id', component: QuotationDetailsComponent, data: { display: false, displayTabs: false }  },
+            { path: 'quotation', component: QuotationDetailsComponent, data: { display: false }  },
+            { path: 'quotation/:id', component: QuotationDetailsComponent, data: { display: false } },
         ]
     },
     { path: 'empowerment', component: EmpowermentComponent },
@@ -46,8 +46,8 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'users', pathMatch: 'full' },
             { path: 'users', component: UsersComponent, data: { title: 'Utilisateurs', display: true } },
-            { path: 'user', component: UserDetailsComponent, data: { display: false, displayTabs: false } },
-            { path: 'user/:id', component: UserDetailsComponent, data: { display: false, displayTabs: false } },
+            { path: 'user', component: UserDetailsComponent, data: { display: false } },
+            { path: 'user/:id', component: UserDetailsComponent, data: { display: false } },
         ]
     },
 ];
