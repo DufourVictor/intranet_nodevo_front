@@ -6,6 +6,8 @@ export class FilterTable {
     private _columns = [];
     private _rows = [];
     service: BackendService<any>;
+    searchFilters: Array<any>;
+    filters;
 
     get columns(): any[] {
         return this._columns;
@@ -37,21 +39,25 @@ export class FilterTable {
         searchFilters: Array<any>
     ) {
         this.service = service;
-        route.params.subscribe(evt => this.updateFilter(evt, searchFilters));
+        this.searchFilters = searchFilters;
+        route.params.subscribe(evt => {
+            this.filters = evt;
+            this.updateFilter();
+        });
     }
 
     cleanString = (string) => {
         return string.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
-    updateFilter = (filters, searchFilters) => {
-        if (Object.values(filters).length === 0) {
+    updateFilter = () => {
+        if (Object.values(this.filters).length === 0) {
             this.rows = this.stacks;
         }
 
-        Object.entries(filters).forEach(([label, value]) => {
+        Object.entries(this.filters).forEach(([label, value]) => {
             if (label === 'search') {
-                this.rows = this.stacks.filter(stack => searchFilters.filter(filter =>
+                this.rows = this.stacks.filter(stack => this.searchFilters.filter(filter =>
                     this.cleanString(
                         stack[filter] ? stack[filter] : stack[filter.name][filter.subname]
                     ).includes(this.cleanString(value))
@@ -69,7 +75,10 @@ export class FilterTable {
         });
     }
 
-    setStack = (data) => (this.stacks = data);
+    setStack = (data) => {
+        this.stacks = data;
+        this.updateFilter();
+    }
 
     deleteObject = (object) => {
         this.stacks.splice(this.stacks.indexOf(object), 1);

@@ -24,7 +24,6 @@ const routes: Routes = [
             { path: 'customers', component: CustomersComponent, data: { title: 'Liste des clients', display: true } },
             { path: 'customer', component: CustomerDetailsComponent, data: { display: false } },
             { path: 'customer/:id', component: CustomerDetailsComponent, data: { display: false } },
-            { path: 'customers/:id/businesses', component: BusinessComponent, data: { display: false, displayTabs: false } },
             { path: 'directory', component: DirectoryComponent, data: { title: 'Annuaire', display: true } },
         ]
     },

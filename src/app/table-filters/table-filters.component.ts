@@ -20,12 +20,14 @@ export class TableFiltersComponent implements OnInit {
 
     ngOnInit() {
         this.filterForm = this.fb.group({
-            search: '',
+            search: this.getFilter('search'),
             ...this.filterProperties.reduce((group, property) => {
                 if (property.subname) {
-                    group[`${property.name}.${property.subname}`] = '';
+                    group[`${property.name}.${property.subname}`] =
+                        this.getFilter(`${property.name}.${property.subname}`)
+                    ;
                 } else {
-                    group[property.name] = '';
+                    group[property.name] = this.getFilter(property.name);
                 }
                 return group;
             }, {})
@@ -40,5 +42,12 @@ export class TableFiltersComponent implements OnInit {
                 return params;
             }, {});
         this.router.navigate([this.router.url.split(';')[0], queryParams]);
+    }
+
+    getFilter(property: string): string {
+        return decodeURI(this.router.url.split(';')
+            .find(param => param.includes(property)) || '')
+            .replace(`${property}=`, '')
+        ;
     }
 }

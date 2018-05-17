@@ -29,7 +29,7 @@
     ></ngx-datatable>
 
     <ng-template #businessTmpl let-row="row">
-        <div [routerLink]="['/crm/customers/', row.id, 'businesses']">Voir les affaires</div>
+        <div [routerLink]="['/gescom/businesses/', {'customer.name': row.name}]">Voir les affaires</div>
     </ng-template>
 
     <ng-template #enabledTmpl let-row="row" let-value="value">
