@@ -30,7 +30,7 @@ export class CustomersComponent extends FilterTable implements OnInit {
         this.columns = [
             {prop: 'codeClient', name: 'Code client'},
             {prop: 'name', name: 'Nom du client'},
-            {name: 'Affaires', cellTemplate: this.businessTmpl},
+            {name: 'Affaires', cellTemplate: this.businessTmpl, cellClass: 'link'},
             {name: 'Devis', cellTemplate: this.quotesTmpl},
             {prop: 'zipCode', name: 'Code postal'},
             {prop: 'city', name: 'Ville'},
