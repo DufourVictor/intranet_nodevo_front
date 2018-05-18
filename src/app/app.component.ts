@@ -13,10 +13,6 @@ export class AppComponent {
     user: User;
     opened = true;
 
-    get userFullName() {
-        return `${this.user.firstName} ${this.user.lastName}`;
-    }
-
     constructor(
         private auth: AuthentificationService,
         private router: Router

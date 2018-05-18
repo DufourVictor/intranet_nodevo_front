@@ -20,11 +20,11 @@
         <header class="navbar">
             <section class="navbar-section">
                 <div class="col-ml-auto flex-centered">
-                    <span class="user-fullname">{{ userFullName }}</span>
+                    <span class="user-fullname">{{ user.fullName }}</span>
                     <div>
                         <ngx-avatar
                             bgColor="#9B9B9B"
-                            [name]="userFullName"
+                            [name]="user.fullName"
                             [size]="30"
                             [textSizeRatio]="2"
                             class="col-ml-auto"
