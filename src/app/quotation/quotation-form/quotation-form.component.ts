@@ -29,6 +29,10 @@ import { Router } from '@angular/router';
     styleUrls: ['./quotation-form.component.scss']
 })
 export class QuotationFormComponent implements OnInit {
+    static STATUS_VALIDATE = 'Accepté';
+    static STATUS_REFUSE = 'Refusé';
+    static STATUS_LEAVE = 'Abandonné';
+    static STATUS_LOST = 'Perdu';
     @Input() quotation: Quotation = new Quotation();
     form: Form<Quotation>;
     businesses: Business[] = [];
@@ -38,6 +42,8 @@ export class QuotationFormComponent implements OnInit {
     status: Status[] = [];
     cgvs: CGV[] = [];
     paymentConditions: PaymentConditions[] = [];
+    needReason = false;
+    needSignAt = false;
 
     constructor(
         public formService: FormService,
@@ -74,6 +80,7 @@ export class QuotationFormComponent implements OnInit {
     save () {
         if (this.form.group.dirty && this.form.group.valid) {
             const quotation = this.form.get();
+            this.getStatus(quotation);
             if (quotation.id) {
                 this.quotationsService.update(quotation).subscribe(() => {
                     this.toastr.success('Le devis a été mis à jour 👍✅', 'Succès !');
@@ -87,6 +94,25 @@ export class QuotationFormComponent implements OnInit {
             }
         } else {
             this.form.displayErrors();
+        }
+    }
+
+    getStatus (quotation = null) {
+        const statusLabel = this.form.get().status.label;
+        if (QuotationFormComponent.STATUS_VALIDATE === statusLabel) {
+            this.needSignAt = true;
+            if (quotation) {
+                quotation.reason = null;
+            }
+        } else if (
+            QuotationFormComponent.STATUS_REFUSE === statusLabel ||
+            QuotationFormComponent.STATUS_LEAVE === statusLabel ||
+            QuotationFormComponent.STATUS_LOST === statusLabel
+        ) {
+            this.needReason = true;
+            if (quotation) {
+                quotation.signAt = null;
+            }
         }
     }
 }

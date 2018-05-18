@@ -14,6 +14,8 @@ export class QuotationValidatorsBase extends FormGroupValidators {
     enabledCgv = [AppValidators.boolean];
     customerNotes = null;
     privateNotes = null;
+    signAt = [CustomValidators.date];
+    reason = null;
     cgv = [AppValidators.item];
     business = [AppValidators.item];
     status = [AppValidators.item];
