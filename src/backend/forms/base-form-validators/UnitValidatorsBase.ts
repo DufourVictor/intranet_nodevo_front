@@ -8,4 +8,8 @@ import { FormGroupValidators } from '../tools/FormGroupValidators';
 
 export class UnitValidatorsBase extends FormGroupValidators {
     label = null;
+    createdAt = [CustomValidators.date];
+    updatedAt = [CustomValidators.date];
+    createdBy = null;
+    updatedBy = null;
 }

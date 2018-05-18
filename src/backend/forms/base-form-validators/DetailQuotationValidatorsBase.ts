@@ -13,4 +13,8 @@ export class DetailQuotationValidatorsBase extends FormGroupValidators {
     amountHtAr = [CustomValidators.number];
     line = [AppValidators.item];
     userQuotation = [AppValidators.item];
+    createdAt = [CustomValidators.date];
+    updatedAt = [CustomValidators.date];
+    createdBy = null;
+    updatedBy = null;
 }

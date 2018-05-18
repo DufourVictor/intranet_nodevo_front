@@ -11,6 +11,10 @@ export class CostPerYearBase {
   cost: number;
   comment: string;
   user: User;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
   setUser(id: number): CostPerYearBase {
     this.user = new User();

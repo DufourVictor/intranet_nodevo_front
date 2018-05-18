@@ -7,5 +7,9 @@ export class ProfileBase {
   get _resource(): string { return ProfileBase._resource; };
 
   label: string;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
 }

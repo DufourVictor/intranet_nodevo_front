@@ -14,6 +14,10 @@ export class LineBase {
   free: boolean;
   title: boolean;
   unit: Unit;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
   setUnit(id: number): LineBase {
     this.unit = new Unit();

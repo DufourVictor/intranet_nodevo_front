@@ -9,7 +9,6 @@ import { FormGroupValidators } from '../tools/FormGroupValidators';
 export class QuotationValidatorsBase extends FormGroupValidators {
     codeQuotation = null;
     label = [Validators.required];
-    createdAt = [CustomValidators.date];
     validedAt = [CustomValidators.date];
     enabledCgv = [AppValidators.boolean];
     customerNotes = null;

@@ -14,6 +14,10 @@ export class DetailQuotationBase {
   amountHtAr: number;
   line: Line;
   userQuotation: UserQuotation;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
   setLine(id: number): DetailQuotationBase {
     this.line = new Line();

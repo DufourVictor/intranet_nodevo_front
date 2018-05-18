@@ -11,4 +11,8 @@ export class CostPerYearValidatorsBase extends FormGroupValidators {
     cost = [CustomValidators.number];
     comment = null;
     user = [AppValidators.item];
+    createdAt = [CustomValidators.date];
+    updatedAt = [CustomValidators.date];
+    createdBy = null;
+    updatedBy = null;
 }

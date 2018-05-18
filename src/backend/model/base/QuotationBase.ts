@@ -15,7 +15,6 @@ export class QuotationBase {
 
   codeQuotation: string;
   label: string;
-  createdAt: Date;
   validedAt: Date;
   enabledCgv: boolean;
   customerNotes: string;

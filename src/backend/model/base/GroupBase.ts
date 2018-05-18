@@ -7,5 +7,9 @@ export class GroupBase {
   get _resource(): string { return GroupBase._resource; };
 
   label: string;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
 }

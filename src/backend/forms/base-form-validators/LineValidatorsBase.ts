@@ -14,4 +14,8 @@ export class LineValidatorsBase extends FormGroupValidators {
     free = [AppValidators.boolean];
     title = [AppValidators.boolean];
     unit = [AppValidators.item];
+    createdAt = [CustomValidators.date];
+    updatedAt = [CustomValidators.date];
+    createdBy = null;
+    updatedBy = null;
 }
