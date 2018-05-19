@@ -1,0 +1,45 @@
+<div class="table">
+    <div class="header">
+        <div>Désignation</div>
+        <div>Quantité</div>
+        <div>Unité</div>
+        <div>Prix</div>
+        <div>Coût HT</div>
+        <div>Actions</div>
+    </div>
+
+    <div class="body">
+        <div class="line" *ngFor="let form of forms; let i = index">
+            <form [formGroup]="form.group">
+                <div>
+                    <input formControlName="label" type="text" />
+                </div>
+                <div>
+                    <input formControlName="quantity" type="number" />
+                </div>
+                <div>
+                    <input formControlName="unit" type="text" />
+                </div>
+                <div>
+                    <input formControlName="priceHt" type="number" />
+                </div>
+                <div>
+                    <span>{{ getCost(form) }}</span>
+                </div>
+                <div>
+                    <i class="material-icons" (click)="deleteLine(i)">close</i>
+                    <label>
+                        <i class="material-icons">cake</i>
+                        <input formControlName="free" type="checkbox" />
+                    </label>
+                    <label>
+                        <i class="material-icons">font_download</i>
+                        <input formControlName="title" type="checkbox" />
+                    </label>
+                    <i class="material-icons" (click)="setPosition(i, -1)">arrow_upward</i>
+                    <i class="material-icons" (click)="setPosition(i, 1)">arrow_downward</i>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

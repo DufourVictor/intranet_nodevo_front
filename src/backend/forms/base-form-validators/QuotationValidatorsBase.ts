@@ -22,4 +22,5 @@ export class QuotationValidatorsBase extends FormGroupValidators {
     customer = [AppValidators.item];
     contact = [AppValidators.item];
     provision = [AppValidators.item];
+    lines = [AppValidators.item];
 }

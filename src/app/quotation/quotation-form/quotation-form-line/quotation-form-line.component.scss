@@ -1,0 +1,21 @@
+div.table {
+    display: flex;
+    flex-direction: column;
+
+    & > div, .line > form {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .body {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}
+
+input {
+    &[type=checkbox] {
+        display: none;
+    }
+}

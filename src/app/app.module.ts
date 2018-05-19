@@ -23,6 +23,7 @@ import {
     CostPerYearsService,
     CustomersService,
     GroupsService,
+    LinesService,
     NoTimeRecordingsService,
     PaymentConditionsService,
     ProfilesService,
@@ -67,6 +68,7 @@ import { QuotationDetailsComponent } from './quotation/quotation-details/quotati
 import { QuotationFormComponent } from './quotation/quotation-form/quotation-form.component';
 import { TableFiltersComponent } from './table-filters/table-filters.component';
 import { DirectoryComponent } from './directory/directory.component';
+import { QuotationFormLineComponent } from './quotation/quotation-form/quotation-form-line/quotation-form-line.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -106,6 +108,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         QuotationFormComponent,
         TableFiltersComponent,
         DirectoryComponent,
+        QuotationFormLineComponent,
     ],
     imports: [
         BrowserModule,
@@ -148,6 +151,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         StatusesService,
         CGVsService,
         PaymentConditionsService,
+        LinesService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
