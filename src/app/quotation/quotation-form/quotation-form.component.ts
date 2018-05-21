@@ -62,7 +62,9 @@ export class QuotationFormComponent implements OnInit {
 
     ngOnInit () {
         this.form = this.formService.makeForm<Quotation>(this.quotation);
-        this.businessesService.getAllByFilter('enabled', true).subscribe((businesses) => this.businesses = businesses);
+        this.businessesService.getAllByFilter('enabled', true).subscribe((businesses) => {
+            this.businesses = businesses.filter(business => business.quotation === null);
+        });
         this.customersService.getAllByFilter('deleted', false).subscribe((customers) => this.customers = customers);
         this.provisionsService.getAll().subscribe((provisions) => this.provisions = provisions);
         this.statusService.getAll().subscribe((status) => this.status = status);
