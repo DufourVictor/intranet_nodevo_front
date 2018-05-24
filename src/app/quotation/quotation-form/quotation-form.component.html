@@ -108,6 +108,7 @@
                 </span>
             </div>
         </div>
+
         <div class="columns" *ngIf="quotation.id">
             <div class="form-group column">
                 <label class="form-label">Contact commercial</label>
@@ -204,4 +205,6 @@
             <a class="btn btn-error col-4 col-mx-auto" routerLink="/gescom/quotations">Retour à la liste</a>
         </div>
     </form>
+
+    <app-quotation-form-line (linesChange)="onLinesChange($event)" [lines]="quotation.lines"></app-quotation-form-line>
 </div>

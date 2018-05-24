@@ -1,7 +1,7 @@
 // This file should not be modified, as it can be overwritten by the generator.
 // The 'Line' class is here for customizations and will not be touched.
 
-import { Unit } from '../Unit';
+import { Quotation } from '../Quotation';
 
 export class LineBase {
   public static readonly _resource: string = 'lines';
@@ -13,12 +13,17 @@ export class LineBase {
   priceHt: number;
   free: boolean;
   title: boolean;
-  unit: Unit;
+  unit: string;
+  quotation: Quotation;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
-  setUnit(id: number): LineBase {
-    this.unit = new Unit();
-    this.unit.id = id;
-    this.unit['@id'] = '/units/' + id;
+  setQuotation(id: number): LineBase {
+    this.quotation = new Quotation();
+    this.quotation.id = id;
+    this.quotation['@id'] = '/quotations/' + id;
     return this;
   }
 

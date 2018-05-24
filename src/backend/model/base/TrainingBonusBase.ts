@@ -12,6 +12,10 @@ export class TrainingBonusBase {
   price: string;
   notes: string;
   user: User;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
   setUser(id: number): TrainingBonusBase {
     this.user = new User();

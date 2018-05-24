@@ -7,5 +7,9 @@ export class TypeBase {
   get _resource(): string { return TypeBase._resource; };
 
   label: string;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
 }

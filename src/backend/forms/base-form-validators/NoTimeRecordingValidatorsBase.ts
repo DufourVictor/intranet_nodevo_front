@@ -11,4 +11,8 @@ export class NoTimeRecordingValidatorsBase extends FormGroupValidators {
     fromDate = [CustomValidators.date];
     toDate = [CustomValidators.date];
     user = [AppValidators.item];
+    createdAt = [CustomValidators.date];
+    updatedAt = [CustomValidators.date];
+    createdBy = null;
+    updatedBy = null;
 }

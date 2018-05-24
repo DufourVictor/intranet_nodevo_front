@@ -13,5 +13,10 @@ export class LineValidatorsBase extends FormGroupValidators {
     priceHt = [CustomValidators.digits];
     free = [AppValidators.boolean];
     title = [AppValidators.boolean];
-    unit = [AppValidators.item];
+    unit = null;
+    quotation = [AppValidators.item];
+    createdAt = [CustomValidators.date];
+    updatedAt = [CustomValidators.date];
+    createdBy = null;
+    updatedBy = null;
 }

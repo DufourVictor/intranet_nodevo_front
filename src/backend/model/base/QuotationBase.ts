@@ -8,6 +8,7 @@ import { PaymentConditions } from '../PaymentConditions';
 import { Customer } from '../Customer';
 import { Contact } from '../Contact';
 import { Provision } from '../Provision';
+import { Line } from '../Line';
 
 export class QuotationBase {
   public static readonly _resource: string = 'quotations';
@@ -15,7 +16,6 @@ export class QuotationBase {
 
   codeQuotation: string;
   label: string;
-  createdAt: Date;
   validedAt: Date;
   enabledCgv: boolean;
   customerNotes: string;
@@ -29,6 +29,7 @@ export class QuotationBase {
   customer: Customer;
   contact: Contact;
   provision: Provision;
+  lines: Line[];
 
   setCgv(id: number): QuotationBase {
     this.cgv = new CGV();

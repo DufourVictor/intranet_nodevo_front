@@ -4,6 +4,7 @@ import {
     CGV,
     Contact,
     Customer,
+    Line,
     PaymentConditions,
     Provision,
     Quotation,
@@ -15,6 +16,7 @@ import {
     CGVsService,
     ContactsService,
     CustomersService,
+    LinesService,
     PaymentConditionsService,
     ProvisionsService,
     QuotationsService,
@@ -42,6 +44,7 @@ export class QuotationFormComponent implements OnInit {
     status: Status[] = [];
     cgvs: CGV[] = [];
     paymentConditions: PaymentConditions[] = [];
+    lines: Line[] = [];
     needReason = false;
     needSignAt = false;
 
@@ -55,6 +58,7 @@ export class QuotationFormComponent implements OnInit {
         private statusService: StatusesService,
         private cgvService: CGVsService,
         private paymentConditionsService: PaymentConditionsService,
+        private lineService: LinesService,
         private toastr: ToastrService,
         private router: Router
     ) {
@@ -82,6 +86,7 @@ export class QuotationFormComponent implements OnInit {
     save () {
         if (this.form.group.dirty && this.form.group.valid) {
             const quotation = this.form.get();
+            quotation.lines = this.lines;
             this.getStatus(quotation);
             if (quotation.id) {
                 this.quotationsService.update(quotation).subscribe(() => {
@@ -116,5 +121,10 @@ export class QuotationFormComponent implements OnInit {
                 quotation.signAt = null;
             }
         }
+    }
+
+    onLinesChange (lines: Line[]) {
+        this.form.group.markAsDirty();
+        this.lines = lines;
     }
 }

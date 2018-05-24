@@ -7,5 +7,9 @@ export class UnitBase {
   get _resource(): string { return UnitBase._resource; };
 
   label: string;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
 }

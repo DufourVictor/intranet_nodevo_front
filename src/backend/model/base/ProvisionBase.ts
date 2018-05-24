@@ -7,5 +7,9 @@ export class ProvisionBase {
   get _resource(): string { return ProvisionBase._resource; };
 
   label: string;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
 }

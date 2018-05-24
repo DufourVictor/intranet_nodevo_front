@@ -7,5 +7,9 @@ export class StatusBase {
   get _resource(): string { return StatusBase._resource; };
 
   label: string;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
 }
