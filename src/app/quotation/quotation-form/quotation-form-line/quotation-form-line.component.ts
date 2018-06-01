@@ -9,41 +9,47 @@ import { Form, FormService } from '../../../../backend/forms';
 })
 export class QuotationFormLineComponent implements OnInit {
     forms: Form<Line>[] = [];
-
-    @Input()
-    numberLines = 4;
-    @Input()
-    lines: Line[] = [];
-    @Output()
-    linesChange = new EventEmitter<Line[]>();
+    @Input() lines: Line[] = [new Line()];
+    @Output() linesChange = new EventEmitter<Line[]>();
 
     constructor(
         public formService: FormService,
     ) {}
 
     ngOnInit() {
-        this.forms = this.lines.map(line => {
-            const form = this.formService.makeForm(Object.assign(new Line(), line));
-            form.group.markAsDirty();
-
-            return form;
-        });
-        for (let i = this.lines.length; i < this.numberLines; i++) {
-            const form = this.formService.makeForm<Line>(Object.assign(new Line(), {position: i}));
-            this.titleDisable(form, form.get().title);
-
-            this.forms.push(form);
+        if (this.lines) {
+            this.forms = this.lines.map(line => {
+                const form = this.createLineForm(line);
+                form.group.markAsDirty();
+                return form;
+            });
+        } else {
+            this.lines = [];
         }
+        this.addLine();
         this.orderForms();
+    }
 
-        this.forms.forEach(form => {
-            form.group.valueChanges.subscribe(() => this.emitLines());
-            form.group.get('title').valueChanges.subscribe(val => this.titleDisable(form, val));
-        })
+    createLineForm (line) {
+        const form = this.formService.makeForm(Object.assign(new Line(), line));
+        form.group.valueChanges.subscribe(() => this.emitLines());
+        form.group.get('title').valueChanges.subscribe(val => this.titleDisable(form, val));
+
+        return form;
+    }
+
+    addLine () {
+        const line = new Line();
+        line.position = this.forms.length;
+        this.forms.push(this.createLineForm(line));
+    }
+
+    getDirtyForms () {
+        return this.forms.filter(f => f.group.dirty && f.group.valid).map(f => f.get());
     }
 
     emitLines () {
-        this.linesChange.emit(this.forms.filter(f => f.group.dirty && f.group.valid).map(f => f.get()));
+        this.linesChange.emit(this.getDirtyForms());
     }
 
     getCost (form: Form<Line>) {
@@ -64,7 +70,7 @@ export class QuotationFormLineComponent implements OnInit {
 
     setPosition (index: number, val: number) {
         const line = this.forms[index].get();
-        if (line.position + val < 0 || line.position + val >= this.numberLines) {
+        if (line.position + val < 0 || line.position + val >= this.getDirtyForms().length) {
             return;
         }
         line.position = line.position + val;
@@ -73,6 +79,9 @@ export class QuotationFormLineComponent implements OnInit {
             this.forms.find(f => +f.get().position === +line.position)
         );
         this.forms[index].set(line);
+        this.forms[index].group.markAsDirty();
+
+        this.emitLines();
 
         return otherLineIndex !== -1 ? this.setPosition(otherLineIndex, (val * -1)) : this.orderForms();
     }
