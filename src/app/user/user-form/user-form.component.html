@@ -1,7 +1,17 @@
+<i class="material-icons back-form" routerLink="/settings/users">
+    keyboard_backspace
+</i>
+
+<button form="form" type="submit" class="save-form-place">
+    <i class="material-icons save-form">
+        save
+    </i>
+</button>
+
 <div class="card form">
     <h3>{{ user.firstName }} {{ user.lastName }}</h3>
 
-    <form [formGroup]="form.group" (ngSubmit)="save()">
+    <form [formGroup]="form.group" (ngSubmit)="save()" id="form">
         <div class="columns" *ngIf="user.trigram">
             <div class="form-group column col-6">
                 <label class="form-label">Trigramme</label>
@@ -75,7 +85,8 @@
 
             <div class="form-group column col-6" [class.has-error]="profileError.hasError('*', 'touched')">
                 <label class="form-label">Groupe</label>
-                <select class="form-control form-select" formControlName="group" [compareWith]="formService.objectsEquals">
+                <select class="form-control form-select" formControlName="group"
+                        [compareWith]="formService.objectsEquals">
                     <option
                         *ngFor="let group of groups | async"
                         [ngValue]="group"
@@ -114,11 +125,6 @@
                     <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
                 </div>
             </div>
-        </div>
-
-        <div class="columns">
-            <button class="btn btn-primary column col-4 col-mx-auto" type="submit">Enregistrer</button>
-            <a class="btn btn-error col-4 col-mx-auto" routerLink="/settings/users">Retour à la liste</a>
         </div>
     </form>
 </div>

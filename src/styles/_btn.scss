@@ -1,5 +1,29 @@
+@import "variables";
+
 .form-add-btn{
-    position: absolute;
+    position: absolute !important;
     right: 11px;
     top: 68px;
+}
+
+.back-form, .back-form:focus{
+    border-style : none;
+    outline: none;
+    position: absolute !important;
+    right: 60px;
+    top: 78px;
+    font-size: 30px;
+}
+
+.save-form{
+    color: $primary-color;
+    font-size: 30px;
+}
+
+.save-form-place, .save-form-place:focus{
+    border-style : none;
+    outline: none;
+    position: absolute !important;
+    right: 18px;
+    top: 76px;
 }
