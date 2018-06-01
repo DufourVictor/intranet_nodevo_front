@@ -35,6 +35,11 @@ input {
   &[type=checkbox] {
     display: none;
   }
+
+  &[disabled] {
+    opacity: 0.2;
+  }
+
   border: none;
   outline: 0;
   width: 100px;
@@ -53,7 +58,7 @@ input {
 }
 
 i {
-  &:hover {
+  &:hover, &.active {
     color: $primary-color;
   }
 
