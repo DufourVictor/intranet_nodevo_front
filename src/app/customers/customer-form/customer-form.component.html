@@ -1,7 +1,17 @@
+<i class="material-icons back-form" routerLink="/crm/customers">
+    keyboard_backspace
+</i>
+
+<button form="form" type="submit" class="save-form-place">
+    <i class="material-icons save-form">
+        save
+    </i>
+</button>
+
 <div class="card form">
     <h3>{{ customer.name }}</h3>
 
-    <form [formGroup]="form.group" (ngSubmit)="save()">
+    <form [formGroup]="form.group" (ngSubmit)="save()" id="form">
         <div class="columns" *ngIf="customer.id">
             <div class="form-group column col-6">
                 <label class="form-label">Code client</label>
@@ -61,11 +71,6 @@
                 <label class="form-label">Notes</label>
                 <textarea class="form-input" rows="5" formControlName="notes">{{ customer.notes }}</textarea>
             </div>
-        </div>
-
-        <div class="columns">
-            <button class="btn btn-primary column col-4 col-mx-auto" type="submit">Enregistrer</button>
-            <button class="btn btn-error col-4 col-mx-auto" routerLink="/crm/customers">Retour à la liste</button>
         </div>
     </form>
 </div>
