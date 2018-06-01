@@ -1,5 +1,22 @@
+@import "variables";
+
 .form-add-btn{
     position: absolute;
     right: 11px;
     top: 68px;
+}
+
+.save-form{
+    position: absolute;
+    right: 18px;
+    top: 76px;
+    color: $primary-color;
+    font-size: 30px;
+}
+
+.back-form{
+    position: absolute;
+    right: 50px;
+    top: 76px;
+    font-size: 30px;
 }
