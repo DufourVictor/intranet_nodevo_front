@@ -1,11 +1,7 @@
-<i class="material-icons back-form" routerLink="/gescom/quotations">
-    keyboard_backspace
-</i>
+<i class="material-icons back-form" routerLink="/gescom/quotations">keyboard_backspace</i>
 
 <button form="form" type="submit" class="save-form-place">
-    <i class="material-icons save-form">
-        save
-    </i>
+    <i class="material-icons save-form">save</i>
 </button>
 
 <div class="card form">
@@ -22,12 +18,13 @@
         <div class="columns">
             <div class="form-group column col-6">
                 <label class="form-label">Client</label>
-                <select class="form-control form-select" formControlName="customer" #customerInput
-                        [compareWith]="formService.objectsEquals" (change)="customerChange()">
-                    <option
-                        *ngFor="let customer of customers"
-                        [ngValue]="customer"
-                    >
+                <select
+                    class="form-control form-select"
+                    formControlName="customer"
+                    [compareWith]="formService.objectsEquals"
+                    (change)="customerChange()"
+                >
+                    <option *ngFor="let customer of customers | async" [ngValue]="customer">
                         {{ customer.name }}
                     </option>
                 </select>
@@ -46,7 +43,7 @@
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('business').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">Affaire</label>
                 <ng-select
                     [items]="businesses"
@@ -58,21 +55,32 @@
         </div>
 
         <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('label').invalid">
+            <div class="form-group column" [class.has-error]="labelError.hasError('*', 'touched')">
                 <label class="form-label">Intitulé du devis</label>
                 <input type="text" class="form-control form-input" formControlName="label">
+                <div ngxErrors="label" #labelError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('provision').invalid">
+            <div class="form-group column col-6" [class.has-error]="provisionError.hasError('*', 'touched')">
                 <label class="form-label">Type de prestation</label>
-                <select class="form-control form-select" formControlName="provision"
-                        [compareWith]="formService.objectsEquals">
-                    <option *ngFor="let provision of provisions" [ngValue]="provision">{{ provision.label }}</option>
+                <select
+                    class="form-control form-select"
+                    formControlName="provision"
+                    [compareWith]="formService.objectsEquals"
+                >
+                    <option *ngFor="let provision of provisions | async" [ngValue]="provision">
+                        {{ provision.label }}
+                    </option>
                 </select>
+                <div ngxErrors="provision" #provisionError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
-            <div class="form-group column col-5" [class.has-error]="form.group.get('status').invalid">
+            <div class="form-group column col-5" [class.has-error]="statusError.hasError('*', 'touched')">
                 <label class="form-label">Etat</label>
                 <select
                     class="form-control form-select"
@@ -80,8 +88,12 @@
                     [compareWith]="formService.objectsEquals"
                     (change)="getStatus()"
                 >
-                    <option *ngFor="let statu of status" [ngValue]="statu">{{ statu.label }}</option>
+                    <option *ngFor="let statu of status | async" [ngValue]="statu">{{ statu.label }}</option>
                 </select>
+                <div ngxErrors="status" #statusError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
+
                 <div *ngIf="needReason">
                     <label class="form-label" for="reason">Motif</label>
                     <input
@@ -101,6 +113,7 @@
                     >
                 </div>
             </div>
+
             <div class="col-1 status-info">
                  <span
                      *ngIf="quotation.signAt"
@@ -140,24 +153,14 @@
             </div>
         </div>
 
-        <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('createdAt').invalid" *ngIf="quotation.id">
+        <div class="columns" *ngIf="quotation.id">
+            <div class="form-group column">
                 <label class="form-label" for="createdAt">Date de création</label>
-                <input
-                    class="form-input"
-                    type="date"
-                    id="createdAt"
-                    formControlName="createdAt"
-                >
+                <input class="form-input" type="text" id="createdAt" disabled [value]="quotation.createdAt">
             </div>
-            <div class="form-group column" [class.has-error]="form.group.get('validedAt').invalid" *ngIf="quotation.id">
+            <div class="form-group column">
                 <label class="form-label" for="validedAt">Date de validation</label>
-                <input
-                    class="form-input"
-                    type="date"
-                    id="validedAt"
-                    formControlName="validedAt"
-                >
+                <input class="form-input" type="text" id="validedAt" disabled [value]="quotation.validedAt">
             </div>
         </div>
 
@@ -177,40 +180,48 @@
             </div>
             <div class="form-group column col-6" [class.has-error]="form.group.get('cgv').invalid">
                 <label class="form-label">CGV</label>
-                <select class="form-control form-select" formControlName="cgv"
-                        [compareWith]="formService.objectsEquals">
-                    <option *ngFor="let cgv of cgvs" [ngValue]="cgv">{{ cgv.label }}</option>
+                <select
+                    class="form-control form-select"
+                    formControlName="cgv"
+                    [compareWith]="formService.objectsEquals"
+                >
+                    <option *ngFor="let cgv of cgvs | async" [ngValue]="cgv">{{ cgv.label }}</option>
                 </select>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('paymentConditions').invalid">
+            <div class="form-group column col-6" [class.has-error]="paymentConditionsError.hasError('*', 'touched')">
                 <label class="form-label">Conditions de paiement</label>
-                <select class="form-control form-select" formControlName="paymentConditions"
-                        [compareWith]="formService.objectsEquals">
-                    <option *ngFor="let paymentCondition of paymentConditions" [ngValue]="paymentCondition">
+                <select
+                    class="form-control form-select"
+                    formControlName="paymentConditions"
+                    [compareWith]="formService.objectsEquals"
+                >
+                    <option *ngFor="let paymentCondition of paymentConditions | async" [ngValue]="paymentCondition">
                         {{ paymentCondition.label }}
                     </option>
                 </select>
+                <div ngxErrors="paymentConditions" #paymentConditionsError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('customerNotes').invalid">
+            <div class="form-group column col-12">
                 <label class="form-label">Notes clients</label>
                 <input type="text" class="form-control form-input" formControlName="customerNotes">
             </div>
-        </div>
 
-        <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('privateNotes').invalid">
+            <div class="form-group column col-12">
                 <label class="form-label">Notes privées</label>
                 <input type="text" class="form-control form-input" formControlName="privateNotes">
             </div>
         </div>
     </form>
 </div>
+
 <div class="details card">
     <div class="list">
         <app-quotation-form-line (linesChange)="onLinesChange($event)" [lines]="quotation.lines"></app-quotation-form-line>

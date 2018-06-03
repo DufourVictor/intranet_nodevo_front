@@ -29,10 +29,8 @@
                         <div>
                             <input formControlName="priceHt" type="number"/>
                         </div>
-                        <div class="line-center">
-                            {{ getCost(form) }}
-                        </div>
-                        <div class="line-center">
+                        <div class="line-center">{{ getCost(form) }}</div>
+                        <div class="line-center btn-actions">
                             <i class="material-icons" (click)="deleteLine(i)">highlight_off</i>
                             <label>
                                 <i class="material-icons" [ngClass]="{active: form.get().free}">card_giftcard</i>
@@ -47,6 +45,10 @@
                         </div>
                     </form>
                 </div>
+            </div>
+
+            <div>
+                <button class="btn btn-action btn-primary btn-lg circle" (click)="addLine()"><i class="icon icon-plus"></i></button>
             </div>
         </div>
     </div>

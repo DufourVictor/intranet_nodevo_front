@@ -24,6 +24,7 @@ import {
 } from '../../../backend/services';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-quotation-form',
@@ -37,13 +38,13 @@ export class QuotationFormComponent implements OnInit {
     static STATUS_LOST = 'Perdu';
     @Input() quotation: Quotation = new Quotation();
     form: Form<Quotation>;
-    businesses: Business[] = [];
-    customers: Customer[] = [];
-    contacts: Contact[] = [];
-    provisions: Provision[] = [];
-    status: Status[] = [];
-    cgvs: CGV[] = [];
-    paymentConditions: PaymentConditions[] = [];
+    businesses: Business[];
+    customers: Observable<Customer[]>;
+    contacts: Observable<Contact[]>;
+    provisions: Observable<Provision[]>;
+    status: Observable<Status[]>;
+    cgvs: Observable<CGV[]>;
+    paymentConditions: Observable<PaymentConditions[]>;
     lines: Line[] = [];
     needReason = false;
     needSignAt = false;
@@ -66,21 +67,19 @@ export class QuotationFormComponent implements OnInit {
 
     ngOnInit () {
         this.form = this.formService.makeForm<Quotation>(this.quotation);
-        this.businessesService.getAllByFilter('enabled', true).subscribe((businesses) => {
-            this.businesses = businesses.filter(business => business.quotation === null);
-        });
-        this.customersService.getAllByFilter('deleted', false).subscribe((customers) => this.customers = customers);
-        this.provisionsService.getAll().subscribe((provisions) => this.provisions = provisions);
-        this.statusService.getAll().subscribe((status) => this.status = status);
-        this.paymentConditionsService.getAll().subscribe((paymentConditions) => this.paymentConditions = paymentConditions);
-        this.cgvService.getAll().subscribe((cgvs) => this.cgvs = cgvs);
+        this.businessesService.getAllByFilter('enabled', true).subscribe(businesses => this.businesses = businesses.filter(business => business.quotation === null));
+        this.customers = this.customersService.getAllByFilter('deleted', false);
+        this.provisions = this.provisionsService.getAll();
+        this.status = this.statusService.getAll();
+        this.paymentConditions = this.paymentConditionsService.getAll();
+        this.cgvs = this.cgvService.getAll();
         if (this.quotation.id) {
             this.customerChange();
         }
     }
 
     customerChange () {
-        this.contactsService.getAllBy('customers', this.form.get().customer.id).subscribe(contacts => this.contacts = contacts);
+        this.contacts = this.contactsService.getAllBy('customers', this.form.get().customer.id);
     }
 
     save () {
