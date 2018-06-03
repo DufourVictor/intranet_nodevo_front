@@ -34,7 +34,7 @@ export class CostPerYearFormComponent implements OnChanges {
             if (costPerYear.id) {
                 this.costPerYearsService.update(costPerYear).subscribe(() => {
                     this.saveCost.emit();
-                    this.toastr.success(`Le coût par année a bien été ajouté ! 👍✅`);
+                    this.toastr.success(`Le coût par année a bien été modifié ! 👍✅`);
                 });
             } else {
                 costPerYear.setUser(this.user.id);
