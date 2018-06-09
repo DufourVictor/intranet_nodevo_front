@@ -69,6 +69,15 @@ import { QuotationFormComponent } from './quotation/quotation-form/quotation-for
 import { TableFiltersComponent } from './table-filters/table-filters.component';
 import { DirectoryComponent } from './directory/directory.component';
 import { QuotationFormLineComponent } from './quotation/quotation-form/quotation-form-line/quotation-form-line.component';
+import { ReferentialComponent } from './referential/referential.component';
+import { ProfileComponent } from './referential/profile/profile.component';
+import { PaymentConditionComponent } from './referential/payment-conditions/payment-condition.component';
+import { GroupComponent } from './referential/group/group.component';
+import { TypeComponent } from './referential/type/type.component';
+import { ProfileFormComponent } from './referential/profile/profile-form/profile-form.component';
+import { PaymentConditionsFormComponent } from './referential/payment-conditions/payment-conditions-form/payment-conditions-form.component';
+import { GroupFormComponent } from './referential/group/group-form/group-form.component';
+import { TypeFormComponent } from './referential/type/type-form/type-form.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -109,6 +118,15 @@ export function createRestangularConfigFactory(RestangularProvider) {
         TableFiltersComponent,
         DirectoryComponent,
         QuotationFormLineComponent,
+        ReferentialComponent,
+        ProfileComponent,
+        PaymentConditionComponent,
+        GroupComponent,
+        TypeComponent,
+        ProfileFormComponent,
+        PaymentConditionsFormComponent,
+        GroupFormComponent,
+        TypeFormComponent
     ],
     imports: [
         BrowserModule,

@@ -13,6 +13,7 @@ import { CustomerDetailsComponent } from './customers/customer-details/customer-
 import { QuotationComponent } from './quotation/quotation.component';
 import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
 import { DirectoryComponent } from './directory/directory.component';
+import { ReferentialComponent } from './referential/referential.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
             { path: 'users', component: UsersComponent, data: { title: 'Utilisateurs', display: true } },
             { path: 'user', component: UserDetailsComponent, data: { display: false } },
             { path: 'user/:id', component: UserDetailsComponent, data: { display: false } },
+            { path: 'referential', component: ReferentialComponent, data: { title: 'Référentielle', display: true } },
         ]
     },
 ];

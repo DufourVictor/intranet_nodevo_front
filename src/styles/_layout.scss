@@ -35,12 +35,12 @@
 
             &-body {
                 margin-top: 20px;
-
-                .add {
-                    cursor: pointer;
-                    color: $primary-color;
-                }
             }
         }
     }
+}
+
+.add {
+  cursor: pointer;
+  color: $primary-color;
 }

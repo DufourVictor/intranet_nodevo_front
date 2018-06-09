@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="header-title">Groupes</div>
+    <div class="text-right">
+        <i class="material-icons add" (click)="activeModal()">add_circle</i>
+    </div>
+    <ngx-datatable
+        #table
+        class="material fullscreen"
+        [columnMode]="'force'"
+        [headerHeight]="'auto'"
+        [rowHeight]="'auto'"
+        [footerHeight]="'auto'"
+        [rows]="rows"
+        [columns]="columns"
+        [limit]="10"
+    ></ngx-datatable>
+
+    <ng-template #actionTmpl let-row="row">
+        <i class="material-icons" (click)="activeModal(row)">
+            mode_edit
+        </i>
+        <i class="material-icons delete" (click)="confirmDelete(row)">
+            delete_forever
+        </i>
+    </ng-template>
+</div>
+
+<spectre-modal [title]="modalTitle">
+    <app-group-form [group]="group" (saveGroup)="closeModal()"></app-group-form>
+</spectre-modal>

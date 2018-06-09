@@ -1,0 +1,19 @@
+<form class="form-horizontal" [formGroup]="formProfile.group" (ngSubmit)="save()">
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="label">Label</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input
+                class="form-input"
+                type="text"
+                id="label"
+                placeholder="Label"
+                formControlName="label"
+            >
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">
+        Enregistrer
+    </button>
+</form>
