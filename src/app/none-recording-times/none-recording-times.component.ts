@@ -2,6 +2,7 @@ import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { NoTimeRecordingsService } from '../../backend/services';
 import { NoTimeRecording, User } from '../../backend/model';
 import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-none-recording-times',
@@ -21,7 +22,7 @@ export class NoneRecordingTimesComponent implements OnInit {
     rows: NoTimeRecording[] = [];
     columns = [];
 
-    constructor(private noTimeRecordingsService: NoTimeRecordingsService) {
+    constructor(private noTimeRecordingsService: NoTimeRecordingsService, private toastr: ToastrService) {
     }
 
     getAllNoneRecordingTimes() {
@@ -55,6 +56,7 @@ export class NoneRecordingTimesComponent implements OnInit {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
             this.noTimeRecordingsService.remove(obj).subscribe(() => {
                 this.noneRecordingTimes.splice(this.noneRecordingTimes.indexOf(obj), 1);
+                this.toastr.warning('La période de non saisie des temps bien été supprimée ! 😕❗️');
             });
         }
     }
