@@ -1,72 +1,87 @@
 @import "../../../../styles/variables";
 
 div.table {
-  display: flex;
-  flex-direction: column;
-
-  & > div, .line > form {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 5px 0 5px 0;
-
-    .line-center {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    input:first-child {
-      margin-left: 10px;
-    }
-
-    i:last-child {
-      margin-right: 10px;
-    }
-  }
-
-  .body {
-    flex-wrap: wrap;
     flex-direction: column;
-  }
+
+    & > div {
+        display: flex;
+        width: 100%;
+
+        & > div, form > div {
+            min-width: 16.6%;
+        }
+    }
+
+    .body {
+        flex-direction: column;
+    }
+
+    &.complex {
+        margin-top: 180px;
+
+        .header {
+            & > div:nth-child(2) {
+                margin-left: auto;
+            }
+        }
+    }
+
+    .line form {
+        display: flex;
+
+        .line-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input:first-child {
+            margin-left: 10px;
+        }
+
+        i:last-child {
+            margin-right: 10px;
+        }
+    }
 }
 
 input {
-  &[type=checkbox] {
-    display: none;
-  }
+    &[type=checkbox] {
+        display: none;
+    }
 
-  &[disabled] {
-    opacity: 0.2;
-  }
+    &[disabled] {
+        opacity: 0.2;
+    }
 
-  border: none;
-  outline: 0;
-  width: 100px;
+    border: none;
+    outline: 0;
+    width: 100px;
 }
 
 .header {
-  border-bottom: 2px solid $grey-table;
+    border-bottom: 2px solid $grey-table;
 }
 
 .body > .line:nth-child(odd) {
-  background-color: $light-grey-2;
-
-  & input {
     background-color: $light-grey-2;
-  }
+
+    & input {
+        background-color: $light-grey-2;
+    }
 }
 
 i {
-  &:hover, &.active {
-    color: $primary-color;
-  }
+    &:hover, &.active {
+        color: $primary-color;
+    }
 
-  margin-left: 5px;
+    margin-left: 5px;
 }
 
 .btn-actions {
-  &, label {
-    cursor: pointer;
-  }
+    &, label {
+        cursor: pointer;
+    }
 }

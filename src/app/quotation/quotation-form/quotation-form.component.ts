@@ -67,6 +67,10 @@ export class QuotationFormComponent implements OnInit {
 
     ngOnInit () {
         this.form = this.formService.makeForm<Quotation>(this.quotation);
+        this.form.group.get('provision').valueChanges.subscribe(val => {
+            this.quotation.provision = val;
+        });
+
         this.businessesService.getAllByFilter('enabled', true).subscribe(businesses => this.businesses = businesses.filter(business => business.quotation === null));
         this.customers = this.customersService.getAllByFilter('deleted', false);
         this.provisions = this.provisionsService.getAll();
@@ -90,7 +94,7 @@ export class QuotationFormComponent implements OnInit {
             if (quotation.id) {
                 this.quotationsService.update(quotation).subscribe(() => {
                     this.toastr.success('Le devis a été mis à jour 👍✅', 'Succès !');
-                    this.router.navigate(['gescom/quotations']);
+                    // this.router.navigate(['gescom/quotations']);
                 });
             } else {
                 this.quotationsService.add(quotation).subscribe(() => {
@@ -104,20 +108,18 @@ export class QuotationFormComponent implements OnInit {
     }
 
     getStatus (quotation = null) {
-        const statusLabel = this.form.get().status.label;
-        if (QuotationFormComponent.STATUS_VALIDATE === statusLabel) {
-            this.needSignAt = true;
-            if (quotation) {
-                quotation.reason = null;
-            }
-        } else if (
-            QuotationFormComponent.STATUS_REFUSE === statusLabel ||
-            QuotationFormComponent.STATUS_LEAVE === statusLabel ||
-            QuotationFormComponent.STATUS_LOST === statusLabel
-        ) {
-            this.needReason = true;
-            if (quotation) {
-                quotation.signAt = null;
+        const {status} = this.form.get();
+        if (status) {
+            if (QuotationFormComponent.STATUS_VALIDATE === status.label) {
+                this.needSignAt = true;
+                if (quotation) {
+                    quotation.reason = null;
+                }
+            } else if ([QuotationFormComponent.STATUS_REFUSE, QuotationFormComponent.STATUS_LEAVE, QuotationFormComponent.STATUS_LOST].includes(status.label)) {
+                this.needReason = true;
+                if (quotation) {
+                    quotation.signAt = null;
+                }
             }
         }else {
             this.needSignAt = false;

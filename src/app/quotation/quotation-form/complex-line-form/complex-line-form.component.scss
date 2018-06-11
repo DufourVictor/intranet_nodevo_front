@@ -1,0 +1,21 @@
+.columns, form {
+    position: relative;
+}
+
+.columns {
+    flex-wrap: nowrap;
+}
+
+.add-btn {
+    position: absolute;
+    left: 100%;
+}
+
+.header {
+    position: absolute;
+    bottom: 110%;
+
+    input, select {
+        min-height: unset;
+    }
+}
