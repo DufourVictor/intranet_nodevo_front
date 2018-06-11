@@ -2,6 +2,7 @@ import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { TrainingBonusesService } from '../../backend/services';
 import { TrainingBonus, User } from '../../backend/model';
 import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-trainings-bonus',
@@ -20,7 +21,7 @@ export class TrainingsBonusComponent implements OnInit {
     rows: TrainingBonus[] = [];
     columns = [];
 
-    constructor(private trainingBonusesService: TrainingBonusesService) {
+    constructor(private trainingBonusesService: TrainingBonusesService, private toastr: ToastrService) {
     }
 
     getAllTraining() {
@@ -55,6 +56,7 @@ export class TrainingsBonusComponent implements OnInit {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
             this.trainingBonusesService.remove(obj).subscribe(() => {
                 this.trainingBonuses.splice(this.trainingBonuses.indexOf(obj), 1);
+                this.toastr.warning('La prime/formation bien été supprimée ! 😕❗️');
             });
         }
     }
