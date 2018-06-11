@@ -16,7 +16,7 @@ import { DirectoryComponent } from './directory/directory.component';
 import { ReferentialComponent } from './referential/referential.component';
 
 const routes: Routes = [
-    { path: '', component: LoginComponent },
+    { path: '', component: LoginComponent, outlet: 'login' },
     { path: 'dashboard', component: DashboardComponent },
     {
         path: 'crm',
