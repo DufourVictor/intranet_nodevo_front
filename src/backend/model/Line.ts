@@ -1,4 +1,5 @@
 import { LineBase } from './base/LineBase';
+import { SimpleLine } from './SimpleLine';
 
 export class Line extends LineBase {
     id: number;
@@ -6,11 +7,9 @@ export class Line extends LineBase {
     constructor() {
         super();
         this.label = null;
-        this.quantity = null;
         this.position = null;
-        this.priceHt = null;
-        this.unit = null;
         this.free = false;
         this.title = false;
+        this.complexLines = [];
     }
 }

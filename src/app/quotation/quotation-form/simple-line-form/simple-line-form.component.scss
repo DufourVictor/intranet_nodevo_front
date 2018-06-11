@@ -1,0 +1,7 @@
+form {
+    display: flex;
+
+    & > div {
+        min-width: 33%;
+    }
+}

@@ -32,7 +32,7 @@
             <div class="form-group column col-6">
                 <label class="form-label">Contact client</label>
                 <ng-select
-                    [items]="contacts"
+                    [items]="contacts | async"
                     [multiple]="false"
                     formControlName="contact"
                     bindLabel="fullName"
@@ -224,6 +224,10 @@
 
 <div class="details card">
     <div class="list">
-        <app-quotation-form-line (linesChange)="onLinesChange($event)" [lines]="quotation.lines"></app-quotation-form-line>
+        <app-quotation-form-line
+            [lines]="quotation.lines"
+            [type]="quotation.provision.type"
+            (linesChange)="onLinesChange($event)"
+        ></app-quotation-form-line>
     </div>
 </div>

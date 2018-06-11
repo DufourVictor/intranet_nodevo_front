@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Line } from '../../../../backend/model';
+import { Line, Profile } from '../../../../backend/model';
 import { Form, FormService } from '../../../../backend/forms';
+import { Observable } from 'rxjs/Observable';
+import { ProfilesService } from '../../../../backend/services';
 
 @Component({
     selector: 'app-quotation-form-line',
@@ -9,23 +11,23 @@ import { Form, FormService } from '../../../../backend/forms';
 })
 export class QuotationFormLineComponent implements OnInit {
     forms: Form<Line>[] = [];
-    @Input() lines: Line[] = [new Line()];
+    profiles: Observable<Profile[]>;
+    @Input() lines: Line[];
+    @Input() type: string = 'simple';
     @Output() linesChange = new EventEmitter<Line[]>();
 
     constructor(
         public formService: FormService,
+        private profileService: ProfilesService
     ) {}
 
     ngOnInit() {
-        if (this.lines) {
-            this.forms = this.lines.map(line => {
-                const form = this.createLineForm(line);
-                form.group.markAsDirty();
-                return form;
-            });
-        } else {
-            this.lines = [];
-        }
+        this.profiles = this.profileService.getAll();
+        this.forms = this.lines.map(line => {
+            const form = this.createLineForm(line);
+            form.group.markAsDirty();
+            return form;
+        });
         this.addLine();
         this.orderForms();
     }
@@ -52,10 +54,44 @@ export class QuotationFormLineComponent implements OnInit {
         this.linesChange.emit(this.getDirtyForms());
     }
 
-    getCost (form: Form<Line>) {
-        const {priceHt, quantity} = form.get();
+    simpleChange (form, evt) {
+        form.group.get('simpleLine').setValue(evt);
+    }
 
-        return priceHt * quantity;
+    complexChange (form, lines, baseLines) {
+        console.log(lines.map((line, ind) => line.updateFrom(baseLines[ind])));
+        form.group.get('complexLines').setValue(lines.map((line, ind) => line.updateFrom(baseLines[ind])));
+        this.forms.forEach(f => {
+            console.log(f.get().complexLines.map((line, ind) => line.updateFrom(baseLines[ind])));
+            f.group.get('complexLines').setValue(f.get().complexLines.map((line, ind) => line.updateFrom(baseLines[ind])));
+        })
+    }
+
+    getComplexLines (form) {
+        if (form.get().complexLines.length > 0) {
+            return form.get().complexLines;
+        } else {
+            return this.forms[0].get().complexLines.map(line => {
+                line.time = 0;
+                return line;
+            })
+        }
+    }
+
+    getCost (form: Form<Line>) {
+        const {simpleLine, complexLines} = form.get();
+        if (simpleLine) {
+            const {priceHt, quantity} = simpleLine;
+
+            return priceHt * quantity;
+        } else if (complexLines) {
+            let price = 0;
+            // complexLines.forEach(line => {
+            //     price += line.tjm * line.time;
+            // });
+
+            return price;
+        }
     }
 
     orderForms () {

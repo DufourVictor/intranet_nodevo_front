@@ -7,9 +7,11 @@
         <div class="table">
             <div class="header">
                 <div>Désignation</div>
-                <div>Quantité</div>
-                <div>Unité</div>
-                <div>Prix</div>
+                <ng-container *ngIf="type === 'simple'">
+                    <div>Quantité</div>
+                    <div>Unité</div>
+                    <div>Prix</div>
+                </ng-container>
                 <div>Coût HT</div>
                 <div>Actions</div>
             </div>
@@ -21,13 +23,17 @@
                             <input formControlName="label" type="text"/>
                         </div>
                         <div>
-                            <input formControlName="quantity" type="number"/>
-                        </div>
-                        <div>
-                            <input formControlName="unit" type="text"/>
-                        </div>
-                        <div>
-                            <input formControlName="priceHt" type="number"/>
+                            <app-simple-line-form
+                                *ngIf="type === 'simple'"
+                                [line]="form.get().simpleLine"
+                                (lineChange)="simpleChange(form, $event)"
+                            ></app-simple-line-form>
+                            <app-complex-line-form
+                                *ngIf="type === 'complex'"
+                                [lines]="getComplexLines(form)"
+                                (linesChange)="complexChange(form, $event, $event)"
+                                [displayHeader]="i === 0"
+                            ></app-complex-line-form>
                         </div>
                         <div class="line-center">{{ getCost(form) }}</div>
                         <div class="line-center btn-actions">
