@@ -14,6 +14,7 @@ import { QuotationComponent } from './quotation/quotation.component';
 import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
 import { DirectoryComponent } from './directory/directory.component';
 import { ReferentialComponent } from './referential/referential.component';
+import { QuotationShowComponent } from './quotation/quotation-show/quotation-show.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent, outlet: 'login' },
@@ -38,6 +39,8 @@ const routes: Routes = [
             { path: 'quotations', component: QuotationComponent, data: { title: 'Devis', display: true } },
             { path: 'quotation', component: QuotationDetailsComponent, data: { display: false }  },
             { path: 'quotation/:id', component: QuotationDetailsComponent, data: { display: false } },
+            { path: 'quotation/show/:id', component: QuotationShowComponent, data: { display: false } },
+
         ]
     },
     { path: 'empowerment', component: EmpowermentComponent },

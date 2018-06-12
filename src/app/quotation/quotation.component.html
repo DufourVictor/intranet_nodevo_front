@@ -45,6 +45,9 @@
         <i class="material-icons" [routerLink]="['/gescom/quotation/', row.id]">
             mode_edit
         </i>
+        <i class="material-icons" [routerLink]="['/gescom/quotation/show', row.id]">
+            format_align_justify
+        </i>
         <i class="material-icons delete" (click)="delete(row)">
             delete_forever
         </i>

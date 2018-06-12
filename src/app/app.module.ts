@@ -78,6 +78,7 @@ import { ProfileFormComponent } from './referential/profile/profile-form/profile
 import { PaymentConditionsFormComponent } from './referential/payment-conditions/payment-conditions-form/payment-conditions-form.component';
 import { GroupFormComponent } from './referential/group/group-form/group-form.component';
 import { TypeFormComponent } from './referential/type/type-form/type-form.component';
+import { QuotationShowComponent } from './quotation/quotation-show/quotation-show.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -126,7 +127,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ProfileFormComponent,
         PaymentConditionsFormComponent,
         GroupFormComponent,
-        TypeFormComponent
+        TypeFormComponent,
+        QuotationShowComponent
     ],
     imports: [
         BrowserModule,

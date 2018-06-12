@@ -1,0 +1,25 @@
+
+<div class="columns col-gapless">
+  <div class="column col-6">
+    <ul class="nostyle">
+    <li>Nodevo</li>
+    <li>Chantilly</li>
+    <li>1 Avenue du Général de Gaulle</li>
+    <li>60500 Chantilly</li>
+    </ul>
+  </div>
+
+  <div class="column col-6">
+    <ul class="nostyle">
+      <li *ngIf="quotation.label">{{ quotation.label }}</li>
+      <li *ngIf="quotation.validedAt">{{ quotation.validedAt }}</li>
+      <li *ngIf="quotation.customer.codeClient">{{ quotation.customer.codeClient }}</li>
+      <li>Devis valable : </li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+
