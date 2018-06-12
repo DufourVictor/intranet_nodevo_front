@@ -4,6 +4,7 @@ import { Group } from '../../../backend/model';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { SpectreModalComponent } from '../../spectre-modal/spectre-modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { RoleGuardService } from '../../role-guard.service';
 
 @Component({
     selector: 'app-group',
@@ -25,6 +26,7 @@ export class GroupComponent implements OnInit {
     constructor(
         protected groupsService: GroupsService,
         private toastr: ToastrService,
+        public roleGuard: RoleGuardService
     ) {
     }
 

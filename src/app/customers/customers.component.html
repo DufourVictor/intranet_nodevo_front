@@ -1,10 +1,8 @@
-<button
-    class="btn btn-lg btn-primary circle tooltip tooltip-bottom form-add-btn"
-    data-tooltip="Ajouter une affaire"
-    routerLink="/crm/customer"
+<i class="material-icons form-add-btn" [routerLink]="['/crm/customer']"
+   *ngIf="roleGuard.canAccess('CRM', 'WRITE')"
 >
-    <i class="icon icon-plus"></i>
-</button>
+    add_circle
+</i>
 
 <app-table-filters
     [searchProperties]="['codeClient', 'name', 'city']"
@@ -40,7 +38,9 @@
         <i class="material-icons enabled-{{ !row.enabled }}" (click)="toggleEnabled(row)">
             check_circle
         </i>
-        <i class="material-icons" [routerLink]="['/crm/customer/', row.id]">
+        <i class="material-icons" [routerLink]="['/crm/customer/', row.id]"
+           *ngIf="roleGuard.canAccess('CRM', 'WRITE')"
+        >
             mode_edit
         </i>
         <i class="material-icons delete" (click)="delete(row)">

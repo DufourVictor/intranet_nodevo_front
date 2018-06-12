@@ -4,6 +4,7 @@ import { Customer } from '../../backend/model';
 import { ToastrService } from 'ngx-toastr';
 import { FilterTable } from '../mixins/FilterTable';
 import { ActivatedRoute } from '@angular/router';
+import { RoleGuardService } from '../role-guard.service';
 
 @Component({
     selector: 'app-customers',
@@ -19,7 +20,8 @@ export class CustomersComponent extends FilterTable implements OnInit {
     constructor(
         private customersService: CustomersService,
         private toastr: ToastrService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        public roleGuard: RoleGuardService
     ) {
         super(customersService, route, ['codeClient', 'name', 'city']);
     }

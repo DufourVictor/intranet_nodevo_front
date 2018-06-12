@@ -4,6 +4,7 @@ import { Type } from '../../../backend/model';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ToastrService } from 'ngx-toastr';
 import { SpectreModalComponent } from '../../spectre-modal/spectre-modal.component';
+import { RoleGuardService } from '../../role-guard.service';
 
 @Component({
     selector: 'app-type',
@@ -25,6 +26,7 @@ export class TypeComponent implements OnInit {
     constructor(
         protected typesService: TypesService,
         private toastr: ToastrService,
+        public roleGuard: RoleGuardService
     ) {
     }
 

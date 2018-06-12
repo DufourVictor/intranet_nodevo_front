@@ -4,6 +4,7 @@ import { Profile } from '../../../backend/model';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { SpectreModalComponent } from '../../spectre-modal/spectre-modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { RoleGuardService } from '../../role-guard.service';
 
 @Component({
     selector: 'app-profile',
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit {
     constructor(
         protected profileService: ProfilesService,
         private toastr: ToastrService,
+        public roleGuard: RoleGuardService
     ) {
     }
 

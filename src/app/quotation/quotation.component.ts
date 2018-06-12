@@ -5,6 +5,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { QuotationsService } from '../../backend/services';
 import { FilterTable } from '../mixins/FilterTable';
 import { ActivatedRoute } from '@angular/router';
+import { RoleGuardService } from '../role-guard.service';
 
 @Component({
     selector: 'app-quotation',
@@ -19,7 +20,8 @@ export class QuotationComponent extends FilterTable implements OnInit {
     constructor(
         private quotationService: QuotationsService,
         private toastr: ToastrService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        public roleGuard: RoleGuardService
     ) {
         super(quotationService, route, [
             'codeQuotation',

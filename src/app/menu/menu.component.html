@@ -3,19 +3,25 @@
         <span>Tableau de bord</span>
         <i class="material-icons">timeline</i>
     </div>
-    <div class="nav--item" routerLink="/crm" routerLinkActive="active">
+    <div class="nav--item" routerLink="/crm" routerLinkActive="active" *ngIf="roleGuard.canAccess('CRM', 'READ')">
         <span>CRM</span>
         <i class="material-icons">group</i>
     </div>
-    <div class="nav--item" routerLink="/gescom" routerLinkActive="active">
+    <div class="nav--item" routerLink="/gescom" routerLinkActive="active"
+         *ngIf="roleGuard.canAccess('Gestion commerciale', 'READ')"
+    >
         <span>Gestion commerciale</span>
         <i class="material-icons">card_travel</i>
     </div>
-    <div class="nav--item" routerLink="/empowerment" routerLinkActive="active">
+    <div class="nav--item" routerLink="/empowerment" routerLinkActive="active"
+         *ngIf="roleGuard.canAccess()"
+    >
         <span>Habilitations</span>
         <i class="material-icons">device_hub</i>
     </div>
-    <div class="nav--item" routerLink="/settings" routerLinkActive="active">
+    <div class="nav--item" routerLink="/settings" routerLinkActive="active"
+         *ngIf="roleGuard.canAccess('Paramétrage', 'READ')"
+    >
         <span>Paramétrage</span>
         <i class="material-icons">settings</i>
     </div>

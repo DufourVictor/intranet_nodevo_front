@@ -1,7 +1,9 @@
 <div class="card">
-    <div class="header-title">Groupes</div>
-    <div class="text-right">
-        <i class="material-icons add" (click)="activeModal()">add_circle</i>
+    <div class="header-title">
+        Groupes
+        <i class="material-icons add" (click)="activeModal()" *ngIf="roleGuard.canAccess('Paramétrage', 'WRITE')">
+            add_circle
+        </i>
     </div>
     <ngx-datatable
         #table
@@ -16,7 +18,7 @@
     ></ngx-datatable>
 
     <ng-template #actionTmpl let-row="row">
-        <i class="material-icons" (click)="activeModal(row)">
+        <i class="material-icons" (click)="activeModal(row)" *ngIf="roleGuard.canAccess('Paramétrage', 'WRITE')">
             mode_edit
         </i>
         <i class="material-icons delete" (click)="confirmDelete(row)">

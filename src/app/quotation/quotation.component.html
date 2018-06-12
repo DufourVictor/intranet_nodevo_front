@@ -1,10 +1,8 @@
-<button
-    class="btn btn-lg btn-primary circle tooltip tooltip-bottom form-add-btn"
-    data-tooltip="Ajouter un devis"
-    routerLink="/gescom/quotation"
+<i class="material-icons form-add-btn" [routerLink]="['/gescom/quotation']"
+   *ngIf="roleGuard.canAccess('Gestion commerciale', 'WRITE')"
 >
-    <i class="icon icon-plus"></i>
-</button>
+    add_circle
+</i>
 
 <app-table-filters
     [searchProperties]="[
@@ -42,7 +40,9 @@
         <i class="material-icons" (click)="duplicate(row)">
             content_copy
         </i>
-        <i class="material-icons" [routerLink]="['/gescom/quotation/', row.id]">
+        <i class="material-icons" [routerLink]="['/gescom/quotation/', row.id]"
+           *ngIf="roleGuard.canAccess('Gestion commerciale', 'WRITE')"
+        >
             mode_edit
         </i>
         <i class="material-icons delete" (click)="delete(row)">
