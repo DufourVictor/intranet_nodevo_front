@@ -165,7 +165,7 @@
         </div>
 
         <div class="columns">
-            <div class="form-group column" [class.has-error]="enabledCgvError.hasError('*', 'touched')">
+            <div class="form-group column" [class.has-error]="form.group.get('enabledCgv').invalid">
                 <div class="form-group">
                     <label class="form-label">Afficher les cgv</label>
                     <label class="form-radio">
@@ -176,9 +176,6 @@
                         <input type="radio" formControlName="enabledCgv" [value]=false>
                         <i class="form-icon"></i> Non
                     </label>
-                    <div ngxErrors="enabledCgv" #enabledCgvError="ngxErrors">
-                        <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
-                    </div>
                 </div>
             </div>
             <div class="form-group column col-6" [class.has-error]="form.group.get('cgv').invalid">
