@@ -19,18 +19,21 @@
             </div>
         </div>
 
-        <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('name').invalid">
-                <label class="form-label">Nom du client</label>
-                <input type="text" class="form-control form-input" formControlName="name">
-            </div>
-            <div class="form-group column col-6" [class.has-error]="form.group.get('businessName').invalid">
-                <label class="form-label">Raison sociale</label>
-                <input type="text" class="form-control form-input" formControlName="businessName">
+    <div class="columns">
+        <div class="form-group column col-6">
+            <label class="form-label">Nom du client</label>
+            <input type="text" class="form-control form-input" formControlName="name">
+        </div>
+        <div class="form-group column col-6" [class.has-error]="businessNameError.hasError('*', 'touched')">
+            <label class="form-label">Raison sociale</label>
+            <input type="text" class="form-control form-input" formControlName="businessName">
+            <div ngxErrors="businessName" #businessNameError="ngxErrors">
+                <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
             </div>
         </div>
+    </div>
 
-        <div class="columns">
+     <div class="columns">
             <div class="form-group column col-6" [class.has-error]="form.group.get('siret').invalid">
                 <label class="form-label">N° SIRET</label>
                 <input type="text" class="form-control form-input" formControlName="siret" minlength="14"

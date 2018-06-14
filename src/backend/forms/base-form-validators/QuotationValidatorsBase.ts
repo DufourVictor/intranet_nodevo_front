@@ -10,14 +10,14 @@ export class QuotationValidatorsBase extends FormGroupValidators {
     codeQuotation = null;
     label = [Validators.required];
     validedAt = [CustomValidators.date];
-    enabledCgv = [AppValidators.boolean];
+    enabledCgv = [Validators.required];
     customerNotes = null;
     privateNotes = null;
     signAt = [CustomValidators.date];
     reason = null;
     cgv = [AppValidators.item];
     business = [AppValidators.item];
-    status = [AppValidators.item];
+    status = [Validators.required];
     paymentConditions = [AppValidators.item];
     customer = [AppValidators.item];
     contact = [AppValidators.item];
