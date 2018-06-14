@@ -34,23 +34,23 @@
     </div>
 
      <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('siret').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">N° SIRET</label>
                 <input type="text" class="form-control form-input" formControlName="siret" minlength="14"
                        maxlength="14">
             </div>
-            <div class="form-group column col-6" [class.has-error]="form.group.get('street').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">Adresse</label>
                 <input type="text" class="form-control form-input" formControlName="street">
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('street2').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">Complément d'adresse</label>
                 <input type="text" class="form-control form-input" formControlName="street2">
             </div>
-            <div class="form-group column col-6" [class.has-error]="form.group.get('zipCode').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">Code postal</label>
                 <input type="text" class="form-control form-input" formControlName="zipCode" minlength="5"
                        maxlength="5">
@@ -58,11 +58,11 @@
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('city').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">Ville</label>
                 <input type="text" class="form-control form-input" formControlName="city">
             </div>
-            <div class="form-group column col-6" [class.has-error]="form.group.get('phone').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">Téléphone</label>
                 <input type="text" class="form-control form-input" formControlName="phone" minlength="10"
                        maxlength="10">
@@ -70,7 +70,7 @@
         </div>
 
         <div class="columns">
-            <div class="form-group column col-12" [class.has-error]="form.group.get('notes').invalid">
+            <div class="form-group column col-12">
                 <label class="form-label">Notes</label>
                 <textarea class="form-input" rows="5" formControlName="notes">{{ customer.notes }}</textarea>
             </div>
