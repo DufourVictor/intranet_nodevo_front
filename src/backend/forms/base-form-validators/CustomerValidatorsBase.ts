@@ -9,13 +9,13 @@ import { FormGroupValidators } from '../tools/FormGroupValidators';
 export class CustomerValidatorsBase extends FormGroupValidators {
     codeClient = null;
     businessName = [Validators.required];
-    siret = null;
+    siret = [Validators.required];
     street = [Validators.required];
     street2 = null;
     zipCode = [Validators.required];
     city = [Validators.required];
     phone = null;
-    name = null;
+    name = [Validators.required];
     notes = null;
     enabled = [AppValidators.boolean];
     business = [AppValidators.item];
