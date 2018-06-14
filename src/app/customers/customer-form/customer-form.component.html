@@ -19,29 +19,35 @@
             </div>
         </div>
 
-    <div class="columns">
-        <div class="form-group column col-6">
-            <label class="form-label">Nom du client</label>
-            <input type="text" class="form-control form-input" formControlName="name">
-        </div>
-        <div class="form-group column col-6" [class.has-error]="businessNameError.hasError('*', 'touched')">
-            <label class="form-label">Raison sociale</label>
-            <input type="text" class="form-control form-input" formControlName="businessName">
-            <div ngxErrors="businessName" #businessNameError="ngxErrors">
-                <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="nameError.hasError('*', 'touched')">
+                <label class="form-label">Nom du client</label>
+                <input type="text" class="form-control form-input" formControlName="name">
+                <div ngxErrors="name" #nameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
+            </div>
+            <div class="form-group column col-6" [class.has-error]="businessNameError.hasError('*', 'touched')">
+                <label class="form-label">Raison sociale</label>
+                <input type="text" class="form-control form-input" formControlName="businessName">
+                <div ngxErrors="businessName" #businessNameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
-    </div>
 
-     <div class="columns">
+        <div class="columns">
             <div class="form-group column col-6">
                 <label class="form-label">N° SIRET</label>
                 <input type="text" class="form-control form-input" formControlName="siret" minlength="14"
                        maxlength="14">
             </div>
-            <div class="form-group column col-6">
+            <div class="form-group column col-6" [class.has-error]="streetNameError.hasError('*', 'touched')">
                 <label class="form-label">Adresse</label>
                 <input type="text" class="form-control form-input" formControlName="street">
+                <div ngxErrors="street" #streetNameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
@@ -50,17 +56,23 @@
                 <label class="form-label">Complément d'adresse</label>
                 <input type="text" class="form-control form-input" formControlName="street2">
             </div>
-            <div class="form-group column col-6">
+            <div class="form-group column col-6" [class.has-error]="zipCodeError.hasError('*', 'touched')">
                 <label class="form-label">Code postal</label>
                 <input type="text" class="form-control form-input" formControlName="zipCode" minlength="5"
                        maxlength="5">
+                <div ngxErrors="zipCode" #zipCodeError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6">
+            <div class="form-group column col-6" [class.has-error]="cityError.hasError('*', 'touched')">
                 <label class="form-label">Ville</label>
                 <input type="text" class="form-control form-input" formControlName="city">
+                <div ngxErrors="city" #cityError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
             <div class="form-group column col-6">
                 <label class="form-label">Téléphone</label>

@@ -15,7 +15,7 @@ export class CustomerValidatorsBase extends FormGroupValidators {
     zipCode = [Validators.required];
     city = [Validators.required];
     phone = null;
-    name = null;
+    name = [Validators.required];
     notes = null;
     enabled = [AppValidators.boolean];
     business = [AppValidators.item];
