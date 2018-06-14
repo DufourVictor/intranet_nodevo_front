@@ -41,10 +41,14 @@
                 <label class="form-label">N° SIRET</label>
                 <input type="text" class="form-control form-input" formControlName="siret" minlength="14"
                        maxlength="14">
+                <div ngxErrors="siret" #siretNameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                    <p class="form-input-hint" ngxError="minlength" when="dirty">
+                        Le siret doit être composé de 14 chiffres
+                    </p>
+                </div>
             </div>
-            <div ngxErrors="siret" #siretNameError="ngxErrors">
-                <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
-            </div>
+
             <div class="form-group column col-6" [class.has-error]="streetNameError.hasError('*', 'touched')">
                 <label class="form-label">Adresse</label>
                 <input type="text" class="form-control form-input" formControlName="street">
@@ -65,6 +69,9 @@
                        maxlength="5">
                 <div ngxErrors="zipCode" #zipCodeError="ngxErrors">
                     <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                    <p class="form-input-hint" ngxError="minlength" when="dirty">
+                        Le code postal doit être composé de 5 chiffres
+                    </p>
                 </div>
             </div>
         </div>
