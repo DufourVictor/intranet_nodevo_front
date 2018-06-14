@@ -1,11 +1,13 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthentificationService {
     jwtDecode = require('jwt-decode');
     onUserSet = new EventEmitter();
+    jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(private http: HttpClient) {
     }
@@ -39,5 +41,9 @@ export class AuthentificationService {
 
     public getCurrentUser() {
         return this.getAccessToken() ? this.jwtDecode(this.getAccessToken()) : null;
+    }
+
+    public isAuthenticated(): boolean {
+        return !this.jwtHelper.isTokenExpired(this.getAccessToken());
     }
 }

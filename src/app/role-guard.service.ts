@@ -11,6 +11,12 @@ export class RoleGuardService implements CanActivate {
     }
 
     public canActivate(route: ActivatedRouteSnapshot): boolean {
+        if (!this.auth.isAuthenticated()) {
+            this.auth.logout();
+            this.router.navigate(['']);
+            return false;
+        }
+
         if (RoleGuardService.ADMIN === this.auth.getCurrentUser().group) {
             return true;
         }
