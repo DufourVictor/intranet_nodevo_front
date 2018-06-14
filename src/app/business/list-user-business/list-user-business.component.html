@@ -17,11 +17,11 @@
         ></ngx-datatable>
 
         <ng-template #businessContactTmpl let-row="row">
-            {{ row.businessContact.firstName + ' ' + row.businessContact.lastName }}
+            {{ row.businessContact ? row.businessContact.firstName + ' ' + row.businessContact.lastName : '' }}
         </ng-template>
 
         <ng-template #technicalContactTmpl let-row="row">
-            {{ row.technicalContact.firstName + ' ' + row.technicalContact.lastName }}
+            {{ row.technicalContact ? row.technicalContact.firstName + ' ' + row.technicalContact.lastName : '' }}
         </ng-template>
 
         <ng-template #enabledTmpl let-row="row" let-value="value">
