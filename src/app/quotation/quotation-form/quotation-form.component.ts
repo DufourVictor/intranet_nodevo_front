@@ -40,7 +40,7 @@ export class QuotationFormComponent implements OnInit {
     form: Form<Quotation>;
     businesses: Business[];
     customers: Observable<Customer[]>;
-    contacts: Observable<Contact[]>;
+    contacts: Contact[];
     provisions: Observable<Provision[]>;
     status: Observable<Status[]>;
     cgvs: Observable<CGV[]>;
@@ -79,7 +79,7 @@ export class QuotationFormComponent implements OnInit {
     }
 
     customerChange () {
-        this.contacts = this.contactsService.getAllBy('customers', this.form.get().customer.id);
+        this.contactsService.getAllBy('customers', this.form.get().customer.id).subscribe(contacts => this.contacts = contacts);
     }
 
     save () {
@@ -119,6 +119,9 @@ export class QuotationFormComponent implements OnInit {
             if (quotation) {
                 quotation.signAt = null;
             }
+        }else {
+            this.needSignAt = false;
+            this.needReason = false;
         }
     }
 
