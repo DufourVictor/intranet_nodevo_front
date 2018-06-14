@@ -1,10 +1,8 @@
-<button
-    class="btn btn-lg btn-primary circle tooltip tooltip-bottom form-add-btn"
-    data-tooltip="Ajouter une affaire"
-    routerLink="/gescom/business"
+<i class="material-icons form-add-btn" [routerLink]="['/gescom/business']"
+   *ngIf="roleGuard.canAccess('Gestion commerciale', 'WRITE')"
 >
-    <i class="icon icon-plus"></i>
-</button>
+    add_circle
+</i>
 
 <app-table-filters
     [searchProperties]="['codeBusiness', 'label', {name: 'customer', subname: 'name'}]"
@@ -32,7 +30,9 @@
         <i class="material-icons enabled-{{ !row.enabled }}" (click)="toggleEnabled(row)">
             check_circle
         </i>
-        <i class="material-icons" [routerLink]="['/gescom/business/', row.id]">
+        <i class="material-icons" [routerLink]="['/gescom/business/', row.id]"
+           *ngIf="roleGuard.canAccess('Gestion commerciale', 'WRITE')"
+        >
             mode_edit
         </i>
         <i class="material-icons delete" (click)="delete(row)">

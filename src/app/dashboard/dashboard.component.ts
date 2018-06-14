@@ -11,6 +11,6 @@ export class DashboardComponent {
 
     constructor(private auth: AuthentificationService) {
         const jwt = auth.getCurrentUser();
-        this.username = jwt.username;
+        this.username = jwt.fullName;
     }
 }

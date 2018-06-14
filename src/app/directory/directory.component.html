@@ -1,10 +1,6 @@
-<button
-    class="btn btn-lg btn-primary circle tooltip tooltip-bottom form-add-btn"
-    data-tooltip="Exporter"
-    (click)="exportCsv()"
->
-    <i class="material-icons">get_app</i>
-</button>
+<i class="material-icons form-download" (click)="exportCsv()">
+    get_app
+</i>
 
 <app-table-filters
     [searchProperties]="['lastName', 'firstName', {name: 'customer', subname: 'name'}, 'jobFunction', 'phone', 'email']"

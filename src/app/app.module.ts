@@ -69,6 +69,7 @@ import { QuotationFormComponent } from './quotation/quotation-form/quotation-for
 import { TableFiltersComponent } from './table-filters/table-filters.component';
 import { DirectoryComponent } from './directory/directory.component';
 import { QuotationFormLineComponent } from './quotation/quotation-form/quotation-form-line/quotation-form-line.component';
+import { RoleGuardService } from './role-guard.service';
 import { ReferentialComponent } from './referential/referential.component';
 import { ProfileComponent } from './referential/profile/profile.component';
 import { PaymentConditionComponent } from './referential/payment-conditions/payment-condition.component';
@@ -151,6 +152,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
     providers: [
         HttpClient,
         AuthentificationService,
+        RoleGuardService,
         NoTimeRecordingsService,
         ProfilesService,
         UsersService,

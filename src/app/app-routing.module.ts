@@ -13,6 +13,7 @@ import { CustomerDetailsComponent } from './customers/customer-details/customer-
 import { QuotationComponent } from './quotation/quotation.component';
 import { QuotationDetailsComponent } from './quotation/quotation-details/quotation-details.component';
 import { DirectoryComponent } from './directory/directory.component';
+import { RoleGuardService as RoleGuard } from './role-guard.service';
 import { ReferentialComponent } from './referential/referential.component';
 
 const routes: Routes = [
@@ -23,33 +24,55 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'customers', pathMatch: 'full' },
             { path: 'customers', component: CustomersComponent, data: { title: 'Liste des clients', display: true } },
-            { path: 'customer', component: CustomerDetailsComponent, data: { display: false } },
-            { path: 'customer/:id', component: CustomerDetailsComponent, data: { display: false } },
+            { path: 'customer', component: CustomerDetailsComponent, data: {
+                display: false, name: 'CRM', access: 'WRITE'
+            } },
+            { path: 'customer/:id', component: CustomerDetailsComponent, data: {
+                display: false, name: 'CRM', access: 'WRITE'
+            } },
             { path: 'directory', component: DirectoryComponent, data: { title: 'Annuaire', display: true } },
-        ]
+        ],
+        canActivate: [RoleGuard],
+        data: { name: 'CRM', access: 'READ' }
     },
     {
         path: 'gescom',
         children: [
             { path: '', redirectTo: 'businesses', pathMatch: 'full' },
             { path: 'businesses', component: BusinessComponent, data: { title: 'Affaires', display: true } },
-            { path: 'business', component: BusinessDetailsComponent, data: { display: false } },
-            { path: 'business/:id', component: BusinessDetailsComponent, data: { display: false } },
+            { path: 'business', component: BusinessDetailsComponent, data: {
+                display: false, name: 'Gestion commerciale', access: 'WRITE'
+            } },
+            { path: 'business/:id', component: BusinessDetailsComponent, data: {
+                display: false, name: 'Gestion commerciale', access: 'WRITE'
+            } },
             { path: 'quotations', component: QuotationComponent, data: { title: 'Devis', display: true } },
-            { path: 'quotation', component: QuotationDetailsComponent, data: { display: false }  },
-            { path: 'quotation/:id', component: QuotationDetailsComponent, data: { display: false } },
-        ]
+            { path: 'quotation', component: QuotationDetailsComponent, data: {
+                display: false, name: 'Gestion commerciale', access: 'WRITE'
+            } },
+            { path: 'quotation/:id', component: QuotationDetailsComponent, data: {
+                display: false, name: 'Gestion commerciale', access: 'WRITE'
+            } },
+        ],
+        canActivate: [RoleGuard],
+        data: { name: 'Gestion commerciale', access: 'READ' }
     },
-    { path: 'empowerment', component: EmpowermentComponent },
+    { path: 'empowerment', component: EmpowermentComponent, canActivate: [RoleGuard] },
     {
         path: 'settings',
         children: [
             { path: '', redirectTo: 'users', pathMatch: 'full' },
             { path: 'users', component: UsersComponent, data: { title: 'Utilisateurs', display: true } },
-            { path: 'user', component: UserDetailsComponent, data: { display: false } },
-            { path: 'user/:id', component: UserDetailsComponent, data: { display: false } },
+            { path: 'user', component: UserDetailsComponent, data: {
+                display: false, name: 'Paramétrage', access: 'WRITE'
+            } },
+            { path: 'user/:id', component: UserDetailsComponent, data: {
+                display: false, name: 'Paramétrage', access: 'WRITE'
+            } },
             { path: 'referential', component: ReferentialComponent, data: { title: 'Référentielle', display: true } },
-        ]
+        ],
+        canActivate: [RoleGuard],
+        data: { name: 'Paramétrage', access: 'READ' }
     },
 ];
 

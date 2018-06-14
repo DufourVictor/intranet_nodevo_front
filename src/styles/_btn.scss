@@ -1,9 +1,24 @@
 @import "variables";
 
-.form-add-btn{
+.form-add-btn, .form-add-btn:focus{
+    border-style: none;
+    outline: none;
     position: absolute !important;
-    right: 11px;
-    top: 68px;
+    right: 18px;
+    top: 75px;
+    color: $primary-color;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.form-download {
+    border-style: none;
+    outline: none;
+    position: absolute !important;
+    right: 18px;
+    top: 75px;
+    font-size: 30px;
+    cursor: pointer;
 }
 
 .back-form, .back-form:focus{

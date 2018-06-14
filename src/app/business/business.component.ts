@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FilterTable } from '../mixins/FilterTable';
+import { RoleGuardService } from '../role-guard.service';
 
 @Component({
     selector: 'app-business',
@@ -21,7 +22,8 @@ export class BusinessComponent extends FilterTable implements OnInit {
     constructor(
         private businessesService: BusinessesService,
         private toastr: ToastrService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        public roleGuard: RoleGuardService
     ) {
         super(businessesService, activatedRoute, ['codeBusiness', 'label', {name: 'customer', subname: 'name'}]);
     }

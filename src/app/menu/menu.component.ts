@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RoleGuardService } from '../role-guard.service';
 
 
 @Component({
@@ -6,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
-
-  ngOnInit() {
-  }
-
+export class MenuComponent {
+    constructor(public roleGuard: RoleGuardService) {
+    }
 }
