@@ -4,6 +4,11 @@
         <i class="icon icon-arrow-right mr-1"></i>
     </summary>
     <div class="accordion-body">
+        <div _ngcontent-c27="" class="text-right">
+                <i _ngcontent-c27="" class="material-icons add" (click)="addLine()">
+                    add_circle
+                </i>
+        </div>
         <div class="table" [ngClass]="{complex: type === 'complex'}">
             <div class="header">
                 <div>Désignation</div>
@@ -54,10 +59,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
-
-            <div>
-                <button class="btn btn-action btn-primary btn-lg circle" (click)="addLine()"><i class="icon icon-plus"></i></button>
             </div>
         </div>
     </div>

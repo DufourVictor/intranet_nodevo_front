@@ -130,7 +130,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         ProfileFormComponent,
         PaymentConditionsFormComponent,
         GroupFormComponent,
-        TypeFormComponent
+        TypeFormComponent,
         SimpleLineFormComponent,
         ComplexLineFormComponent,
     ],
