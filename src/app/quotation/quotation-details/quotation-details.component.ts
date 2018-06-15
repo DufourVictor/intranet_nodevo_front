@@ -20,7 +20,9 @@ export class QuotationDetailsComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.params.subscribe(params => {
             if (params.id) {
-                this.quotationsService.get(params.id).subscribe(quotation => this.quotation = quotation);
+                this.quotationsService.get(params.id).subscribe(quotation => {
+                    this.quotation = quotation
+                });
             } else {
                 this.quotation = new Quotation();
             }
