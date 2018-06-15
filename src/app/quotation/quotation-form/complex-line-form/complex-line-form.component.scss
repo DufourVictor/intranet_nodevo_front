@@ -9,6 +9,7 @@
 .add-btn {
     position: absolute;
     left: 100%;
+    top: -118px;
 }
 
 .header {
@@ -17,5 +18,24 @@
 
     input, select {
         min-height: unset;
+    }
+
+    select {
+        padding-right: 0;
+        width: 73%;
+    }
+
+    .btn-colabs {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+
+.body {
+    input {
+        border: none;
+        outline: 0;
+        background: transparent;
     }
 }

@@ -1,5 +1,9 @@
 <div class="columns">
-    <button *ngIf="displayHeader" class="add-btn" (click)="addColumn()">Add</button>
+    <button
+        *ngIf="displayHeader"
+        class="btn btn-action add-btn"
+        (click)="addColumn()"
+    ><i class="icon icon-plus"></i></button>
     <div class="column" *ngFor="let form of forms">
         <form [formGroup]="form.group">
             <div *ngIf="displayHeader" class="header">
@@ -15,7 +19,7 @@
                     </select>
                 </div>
                 <div>
-                    <button class="btn btn-action" (click)="activeModal(form)">
+                    <button class="btn btn-action btn-colabs" (click)="activeModal(form)">
                         <i class="icon icon-people"></i>
                     </button>
                 </div>
@@ -27,7 +31,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="body">
                 <input formControlName="time" type="number">
             </div>
         </form>

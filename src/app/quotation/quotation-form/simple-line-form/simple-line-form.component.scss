@@ -4,4 +4,10 @@ form {
     & > div {
         min-width: 33%;
     }
+
+    input {
+        border: none;
+        outline: 0;
+        background: transparent;
+    }
 }

@@ -18,12 +18,16 @@ div.table {
     }
 
     &.complex {
-        margin-top: 180px;
+        margin-top: 75px;
 
         .header {
             & > div:nth-child(2) {
                 margin-left: auto;
             }
+        }
+
+        .cost-col {
+            margin-left: auto;
         }
     }
 
