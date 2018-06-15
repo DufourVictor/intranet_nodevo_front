@@ -81,7 +81,7 @@ export class ComplexLineFormComponent implements OnInit {
     isCollaborator(id) {
         if (this.activeForm.get().collaborators) {
             return this.activeForm.get().collaborators
-                .map((colab) => +colab.split('/').reverse()[0])
+                .map((colab) => +colab.toString().split('/').reverse()[0])
                 .includes(id);
         }
 

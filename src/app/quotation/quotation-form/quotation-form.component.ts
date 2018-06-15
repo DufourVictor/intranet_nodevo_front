@@ -94,7 +94,7 @@ export class QuotationFormComponent implements OnInit {
             if (quotation.id) {
                 this.quotationsService.update(quotation).subscribe(() => {
                     this.toastr.success('Le devis a été mis à jour 👍✅', 'Succès !');
-                    // this.router.navigate(['gescom/quotations']);
+                    this.router.navigate(['gescom/quotations']);
                 });
             } else {
                 this.quotationsService.add(quotation).subscribe(() => {

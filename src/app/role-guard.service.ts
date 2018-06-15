@@ -43,7 +43,7 @@ export class RoleGuardService implements CanActivate {
             return true;
         }
 
-        return this.auth.getCurrentUser().acls.some(acl =>
+        return this.auth.getCurrentUser().acls && this.auth.getCurrentUser().acls.some(acl =>
             acl.resourceName === route && acl.access === access
         );
     }
