@@ -14,5 +14,4 @@ export class SpectreModalComponent {
     toggleActive() {
         this.active = !this.active;
     }
-
 }

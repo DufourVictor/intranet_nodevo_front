@@ -8,6 +8,7 @@ import { FormGroupValidators } from '../tools/FormGroupValidators';
 
 export class ProvisionValidatorsBase extends FormGroupValidators {
     label = null;
+    type = null;
     createdAt = [CustomValidators.date];
     updatedAt = [CustomValidators.date];
     createdBy = null;

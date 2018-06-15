@@ -24,6 +24,7 @@ import {
     CustomersService,
     GroupsService,
     LinesService,
+    SimpleLinesService,
     NoTimeRecordingsService,
     PaymentConditionsService,
     ProfilesService,
@@ -69,6 +70,8 @@ import { QuotationFormComponent } from './quotation/quotation-form/quotation-for
 import { TableFiltersComponent } from './table-filters/table-filters.component';
 import { DirectoryComponent } from './directory/directory.component';
 import { QuotationFormLineComponent } from './quotation/quotation-form/quotation-form-line/quotation-form-line.component';
+import { SimpleLineFormComponent } from './quotation/quotation-form/simple-line-form/simple-line-form.component';
+import { ComplexLineFormComponent } from './quotation/quotation-form/complex-line-form/complex-line-form.component';
 import { RoleGuardService } from './role-guard.service';
 import { ReferentialComponent } from './referential/referential.component';
 import { ProfileComponent } from './referential/profile/profile.component';
@@ -128,6 +131,8 @@ export function createRestangularConfigFactory(RestangularProvider) {
         PaymentConditionsFormComponent,
         GroupFormComponent,
         TypeFormComponent
+        SimpleLineFormComponent,
+        ComplexLineFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -172,6 +177,7 @@ export function createRestangularConfigFactory(RestangularProvider) {
         CGVsService,
         PaymentConditionsService,
         LinesService,
+        SimpleLinesService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Line } from '../../../../backend/model';
+import { ComplexLine, Line, Profile } from '../../../../backend/model';
 import { Form, FormService } from '../../../../backend/forms';
+import { Observable } from 'rxjs/Observable';
+import { ProfilesService } from '../../../../backend/services';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
     selector: 'app-quotation-form-line',
@@ -9,22 +12,25 @@ import { Form, FormService } from '../../../../backend/forms';
 })
 export class QuotationFormLineComponent implements OnInit {
     forms: Form<Line>[] = [];
-    @Input() lines: Line[] = [new Line()];
+    profiles: Observable<Profile[]>;
+    @Input() lines: Line[] = [];
+    @Input() type: string = 'simple';
     @Output() linesChange = new EventEmitter<Line[]>();
+    newComplexLine: Subject<any> = new Subject<any>();
 
     constructor(
         public formService: FormService,
+        private profileService: ProfilesService
     ) {}
 
     ngOnInit() {
+        this.profiles = this.profileService.getAll();
         if (this.lines) {
             this.forms = this.lines.map(line => {
                 const form = this.createLineForm(line);
                 form.group.markAsDirty();
                 return form;
             });
-        } else {
-            this.lines = [];
         }
         this.addLine();
         this.orderForms();
@@ -38,10 +44,38 @@ export class QuotationFormLineComponent implements OnInit {
         return form;
     }
 
+    synchronizeComplexLines (lines = []) {
+        if (lines.length === 0 && this.forms.length > 1) {
+            lines = this.forms[0].get().complexLines;
+        }
+        this.forms.forEach(f => {
+            let newVal = [];
+            if (f.get().complexLines.length !== lines.length) {
+                newVal = lines.map(line => Object.assign(new ComplexLine(), line).duplicateComplexLine());
+            } else {
+                newVal = f.get().complexLines
+                    .map((line, ind) => Object.assign(new ComplexLine(), line).updateFrom(lines[ind]))
+                ;
+            }
+            f.group.get('complexLines').setValue(newVal);
+        });
+    }
+
     addLine () {
         const line = new Line();
         line.position = this.forms.length;
         this.forms.push(this.createLineForm(line));
+        this.synchronizeComplexLines();
+    }
+
+    addColumn () {
+        this.newComplexLine.next();
+        this.forms.forEach(form => {
+            form.group.get('complexLines').setValue([
+                ...form.get().complexLines,
+                new ComplexLine()
+            ])
+        })
     }
 
     getDirtyForms () {
@@ -52,10 +86,43 @@ export class QuotationFormLineComponent implements OnInit {
         this.linesChange.emit(this.getDirtyForms());
     }
 
-    getCost (form: Form<Line>) {
-        const {priceHt, quantity} = form.get();
+    simpleChange (form, evt) {
+        form.group.get('simpleLine').setValue(evt);
+    }
 
-        return priceHt * quantity;
+    complexChange (formIndex, complexLines) {
+        this.forms[formIndex].group.get('complexLines').setValue(complexLines);
+    }
+
+    complexGeneralChange (complexLines) {
+        this.forms.forEach(form => {
+            const formLines = form.get().complexLines.map(line => Object.assign(new ComplexLine(), line));
+            form.group.get('complexLines').setValue(
+                complexLines.map((line, ind) => Object.assign(formLines[ind] || new ComplexLine(), line.getCommonProps()))
+            );
+        });
+    }
+
+    getComplexLines (form) {
+        return form.get().complexLines.length > 0 ?
+            form.get().complexLines :
+            this.forms[0].get().complexLines.map(line => Object.assign(new ComplexLine(), line).duplicateComplexLine())
+    }
+
+    getCost (form: Form<Line>) {
+        const {simpleLine, complexLines} = form.get();
+        if (simpleLine) {
+            const {priceHt, quantity} = simpleLine;
+
+            return priceHt * quantity;
+        } else if (complexLines) {
+            let price = 0;
+            complexLines.forEach(line => {
+                price += line.tjm * line.time;
+            });
+
+            return price;
+        }
     }
 
     orderForms () {
