@@ -13,6 +13,7 @@ export class RoleGuardService implements CanActivate {
     public canActivate(route: ActivatedRouteSnapshot): boolean {
         if (!this.auth.isAuthenticated()) {
             this.auth.logout();
+            this.toastr.error('Votre session a expiré... 😢❌', 'Erreur !');
             this.router.navigate(['']);
             return false;
         }
