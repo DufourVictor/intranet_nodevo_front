@@ -1,5 +1,17 @@
-<div class="container">
-    <form [formGroup]="form.group" (ngSubmit)="save()">
+<i class="material-icons back-form" routerLink="/crm/customers">
+    keyboard_backspace
+</i>
+
+<button form="form" type="submit" class="save-form-place">
+    <i class="material-icons save-form">
+        save
+    </i>
+</button>
+
+<div class="card form">
+    <h3>{{ customer.name }}</h3>
+
+    <form [formGroup]="form.group" (ngSubmit)="save()" id="form">
         <div class="columns" *ngIf="customer.id">
             <div class="form-group column col-6">
                 <label class="form-label">Code client</label>
@@ -8,46 +20,71 @@
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('name').invalid">
+            <div class="form-group column col-6" [class.has-error]="nameError.hasError('*', 'touched')">
                 <label class="form-label">Nom du client</label>
                 <input type="text" class="form-control form-input" formControlName="name">
+                <div ngxErrors="name" #nameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
-            <div class="form-group column col-6" [class.has-error]="form.group.get('businessName').invalid">
+            <div class="form-group column col-6" [class.has-error]="businessNameError.hasError('*', 'touched')">
                 <label class="form-label">Raison sociale</label>
                 <input type="text" class="form-control form-input" formControlName="businessName">
+                <div ngxErrors="businessName" #businessNameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('siret').invalid">
+            <div class="form-group column col-6" [class.has-error]="siretNameError.hasError('*', 'touched')">
                 <label class="form-label">N° SIRET</label>
                 <input type="text" class="form-control form-input" formControlName="siret" minlength="14"
                        maxlength="14">
+                <div ngxErrors="siret" #siretNameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                    <p class="form-input-hint" ngxError="minlength" when="dirty">
+                        Le siret doit être composé de 14 chiffres
+                    </p>
+                </div>
             </div>
-            <div class="form-group column col-6" [class.has-error]="form.group.get('street').invalid">
+
+            <div class="form-group column col-6" [class.has-error]="streetNameError.hasError('*', 'touched')">
                 <label class="form-label">Adresse</label>
                 <input type="text" class="form-control form-input" formControlName="street">
+                <div ngxErrors="street" #streetNameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('street2').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">Complément d'adresse</label>
                 <input type="text" class="form-control form-input" formControlName="street2">
             </div>
-            <div class="form-group column col-6" [class.has-error]="form.group.get('zipCode').invalid">
+            <div class="form-group column col-6" [class.has-error]="zipCodeError.hasError('*', 'touched')">
                 <label class="form-label">Code postal</label>
                 <input type="text" class="form-control form-input" formControlName="zipCode" minlength="5"
                        maxlength="5">
+                <div ngxErrors="zipCode" #zipCodeError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                    <p class="form-input-hint" ngxError="minlength" when="dirty">
+                        Le code postal doit être composé de 5 chiffres
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('city').invalid">
+            <div class="form-group column col-6" [class.has-error]="cityError.hasError('*', 'touched')">
                 <label class="form-label">Ville</label>
                 <input type="text" class="form-control form-input" formControlName="city">
+                <div ngxErrors="city" #cityError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
-            <div class="form-group column col-6" [class.has-error]="form.group.get('phone').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">Téléphone</label>
                 <input type="text" class="form-control form-input" formControlName="phone" minlength="10"
                        maxlength="10">
@@ -55,15 +92,10 @@
         </div>
 
         <div class="columns">
-            <div class="form-group column col-12" [class.has-error]="form.group.get('notes').invalid">
+            <div class="form-group column col-12">
                 <label class="form-label">Notes</label>
                 <textarea class="form-input" rows="5" formControlName="notes">{{ customer.notes }}</textarea>
             </div>
-        </div>
-
-        <div class="columns">
-            <button class="btn btn-primary column col-4 col-mx-auto" type="submit">Enregistrer</button>
-            <button class="btn btn-error col-4 col-mx-auto" routerLink="/customers">Retour à la liste</button>
         </div>
     </form>
 </div>

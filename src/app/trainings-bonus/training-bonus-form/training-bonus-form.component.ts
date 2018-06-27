@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { TrainingBonus, User } from '../../../backend/model/index';
-import { Form, FormService } from '../../../backend/forms/index';
-import { TrainingBonusesService } from '../../../backend/services/index';
+import { TrainingBonus, User } from '../../../backend/model';
+import { Form, FormService } from '../../../backend/forms';
+import { TrainingBonusesService } from '../../../backend/services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-training-bonus-form',
@@ -17,7 +18,8 @@ export class TrainingBonusFormComponent implements OnChanges {
 
     constructor(
         private formService: FormService,
-        private trainingBonusesService: TrainingBonusesService
+        private trainingBonusesService: TrainingBonusesService,
+        private toastr: ToastrService
     ) {
     }
 
@@ -30,13 +32,20 @@ export class TrainingBonusFormComponent implements OnChanges {
         if (this.form.group.dirty && this.form.group.valid) {
             const trainingBonus = this.form.get();
             if (trainingBonus.id) {
-                this.trainingBonusesService.update(trainingBonus).subscribe(() => this.saveTraining.emit());
+                this.trainingBonusesService.update(trainingBonus).subscribe(() => {
+                    this.saveTraining.emit();
+                    this.toastr.success(`La prime/formation a bien été mise à jour ! 👍✅`);
+                });
             } else {
                 trainingBonus.setUser(this.user.id);
-                this.trainingBonusesService.add(trainingBonus).subscribe(() => this.saveTraining.emit());
+                this.trainingBonusesService.add(trainingBonus).subscribe(() => {
+                    this.saveTraining.emit();
+                    this.toastr.success(`La prime/formation a bien été ajoutée ! 👍✅`);
+                });
             }
             this.form.group.reset();
         } else {
+            this.toastr.error(`Désolé la prime/formation n'a pas pu être mise à jour ! 😢❌`);
             // force invalid inputs state to display errors
             this.form.displayErrors();
         }

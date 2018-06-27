@@ -8,10 +8,14 @@ import { FormGroupValidators } from '../tools/FormGroupValidators';
 
 export class LineValidatorsBase extends FormGroupValidators {
     label = null;
-    quantity = [CustomValidators.digits];
+    simpleLine = [AppValidators.item];
+    complexLines = [AppValidators.item];
     position = [CustomValidators.digits];
-    priceHt = [CustomValidators.digits];
     free = [AppValidators.boolean];
     title = [AppValidators.boolean];
-    unit = [AppValidators.item];
+    quotation = [AppValidators.item];
+    createdAt = [CustomValidators.date];
+    updatedAt = [CustomValidators.date];
+    createdBy = null;
+    updatedBy = null;
 }

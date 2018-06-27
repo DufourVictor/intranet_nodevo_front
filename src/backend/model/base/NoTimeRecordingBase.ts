@@ -11,6 +11,10 @@ export class NoTimeRecordingBase {
   fromDate: Date;
   toDate: Date;
   user: User;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
   setUser(id: number): NoTimeRecordingBase {
     this.user = new User();

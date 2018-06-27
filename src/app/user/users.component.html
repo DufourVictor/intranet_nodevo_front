@@ -1,13 +1,11 @@
-<button
-    class="btn btn-lg btn-primary circle tooltip tooltip-bottom"
-    data-tooltip="Ajouter un utilisateur"
-    routerLink="/settings/user"
+<i class="material-icons form-add-btn" [routerLink]="['/settings/user']"
+   *ngIf="roleGuard.canAccess('Paramétrage', 'WRITE')"
 >
-    <i class="icon icon-plus"></i>
-</button>
+    add_circle
+</i>
 
 <app-table-filters
-    [searchProperties]="['firstName', 'lastName', 'trigram']"
+    [searchProperties]="['firstName', 'lastName', {name: 'profile', subname: 'label'}]"
     [filterProperties]="[
         {name: 'firstName', label: 'Prénom', type: 'text'},
         {name: 'lastName', label: 'Nom', type: 'text'},
@@ -15,40 +13,34 @@
     ]"
 ></app-table-filters>
 
-<ngx-datatable
-    #table
-    class="material fullscreen"
-    columnMode="force"
-    headerHeight="auto"
-    rowHeight="auto"
-    footerHeight="auto"
-    [rows]="rows"
-    [columns]="columns"
-    [limit]="10"
-></ngx-datatable>
+<div class="card">
+    <ngx-datatable
+        #table
+        class="material fullscreen"
+        [columnMode]="'force'"
+        [headerHeight]="'auto'"
+        [rowHeight]="'auto'"
+        [footerHeight]="'auto'"
+        [rows]="rows"
+        [columns]="columns"
+        [limit]="10"
+    ></ngx-datatable>
 
-<ng-template #actionTmpl let-row="row">
-    <div class="btn-group btn-group-block">
-        <button
-            class="btn btn-primary tooltip tooltip-right"
-            data-tooltip="Editer"
-            [routerLink]="['/settings/user/', row.id]"
-        >
-            <i class="material-icons">edit</i>
-        </button>
-        <button
-            class="btn btn-error tooltip tooltip-left"
-            data-tooltip="Supprimer"
-            (click)="delete(row)"
-        >
-            <i class="material-icons">delete</i>
-        </button>
-    </div>
-</ng-template>
+    <ng-template #enabledTmpl let-row="row" let-value="value">
+        <span class="enabled-{{ value }}">{{ value ? 'Actif' : 'Inactif' }}</span>
+    </ng-template>
 
-<ng-template #enabledTmpl let-row="row" let-value="value">
-    <label class="form-switch">
-        <input type="checkbox" [checked]="value" (change)="toggleEnabled(row)">
-        <i class="form-icon"></i>
-    </label>
-</ng-template>
+    <ng-template #actionTmpl let-row="row">
+        <i class="material-icons enabled-{{ !row.enabled }}" (click)="toggleEnabled(row)">
+            check_circle
+        </i>
+        <i class="material-icons" [routerLink]="['/settings/user/', row.id]"
+           *ngIf="roleGuard.canAccess('Paramétrage', 'WRITE')"
+        >
+            mode_edit
+        </i>
+        <i class="material-icons delete" (click)="delete(row)">
+            delete_forever
+        </i>
+    </ng-template>
+</div>

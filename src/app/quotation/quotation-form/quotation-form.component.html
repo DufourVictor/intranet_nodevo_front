@@ -1,5 +1,13 @@
-<div class="container">
-    <form [formGroup]="form.group" (ngSubmit)="save()">
+<i class="material-icons back-form" routerLink="/gescom/quotations">keyboard_backspace</i>
+
+<button form="form" type="submit" class="save-form-place">
+    <i class="material-icons save-form">save</i>
+</button>
+
+<div class="card form">
+    <h3>{{ quotation.label }}</h3>
+
+    <form [formGroup]="form.group" (ngSubmit)="save()" id="form">
         <div class="columns" *ngIf="quotation.id">
             <div class="form-group column col-6">
                 <label class="form-label">Code devis</label>
@@ -10,17 +18,18 @@
         <div class="columns">
             <div class="form-group column col-6">
                 <label class="form-label">Client</label>
-                <select class="form-control form-select" formControlName="customer" #customerInput
-                        [compareWith]="formService.objectsEquals" (change)="customerChange()">
-                    <option
-                        *ngFor="let customer of customers"
-                        [ngValue]="customer"
-                    >
+                <select
+                    class="form-control form-select"
+                    formControlName="customer"
+                    [compareWith]="formService.objectsEquals"
+                    (change)="customerChange()"
+                >
+                    <option *ngFor="let customer of customers | async" [ngValue]="customer">
                         {{ customer.name }}
                     </option>
                 </select>
             </div>
-            <div class="form-group column col-6" *ngIf="customerInput.value !== ''">
+            <div class="form-group column col-6">
                 <label class="form-label">Contact client</label>
                 <ng-select
                     [items]="contacts"
@@ -28,15 +37,16 @@
                     formControlName="contact"
                     bindLabel="fullName"
                     [(ngModel)]="quotation.contact"
+                    [compareWith]="formService.objectsEquals"
                 ></ng-select>
             </div>
         </div>
+
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('business').invalid">
+            <div class="form-group column col-6">
                 <label class="form-label">Affaire</label>
                 <ng-select
                     [items]="businesses"
-                    [multiple]="true"
                     formControlName="business"
                     bindLabel="label"
                     [(ngModel)]="quotation.business"
@@ -45,63 +55,117 @@
         </div>
 
         <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('label').invalid">
+            <div class="form-group column" [class.has-error]="labelError.hasError('*', 'touched')">
                 <label class="form-label">Intitulé du devis</label>
                 <input type="text" class="form-control form-input" formControlName="label">
+                <div ngxErrors="label" #labelError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('provision').invalid">
+            <div class="form-group column col-6" [class.has-error]="provisionError.hasError('*', 'touched')">
                 <label class="form-label">Type de prestation</label>
-                <select class="form-control form-select" formControlName="provision"
-                        [compareWith]="formService.objectsEquals">
-                    <option *ngFor="let provision of provisions" [ngValue]="provision">{{ provision.label }}</option>
+                <select
+                    class="form-control form-select"
+                    formControlName="provision"
+                    [compareWith]="formService.objectsEquals"
+                >
+                    <option *ngFor="let provision of provisions | async" [ngValue]="provision">
+                        {{ provision.label }}
+                    </option>
                 </select>
+                <div ngxErrors="provision" #provisionError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
-            <div class="form-group column col-6" [class.has-error]="form.group.get('status').invalid">
+            <div class="form-group column col-5" [class.has-error]="statusError.hasError('*', 'touched')">
                 <label class="form-label">Etat</label>
-                <select class="form-control form-select" formControlName="status"
-                        [compareWith]="formService.objectsEquals">
-                    <option *ngFor="let statu of status" [ngValue]="statu">{{ statu.label }}</option>
+                <select
+                    class="form-control form-select"
+                    formControlName="status"
+                    [compareWith]="formService.objectsEquals"
+                    (change)="getStatus()"
+                >
+                    <option *ngFor="let statu of status | async" [ngValue]="statu">{{ statu.label }}</option>
                 </select>
+                <div ngxErrors="status" #statusError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
+
+                <div *ngIf="needReason">
+                    <label class="form-label" for="reason">Motif</label>
+                    <input
+                        class="form-input"
+                        type="text"
+                        id="reason"
+                        formControlName="reason"
+                    >
+                </div>
+                <div *ngIf="needSignAt">
+                    <label class="form-label" for="signAt">Date de signature</label>
+                    <input
+                        class="form-input"
+                        type="date"
+                        id="signAt"
+                        formControlName="signAt"
+                    >
+                </div>
+            </div>
+
+            <div class="col-1 status-info">
+                 <span
+                     *ngIf="quotation.signAt"
+                     class="tooltip tooltip-bottom"
+                     [attr.data-tooltip]="quotation.signAt | date:'longDate':'':'fr'"
+                 >
+                     <i class="material-icons">info</i>
+                </span>
+                <span
+                    *ngIf="quotation.reason"
+                    class="tooltip tooltip-bottom"
+                    [attr.data-tooltip]="quotation.reason"
+                >
+                    <i class="material-icons">info</i>
+                </span>
+            </div>
+        </div>
+
+        <div class="columns" *ngIf="quotation.business">
+            <div class="form-group column">
+                <label class="form-label">Contact commercial</label>
+                <input
+                    type="text"
+                    class="form-control form-input"
+                    disabled
+                    [value]="quotation.business.businessContact ? quotation.business.businessContact.firstName + ' ' + quotation.business.businessContact.lastName : ''"
+                >
+            </div>
+            <div class="form-group column">
+                <label class="form-label">Contact technique</label>
+                <input
+                    type="text"
+                    class="form-control form-input"
+                    disabled
+                    [value]="quotation.business.technicalContact ? quotation.business.technicalContact.firstName + ' ' + quotation.business.technicalContact.lastName : ''"
+                >
             </div>
         </div>
 
         <div class="columns" *ngIf="quotation.id">
-            <div class="form-group column" [class.has-error]="form.group.get('business').invalid">
-                <label class="form-label">Contact commercial</label>
-                <input type="text" class="form-control form-input" formControlName="business">
-            </div>
-            <div class="form-group column" [class.has-error]="form.group.get('business').invalid">
-                <label class="form-label">Contact technique</label>
-                <input type="text" class="form-control form-input" formControlName="business">
-            </div>
-        </div>
-
-        <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('createdAt').invalid" *ngIf="quotation.id">
+            <div class="form-group column">
                 <label class="form-label" for="createdAt">Date de création</label>
-                <input
-                    class="form-input"
-                    type="date"
-                    id="createdAt"
-                    formControlName="createdAt"
-                >
+                <input class="form-input" type="text" id="createdAt" disabled [value]="quotation.createdAt  | date:'d/MM/y H:m'">
             </div>
-            <div class="form-group column" [class.has-error]="form.group.get('validedAt').invalid" *ngIf="quotation.id">
+            <div class="form-group column">
                 <label class="form-label" for="validedAt">Date de validation</label>
-                <input
-                    class="form-input"
-                    type="date"
-                    id="validedAt"
-                    formControlName="validedAt"
-                >
+                <input class="form-input" type="text" id="validedAt" disabled [value]="quotation.validedAt | date:'d/MM/y H:m'">
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('enabledCgv').invalid">
+            <div class="form-group column" [class.has-error]="enabledCgvError.hasError('*', 'touched')">
                 <div class="form-group">
                     <label class="form-label">Afficher les cgv</label>
                     <label class="form-radio">
@@ -112,46 +176,61 @@
                         <input type="radio" formControlName="enabledCgv" [value]=false>
                         <i class="form-icon"></i> Non
                     </label>
+                    <div ngxErrors="enabledCgv" #enabledCgvError="ngxErrors">
+                        <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                    </div>
                 </div>
             </div>
             <div class="form-group column col-6" [class.has-error]="form.group.get('cgv').invalid">
                 <label class="form-label">CGV</label>
-                <select class="form-control form-select" formControlName="cgv"
-                        [compareWith]="formService.objectsEquals">
-                    <option *ngFor="let cgv of cgvs" [ngValue]="cgv">{{ cgv.label }}</option>
+                <select
+                    class="form-control form-select"
+                    formControlName="cgv"
+                    [compareWith]="formService.objectsEquals"
+                >
+                    <option *ngFor="let cgv of cgvs | async" [ngValue]="cgv">{{ cgv.label }}</option>
                 </select>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('paymentConditions').invalid">
+            <div class="form-group column col-6" [class.has-error]="paymentConditionsError.hasError('*', 'touched')">
                 <label class="form-label">Conditions de paiement</label>
-                <select class="form-control form-select" formControlName="paymentConditions"
-                        [compareWith]="formService.objectsEquals">
-                    <option *ngFor="let paymentCondition of paymentConditions" [ngValue]="paymentCondition">
+                <select
+                    class="form-control form-select"
+                    formControlName="paymentConditions"
+                    [compareWith]="formService.objectsEquals"
+                >
+                    <option *ngFor="let paymentCondition of paymentConditions | async" [ngValue]="paymentCondition">
                         {{ paymentCondition.label }}
                     </option>
                 </select>
+                <div ngxErrors="paymentConditions" #paymentConditionsError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('customerNotes').invalid">
+            <div class="form-group column col-12">
                 <label class="form-label">Notes clients</label>
                 <input type="text" class="form-control form-input" formControlName="customerNotes">
             </div>
-        </div>
 
-        <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('privateNotes').invalid">
+            <div class="form-group column col-12">
                 <label class="form-label">Notes privées</label>
                 <input type="text" class="form-control form-input" formControlName="privateNotes">
             </div>
         </div>
-
-        <div class="columns">
-            <button class="btn btn-primary column col-4 col-mx-auto" type="submit">Enregistrer</button>
-            <a class="btn btn-error col-4 col-mx-auto" routerLink="/quotations">Retour à la liste</a>
-        </div>
     </form>
+</div>
+
+<div class="details card">
+    <div class="list">
+        <app-quotation-form-line
+            [lines]="quotation.lines"
+            [type]="quotation.provision ? quotation.provision.type : 'simple'"
+            (linesChange)="onLinesChange($event)"
+        ></app-quotation-form-line>
+    </div>
 </div>

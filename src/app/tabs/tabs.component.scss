@@ -2,18 +2,18 @@
 
 .tab {
     padding: 0 10px;
-    background-color: #FFFFFF;
+    background-color: $white;
 
     .tab-item {
         margin: 10px 10px 0 10px;
 
         &.active a {
-            color: #4A4A4A;
+            color: $dark-grey;
         }
 
         a {
             padding-bottom: 10px;
-            color: #9B9B9B;
+            color: $grey;
             font-size: 18px;
             font-weight: 300;
 

@@ -3,6 +3,7 @@
 
 import { Contact } from '../Contact';
 import { Customer } from '../Customer';
+import { Quotation } from '../Quotation';
 
 export class BusinessBase {
   public static readonly _resource: string = 'businesses';
@@ -16,6 +17,8 @@ export class BusinessBase {
   businessContact: Contact;
   technicalContact: Contact;
   customer: Customer;
+  quotation: Quotation;
+  deleted: boolean;
 
   setBusinessContact(id: number): BusinessBase {
     this.businessContact = new Contact();
@@ -35,6 +38,13 @@ export class BusinessBase {
     this.customer = new Customer();
     this.customer.id = id;
     this.customer['@id'] = '/customers/' + id;
+    return this;
+  }
+
+  setQuotation(id: number): BusinessBase {
+    this.quotation = new Quotation();
+    this.quotation.id = id;
+    this.quotation['@id'] = '/quotations/' + id;
     return this;
   }
 

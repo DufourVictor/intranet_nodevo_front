@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { User } from '../../backend/model/index';
-import { UsersService } from '../../backend/services/index';
+import { User } from '../../backend/model';
+import { UsersService } from '../../backend/services';
 import { ToastrService } from 'ngx-toastr';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { FilterTable } from '../mixins/FilterTable';
 import { ActivatedRoute } from '@angular/router';
+import { RoleGuardService } from '../role-guard.service';
 
 @Component({
     selector: 'app-users',
@@ -19,9 +20,10 @@ export class UsersComponent extends FilterTable implements OnInit {
     constructor(
         private usersService: UsersService,
         private toastr: ToastrService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        public roleGuard: RoleGuardService
     ) {
-        super(usersService, route, ['firstName', 'lastName']);
+        super(usersService, route, ['firstName', 'lastName', {name: 'profile', subname: 'label'}]);
     }
 
     ngOnInit() {
@@ -32,7 +34,7 @@ export class UsersComponent extends FilterTable implements OnInit {
             {prop: 'lastName', name: 'Nom'},
             {prop: 'profile.label', name: 'Profil'},
             {prop: 'enabled', name: 'Statut', cellTemplate: this.enabledTmpl},
-            {name: 'Actions', cellTemplate: this.actionTmpl},
+            {name: '', cellTemplate: this.actionTmpl},
         ];
     }
 
@@ -42,7 +44,7 @@ export class UsersComponent extends FilterTable implements OnInit {
             () => this.toastr.success(`L'utilisateur a bien été ${user.enabled ? 'activé' : 'désactivé'} 👍✅`),
             () => {
                 user.enabled = !user.enabled;
-                this.toastr.error(`Désolé l'utilisateur ${user.fullName} n'a pas pu être mis à jour 😢❌`)
+                this.toastr.error(`Désolé l'utilisateur ${user.fullName} n'a pas pu être mis à jour 😢❌`);
             }
         );
     }
@@ -52,9 +54,10 @@ export class UsersComponent extends FilterTable implements OnInit {
             object.enabled = false;
             object.deleted = true;
             this.service.update(object).subscribe(
-                this.deleteObject.then(() => {
-                  this.toastr.warning(`L'utilisateur a bien été supprimé 😕❗`)
-                }),
+                () => {
+                    this.deleteObject(object);
+                    this.toastr.warning(`L'utilisateur a bien été supprimé 😕❗`);
+                },
                 () => {
                     object.enabled = true;
                     object.deleted = false;

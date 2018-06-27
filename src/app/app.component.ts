@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthentificationService } from './authentification.service';
 import { User } from '../backend/model';
 
@@ -11,11 +11,7 @@ import { User } from '../backend/model';
 export class AppComponent {
     title = 'app';
     user: User;
-    _opened = true;
-
-    get userFullName() {
-        return `${this.user.firstName} ${this.user.lastName}`;
-    }
+    opened = true;
 
     constructor(
         private auth: AuthentificationService,
@@ -31,6 +27,6 @@ export class AppComponent {
     }
 
     display() {
-       this._opened = !this._opened;
+       this.opened = !this.opened;
     }
 }

@@ -1,36 +1,35 @@
 <details class="accordion">
     <summary class="accordion-header">
-        <hr>
-        <i class="icon icon-arrow-right mr-1"></i>
         Primes et formations
+        <i class="icon icon-arrow-right mr-1"></i>
     </summary>
     <div class="accordion-body">
-        <a class="btn btn-primary" (click)="activeModal();">Ajouter</a>
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Coût</th>
-                <th>Note</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let trainBonus of trainingBonuses">
-                <td>{{ trainBonus.type }}</td>
-                <td>{{ trainBonus.date|date }}</td>
-                <td>{{ trainBonus.price }}</td>
-                <td>{{ trainBonus.notes }}</td>
-                <td>
-                    <button class="btn btn-primary" (click)="activeModal(trainBonus);"><i class="material-icons">edit</i>
-                    </button>
-                    <button class="btn btn-error" (click)="confirmDelete(trainBonus)"><i class="material-icons">delete</i>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="text-right">
+            <i class="material-icons add" (click)="activeModal()">
+                add_circle
+            </i>
+        </div>
+
+        <ngx-datatable
+            #table
+            class="material fullscreen"
+            [columnMode]="'force'"
+            [headerHeight]="'auto'"
+            [rowHeight]="'auto'"
+            [footerHeight]="'auto'"
+            [rows]="rows"
+            [columns]="columns"
+            [limit]="10"
+        ></ngx-datatable>
+
+        <ng-template #dateTmpl let-value="value" let-row="row">
+            {{ value | date:'longDate':'':'fr' }}
+        </ng-template>
+
+        <ng-template #actionTmpl let-row="row">
+            <i class="material-icons" (click)="activeModal(row)">mode_edit</i>
+            <i class="material-icons" (click)="confirmDelete(row)">delete_forever</i>
+        </ng-template>
     </div>
 </details>
 <spectre-modal [title]="modalTitle">

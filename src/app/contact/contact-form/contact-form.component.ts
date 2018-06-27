@@ -3,7 +3,7 @@ import { Contact, Customer } from '../../../backend/model/index';
 import { Form, FormService } from '../../../backend/forms/index';
 import { ContactsService, TypesService } from '../../../backend/services/index';
 import { ToastrService } from 'ngx-toastr';
-import { Type, User } from '../../../backend/model';
+import { Type } from '../../../backend/model';
 
 @Component({
     selector: 'app-contact-form',

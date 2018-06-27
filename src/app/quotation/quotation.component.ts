@@ -3,29 +3,38 @@ import { Quotation } from '../../backend/model';
 import { ToastrService } from 'ngx-toastr';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { QuotationsService } from '../../backend/services';
+import { FilterTable } from '../mixins/FilterTable';
+import { ActivatedRoute } from '@angular/router';
+import { RoleGuardService } from '../role-guard.service';
 
 @Component({
-  selector: 'app-quotation',
-  templateUrl: './quotation.component.html',
-  styleUrls: ['./quotation.component.scss']
+    selector: 'app-quotation',
+    templateUrl: './quotation.component.html',
+    styleUrls: ['./quotation.component.scss']
 })
-export class QuotationComponent implements OnInit {
+export class QuotationComponent extends FilterTable implements OnInit {
     @ViewChild('actionTmpl') actionTmpl: TemplateRef<any>;
     @ViewChild('enabledTmpl') enabledTmpl: TemplateRef<any>;
     @ViewChild(DatatableComponent) table: DatatableComponent;
 
-    quotations: Quotation[] = [];
-    rows: Quotation[] = [];
-    columns = [];
-
     constructor(
         private quotationService: QuotationsService,
         private toastr: ToastrService,
+        private route: ActivatedRoute,
+        public roleGuard: RoleGuardService
     ) {
+        super(quotationService, route, [
+            'codeQuotation',
+            'label',
+            {name: 'business', subname: 'label'},
+            {name: 'customer', subname: 'name'},
+            {name: 'provision', subname: 'label'},
+            {name: 'status', subname: 'label'},
+        ]);
     }
 
     ngOnInit() {
-        this.quotationService.getAll().subscribe(data => this.quotations = this.rows = data);
+        this.quotationService.getAll().subscribe(this.setStack);
         this.columns = [
             {prop: 'codeQuotation', name: 'Code devis'},
             {prop: 'label', name: 'Intitulé du devis'},
@@ -34,28 +43,30 @@ export class QuotationComponent implements OnInit {
             {prop: 'provision.label', name: 'Type de prestation'},
             {prop: 'totalHt', name: 'Prix HT'},
             {prop: 'status.label', name: 'Etat'},
-            {name: 'Actions', cellTemplate: this.actionTmpl},
+            {name: '', cellTemplate: this.actionTmpl},
         ];
     }
 
     delete(quotation: Quotation) {
         if (confirm('Etes-vous sûr de vouloir supprimer la ligne sélectionnée ?')) {
-            this.quotationService.remove(quotation).subscribe(() => {
-                this.quotations.splice(this.quotations.indexOf(quotation), 1);
-                this.rows = [...this.quotations];
+            this.quotationService.remove(quotation as Quotation).subscribe(() => {
+                this.deleteObject(quotation);
                 this.toastr.warning('Le devis a bien été supprimée 😕❗');
             });
         }
     }
 
-    updateFilter(event) {
-        const val = event.target.value.toLowerCase();
+    duplicate(quotation: Quotation) {
 
-        this.rows = this.quotations.filter((quotation: Quotation) => {
-            return quotation.customer.name.toLowerCase().indexOf(val) !== -1
-                || !val;
+        const duplicateQuotation = Object.create(quotation);
+
+        duplicateQuotation.id = null;
+        duplicateQuotation['@id'] = null;
+        duplicateQuotation['@type'] = null;
+
+        this.quotationService.add(duplicateQuotation).subscribe((data) => {
+            this.addObject(data);
+            this.toastr.success('Le devis a été dupliqué 👍✅📑', 'Succès !');
         });
-        this.table.offset = 0;
     }
-
 }

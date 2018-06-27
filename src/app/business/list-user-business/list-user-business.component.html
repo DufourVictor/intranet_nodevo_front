@@ -1,34 +1,38 @@
 <details class="accordion">
-  <summary class="accordion-header">
-    <hr>
-    <i class="icon icon-arrow-right mr-1"></i>
-    Liste des affaires
-  </summary>
-  <div class="accordion-body">
-    <table class="table table-striped table-hover">
-      <thead>
-      <tr>
-        <th>Code affaire</th>
-        <th>Libellé</th>
-        <th>Contact commercial</th>
-        <th>Contact technique</th>
-        <th>Statut</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let business of businesses">
-        <td>{{ business.codeBusiness }}</td>
-        <td>{{ business.label }}</td>
-        <td>{{ business.businessContact.firstName + ' ' + business.businessContact.lastName }}</td>
-        <td>{{ business.technicalContact.firstName + ' ' + business.technicalContact.lastName }}</td>
-        <td>{{ business.enabled ? 'Actif' : 'Inactif' }}</td>
-        <td>
-          <button [routerLink]="['/business/', business.id]"  class="btn btn-action"><i class="icon icon-search"></i></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    <summary class="accordion-header">
+        Liste des affaires
+        <i class="icon icon-arrow-right mr-1"></i>
+    </summary>
+    <div class="accordion-body">
+        <ngx-datatable
+            #table
+            class="material fullscreen"
+            [columnMode]="'force'"
+            [headerHeight]="'auto'"
+            [rowHeight]="'auto'"
+            [footerHeight]="'auto'"
+            [rows]="rows"
+            [columns]="columns"
+            [limit]="10"
+        ></ngx-datatable>
+
+        <ng-template #businessContactTmpl let-row="row">
+            {{ row.businessContact ? row.businessContact.firstName + ' ' + row.businessContact.lastName : '' }}
+        </ng-template>
+
+        <ng-template #technicalContactTmpl let-row="row">
+            {{ row.technicalContact ? row.technicalContact.firstName + ' ' + row.technicalContact.lastName : '' }}
+        </ng-template>
+
+        <ng-template #enabledTmpl let-row="row" let-value="value">
+            <span class="enabled-{{ value }}">{{ value ? 'Actif' : 'Inactif' }}</span>
+        </ng-template>
+
+        <ng-template #actionTmpl let-row="row">
+            <i class="material-icons" [routerLink]="['/gescom/business/', row.id]">
+                search
+            </i>
+        </ng-template>
+    </div>
 </details>
 

@@ -1,5 +1,17 @@
-<div class="container">
-    <form [formGroup]="form.group" (ngSubmit)="save()">
+<i class="material-icons back-form" routerLink="/settings/users">
+    keyboard_backspace
+</i>
+
+<button form="form" type="submit" class="save-form-place">
+    <i class="material-icons save-form">
+        save
+    </i>
+</button>
+
+<div class="card form">
+    <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+
+    <form [formGroup]="form.group" (ngSubmit)="save()" id="form">
         <div class="columns" *ngIf="user.trigram">
             <div class="form-group column col-6">
                 <label class="form-label">Trigramme</label>
@@ -8,82 +20,111 @@
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('email').invalid">
+            <div class="form-group column col-6" [class.has-error]="emailError.hasError('*', 'touched')">
                 <label class="form-label">Email</label>
                 <input type="email" class="form-control form-input" formControlName="email">
+                <div ngxErrors="email" #emailError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column" [class.has-error]="form.group.get('lastName').invalid">
+            <div class="form-group column" [class.has-error]="lastNameError.hasError('*', 'touched')">
                 <label class="form-label">Nom</label>
                 <input type="text" class="form-control form-input" formControlName="lastName">
+                <div ngxErrors="lastName" #lastNameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
 
-            <div class="form-group column" [class.has-error]="form.group.get('firstName').invalid">
+            <div class="form-group column" [class.has-error]="firstNameError.hasError('*', 'touched')">
                 <label class="form-label">Prénom</label>
                 <input type="text" class="form-control form-input" formControlName="firstName">
-            </div>
-        </div>
-
-        <div class="columns" *ngIf="undefined === user.id">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('username').invalid">
-                <label class="form-label">Nom d'utilisateur</label>
-                <input type="text" class="form-input form-control" formControlName="username">
-            </div>
-
-            <div class="form-group column col-6" [class.has-error]="form.group.get('plainPassword').invalid">
-                <label class="form-label">Mot de passe</label>
-                <input type="text" class="form-input form-control" formControlName="plainPassword">
+                <div ngxErrors="firstName" #firstNameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('profile').invalid">
+            <div class="form-group column col-6" [class.has-error]="usernameError.hasError('*', 'touched')">
+                <label class="form-label">Nom d'utilisateur</label>
+                <input type="text" class="form-input form-control" formControlName="username">
+                <div ngxErrors="username" #usernameError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
+            </div>
+
+            <div class="form-group column col-6" [class.has-error]="passwordError.hasError('*', 'touched')">
+                <label class="form-label">
+                    Mot de passe <span *ngIf="user.id">(remplir que si vous souhaitez changer le mot de passe)</span>
+                </label>
+                <input type="text" class="form-input form-control" formControlName="plainPassword">
+                <div ngxErrors="plainPassword" #passwordError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="form-group column col-6" [class.has-error]="profileError.hasError('*', 'touched')">
                 <label class="form-label">Profile</label>
                 <select class="form-control form-select" formControlName="profile"
                         [compareWith]="formService.objectsEquals">
                     <option
-                        *ngFor="let profile of profiles"
+                        *ngFor="let profile of profiles | async"
                         [ngValue]="profile"
-                    >{{profile.label}}</option>
+                    >{{profile.label}}
+                    </option>
                 </select>
+                <div ngxErrors="profile" #profileError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
 
-            <div class="form-group column col-6" [class.has-error]="form.group.get('group').invalid">
+            <div class="form-group column col-6" [class.has-error]="profileError.hasError('*', 'touched')">
                 <label class="form-label">Groupe</label>
-                <select class="form-control form-select" formControlName="group" [compareWith]="formService.objectsEquals">
+                <select class="form-control form-select" formControlName="group"
+                        [compareWith]="formService.objectsEquals">
                     <option
-                        *ngFor="let group of groups"
+                        *ngFor="let group of groups | async"
                         [ngValue]="group"
-                    >{{group.label}}</option>
+                    >{{group.label}}
+                    </option>
                 </select>
+                <div ngxErrors="profile" #profileError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('managers').invalid">
+            <div class="form-group column col-6" [class.has-error]="managersError.hasError('*', 'touched')">
                 <label class="form-label">Responsables</label>
                 <ng-select
-                    [items]="managers"
+                    [items]="managers | async"
                     [multiple]="true"
                     formControlName="managers"
                     bindLabel="fullName"
                     [(ngModel)]="user.managers"
+                    [class.has-error]="managersError.hasError('*', 'touched')"
+                    [compareWith]="formService.objectsEquals"
                 ></ng-select>
+                <div ngxErrors="managers" #managersError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="form-group column col-6" [class.has-error]="form.group.get('notes').invalid">
+            <div class="form-group column col-6" [class.has-error]="notesError.hasError('*', 'touched')">
                 <label class="form-label">Notes</label>
                 <textarea class="form-input" rows="3" formControlName="notes">{{user.notes}}</textarea>
+                <div ngxErrors="notes" #notesError="ngxErrors">
+                    <p class="form-input-hint" ngxError="required" when="touched">Le champ est requis</p>
+                </div>
             </div>
-        </div>
-
-        <div class="columns">
-            <button class="btn btn-primary column col-4 col-mx-auto" type="submit">Enregistrer</button>
-            <a class="btn btn-error col-4 col-mx-auto" routerLink="/users">Retour à la liste</a>
         </div>
     </form>
 </div>

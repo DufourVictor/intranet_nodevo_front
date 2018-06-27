@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CostPerYear, User } from '../../backend/model';
 import { CostPerYearsService } from '../../backend/services';
 import { SpectreModalComponent } from '../spectre-modal/spectre-modal.component';
@@ -10,11 +10,15 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./cost-per-year.component.scss']
 })
 export class CostPerYearComponent implements OnInit {
+    @ViewChild(SpectreModalComponent) modalToggle: SpectreModalComponent;
+    @ViewChild('actionTmpl') actionTmpl: TemplateRef<any>;
+
+    @Input() user: User;
     costPerYears: CostPerYear[] = [];
     cost: CostPerYear = new CostPerYear();
-    @Input() user: User;
     modalTitle = 'Coût par année';
-    @ViewChild(SpectreModalComponent) modalToggle: SpectreModalComponent;
+    rows: CostPerYear[] = [];
+    columns = [];
 
     constructor(
         private costPerYearsService: CostPerYearsService,
@@ -23,7 +27,16 @@ export class CostPerYearComponent implements OnInit {
     }
 
     getAllCosts() {
-        this.costPerYearsService.getAllBy('users', this.user.id).subscribe(cpys => this.costPerYears = cpys);
+        this.costPerYearsService.getAllBy('users', this.user.id).subscribe(
+            cpys => this.rows = this.costPerYears = cpys
+        );
+
+        this.columns = [
+            {prop: 'cost', name: 'Coût'},
+            {prop: 'comment', name: 'Commentaire'},
+            {prop: 'year', name: 'Année'},
+            {name: '', cellTemplate: this.actionTmpl},
+        ];
     }
 
     ngOnInit() {

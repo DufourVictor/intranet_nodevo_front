@@ -1,0 +1,65 @@
+<details class="accordion" open>
+    <summary class="accordion-header">
+        Devis principal
+        <i class="icon icon-arrow-right mr-1"></i>
+    </summary>
+    <div class="accordion-body">
+        <div _ngcontent-c27="" class="text-right">
+                <i _ngcontent-c27="" class="material-icons add" (click)="addLine()">
+                    add_circle
+                </i>
+        </div>
+        <div class="table" [ngClass]="{complex: type === 'complex'}">
+            <div class="header">
+                <div>Désignation</div>
+                <ng-container *ngIf="type === 'simple'">
+                    <div>Quantité</div>
+                    <div>Unité</div>
+                    <div>Prix</div>
+                </ng-container>
+                <div>Coût HT</div>
+                <div>Actions</div>
+            </div>
+
+            <div class="body">
+                <div class="line" *ngFor="let form of forms; let i = index">
+                    <form [formGroup]="form.group" class="active">
+                        <div>
+                            <input formControlName="label" type="text"/>
+                        </div>
+                        <div>
+                            <app-simple-line-form
+                                *ngIf="type === 'simple'"
+                                [line]="form.get().simpleLine"
+                                (lineChange)="simpleChange(form, $event)"
+                            ></app-simple-line-form>
+                            <app-complex-line-form
+                                *ngIf="type === 'complex'"
+                                [lines]="getComplexLines(form)"
+                                (linesChange)="complexChange(i, $event)"
+                                (generalChange)="complexGeneralChange($event)"
+                                (columnAdded)="addColumn()"
+                                [triggerAdd]="newComplexLine"
+                                [displayHeader]="i === 0"
+                            ></app-complex-line-form>
+                        </div>
+                        <div class="line-center cost-col">{{ getCost(form) | number }}</div>
+                        <div class="line-center btn-actions">
+                            <i class="material-icons" (click)="deleteLine(i)">highlight_off</i>
+                            <label>
+                                <i class="material-icons" [ngClass]="{active: form.get().free}">card_giftcard</i>
+                                <input formControlName="free" type="checkbox"/>
+                            </label>
+                            <label>
+                                <i class="material-icons" [ngClass]="{active: form.get().title}">format_color_text</i>
+                                <input formControlName="title" type="checkbox"/>
+                            </label>
+                            <i class="material-icons" (click)="setPosition(i, -1)">arrow_upward</i>
+                            <i class="material-icons" (click)="setPosition(i, 1)">arrow_downward</i>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</details>

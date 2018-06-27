@@ -7,5 +7,9 @@ export class PaymentConditionsBase {
   get _resource(): string { return PaymentConditionsBase._resource; };
 
   label: string;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
 }

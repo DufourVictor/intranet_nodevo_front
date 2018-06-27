@@ -2,8 +2,8 @@
     <ng-sidebar
         #sidenav
         mode="push"
-        [(opened)]="_opened"
-        [dock]="!_opened"
+        [(opened)]="opened"
+        [dock]="!opened"
         dockedSize="60px"
     >
         <div class="logo">
@@ -20,10 +20,11 @@
         <header class="navbar">
             <section class="navbar-section">
                 <div class="col-ml-auto flex-centered">
-                    <span class="user-fullname">{{ userFullName }}</span>
+                    <span class="user-fullname">{{ user.fullName }}</span>
                     <div>
                         <ngx-avatar
-                            [name]="userFullName"
+                            bgColor="#9B9B9B"
+                            [name]="user.fullName"
                             [size]="30"
                             [textSizeRatio]="2"
                             class="col-ml-auto"
@@ -41,6 +42,6 @@
     </div>
 </ng-sidebar-container>
 
-<router-outlet *ngIf="user === null"></router-outlet>
+<router-outlet *ngIf="user === null" name="login"></router-outlet>
 
-<spinner></spinner>
+<spinner backgroundColor="#A1D614" spinner="sk-three-bounce"></spinner>

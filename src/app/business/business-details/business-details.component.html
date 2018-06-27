@@ -1,4 +1,20 @@
 <div *ngIf="business">
-    <h1>{{ business.label }}</h1>
     <app-business-form [business]="business"></app-business-form>
+
+    <details class="accordion">
+        <summary class="accordion-header">
+            Liste des devis
+            <i class="icon icon-arrow-right mr-1"></i>
+        </summary>
+        <div class="accordion-body">
+            <div *ngFor="let quotation of quotations">
+                <span>{{quotation.codeQuotation}}</span>
+                <span>{{quotation.label}}</span>
+                <span>{{quotation.provision.type}}</span>
+                <span>{{quotation.createdAt | date:'d/m/y'}}</span>
+            </div>
+        </div>
+    </details>
+
+
 </div>

@@ -12,4 +12,8 @@ export class TrainingBonusValidatorsBase extends FormGroupValidators {
     price = null;
     notes = null;
     user = [AppValidators.item];
+    createdAt = [CustomValidators.date];
+    updatedAt = [CustomValidators.date];
+    createdBy = null;
+    updatedBy = null;
 }

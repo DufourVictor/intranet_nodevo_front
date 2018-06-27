@@ -1,34 +1,29 @@
 <details class="accordion">
     <summary class="accordion-header">
-        <hr>
-        <i class="icon icon-arrow-right mr-1"></i>
         Coûts
+        <i class="icon icon-arrow-right mr-1"></i>
     </summary>
     <div class="accordion-body">
-        <a class="btn btn-primary" (click)="activeModal()">Ajouter</a>
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th>Coût</th>
-                <th>Commentaire</th>
-                <th>Année</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let cost of costPerYears">
-                <td>{{ cost.cost }}</td>
-                <td>{{ cost.comment }}</td>
-                <td>{{ cost.year }}</td>
-                <td>
-                    <button class="btn btn-primary" (click)="activeModal(cost)"><i class="material-icons">edit</i>
-                    </button>
-                    <button class="btn btn-error" (click)="confirmDelete(cost)"><i class="material-icons">delete</i>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="text-right">
+            <i class="material-icons add" (click)="activeModal()">add_circle</i>
+        </div>
+
+        <ngx-datatable
+            #table
+            class="material fullscreen"
+            [columnMode]="'force'"
+            [headerHeight]="'auto'"
+            [rowHeight]="'auto'"
+            [footerHeight]="'auto'"
+            [rows]="rows"
+            [columns]="columns"
+            [limit]="10"
+        ></ngx-datatable>
+
+        <ng-template #actionTmpl let-row="row">
+            <i class="material-icons" (click)="activeModal(row)">mode_edit</i>
+            <i class="material-icons" (click)="confirmDelete(row)">delete_forever</i>
+        </ng-template>
     </div>
 </details>
 <spectre-modal [title]="modalTitle">

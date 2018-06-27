@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="header-title">
+        Groupes
+        <i class="material-icons add" (click)="activeModal()" *ngIf="roleGuard.canAccess('Paramétrage', 'WRITE')">
+            add_circle
+        </i>
+    </div>
+    <ngx-datatable
+        #table
+        class="material fullscreen"
+        [columnMode]="'force'"
+        [headerHeight]="'auto'"
+        [rowHeight]="'auto'"
+        [footerHeight]="'auto'"
+        [rows]="rows"
+        [columns]="columns"
+        [limit]="10"
+    ></ngx-datatable>
+
+    <ng-template #actionTmpl let-row="row">
+        <i class="material-icons" (click)="activeModal(row)" *ngIf="roleGuard.canAccess('Paramétrage', 'WRITE')">
+            mode_edit
+        </i>
+        <i class="material-icons delete" (click)="confirmDelete(row)">
+            delete_forever
+        </i>
+    </ng-template>
+</div>
+
+<spectre-modal [title]="modalTitle">
+    <app-group-form [group]="group" (saveGroup)="closeModal()"></app-group-form>
+</spectre-modal>

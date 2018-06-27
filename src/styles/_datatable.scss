@@ -1,0 +1,65 @@
+@import "variables";
+
+.ngx-datatable {
+    box-shadow: none !important;
+
+    .datatable {
+        &-header {
+            border-bottom: 2px solid $light-grey-1 !important;
+
+            &-cell {
+                padding: 0 .3rem !important;
+
+                &-template-wrap {
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    color: $black-2;
+                }
+            }
+        }
+
+        &-body {
+            .datatable-body {
+                &-row {
+                    &.datatable-row-even {
+                        background-color: $light-grey-2;
+                    }
+                }
+
+                &-cell {
+                    padding: .5rem .3rem !important;
+                    display: flex;
+                    align-items: center;
+
+                    &.link {
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
+
+                    .enabled {
+                        &-true {
+                            color: $green;
+                        }
+
+                        &-false {
+                            color: $grey;
+                        }
+                    }
+
+                    i {
+                        cursor: pointer;
+                        color: $grey;
+
+                        &:hover {
+                            color: $green;
+                        }
+
+                        &.delete:hover {
+                            color: $error-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,91 @@
+@import "../../../../styles/variables";
+
+div.table {
+    display: flex;
+    flex-direction: column;
+
+    & > div {
+        display: flex;
+        width: 100%;
+
+        & > div, form > div {
+            min-width: 16.6%;
+        }
+    }
+
+    .body {
+        flex-direction: column;
+    }
+
+    &.complex {
+        margin-top: 75px;
+
+        .header {
+            & > div:nth-child(2) {
+                margin-left: auto;
+            }
+        }
+
+        .cost-col {
+            margin-left: auto;
+        }
+    }
+
+    .line form {
+        display: flex;
+
+        .line-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input:first-child {
+            margin-left: 10px;
+        }
+
+        i:last-child {
+            margin-right: 10px;
+        }
+    }
+}
+
+input {
+    &[type=checkbox] {
+        display: none;
+    }
+
+    &[disabled] {
+        opacity: 0.2;
+    }
+
+    border: none;
+    outline: 0;
+    width: 100px;
+}
+
+.header {
+    border-bottom: 2px solid $grey-table;
+}
+
+.body > .line:nth-child(odd) {
+    background-color: $light-grey-2;
+
+    & input {
+        background-color: $light-grey-2;
+    }
+}
+
+i {
+    &:hover, &.active {
+        color: $primary-color;
+    }
+
+    margin-left: 5px;
+}
+
+.btn-actions {
+    &, label {
+        cursor: pointer;
+    }
+}

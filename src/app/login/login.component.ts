@@ -45,13 +45,13 @@ export class LoginComponent implements OnInit {
                     this.auth.setAccessToken(data.token, this.remember.value);
                 },
                 (error) => {
-                    if(error.status == 401){
+                    if (401 === error.status) {
                         this.errorStatus = true;
                     }
                 },
                 () => this.router.navigate(['dashboard']));
         } else {
-          this.validateAllFormFields(this.loginForm);
+            this.validateAllFormFields(this.loginForm);
         }
     }
 

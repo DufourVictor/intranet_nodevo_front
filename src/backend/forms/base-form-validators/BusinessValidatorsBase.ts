@@ -15,4 +15,6 @@ export class BusinessValidatorsBase extends FormGroupValidators {
     businessContact = [AppValidators.item];
     technicalContact = [AppValidators.item];
     customer = [AppValidators.item];
+    quotation = [AppValidators.item];
+    deleted = [AppValidators.boolean];
 }

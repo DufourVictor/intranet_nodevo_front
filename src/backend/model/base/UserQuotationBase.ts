@@ -7,5 +7,9 @@ export class UserQuotationBase {
   get _resource(): string { return UserQuotationBase._resource; };
 
   tjm: string;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+  updatedBy: string;
 
 }

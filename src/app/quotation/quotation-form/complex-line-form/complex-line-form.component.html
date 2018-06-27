@@ -1,0 +1,54 @@
+<div class="columns">
+    <button
+        *ngIf="displayHeader"
+        class="btn btn-action add-btn"
+        (click)="addColumn()"
+    ><i class="icon icon-plus"></i></button>
+    <div class="column" *ngFor="let form of forms">
+        <form [formGroup]="form.group">
+            <div *ngIf="displayHeader" class="header">
+                <div>
+                    <select
+                        class="form-control form-select"
+                        formControlName="profile"
+                        [compareWith]="formService.objectsEquals"
+                    >
+                        <option *ngFor="let profile of profiles" [ngValue]="profile">
+                            {{ profile.label }}
+                        </option>
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-action btn-colabs" (click)="activeModal(form)">
+                        <i class="icon icon-people"></i>
+                    </button>
+                </div>
+                <div>
+                    <input formControlName="label" type="text" placeholder="Intitulé">
+                </div>
+                <div>
+                    <input formControlName="tjm" type="number" placeholder="TJM">
+                </div>
+            </div>
+
+            <div class="body">
+                <input formControlName="time" type="number" placeholder="Temps">
+            </div>
+        </form>
+    </div>
+</div>
+
+<spectre-modal title="Colalborateurs">
+    <form *ngIf="activeForm" #collabForm>
+        <label *ngFor="let user of users">
+            {{ user.fullName }}
+            <input
+                type="checkbox"
+                name="collaborators"
+                [value]="user.id"
+                [checked]="isCollaborator(user.id)"
+                (change)="changeCollaborator(collabForm)"
+            >
+        </label>
+    </form>
+</spectre-modal>
